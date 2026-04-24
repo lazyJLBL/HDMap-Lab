@@ -12,3 +12,4 @@ frontend/.vite/
 logs/
 .playwright-mcp/
 hdmap-lab-visualizer*.png
+docs/assets/demo_frames/

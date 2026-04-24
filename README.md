@@ -10,6 +10,10 @@ HDMap-Lab is a lightweight GIS / HD map spatial algorithm platform for spatial q
 
 HDMap-Lab 是一个面向 GIS、高精地图、LBS、物流配送和轨迹分析场景的空间算法平台。项目支持 GeoJSON / OSM 路网加载、R-Tree / KD-Tree 空间索引、电子围栏检测、轨迹 Map Matching、Dijkstra / A* 路径规划和地图可视化。
 
+![HDMap-Lab Demo](docs/assets/demo.gif)
+
+Static fallback:
+
 ![HDMap-Lab Visualizer](docs/assets/screenshot-route.png)
 
 ## Why This Project
@@ -122,6 +126,25 @@ Docker:
 docker compose up --build
 ```
 
+## Run the Full Demo
+
+```bash
+docker compose up --build
+```
+
+Then open:
+
+- Backend: <http://localhost:8000>
+- Swagger: <http://localhost:8000/docs>
+- Frontend: <http://localhost:5173>
+
+In the frontend, click **Load Sample Data**, then try:
+
+1. Nearby Roads
+2. Geofence
+3. Match
+4. Route
+
 ## API Examples
 
 Load sample data:
@@ -200,8 +223,6 @@ python benchmarks/benchmark_map_matching.py
 python benchmarks/benchmark_routing.py
 ```
 
-Example benchmark table format:
-
 Latest local benchmark snapshot:
 
 | Scenario | Data Scale | Baseline | Optimized / Compared | Result |
@@ -267,3 +288,16 @@ HDMAP_LOG_LEVEL=INFO
 More resume variants: [docs/resume_bullets.md](docs/resume_bullets.md)
 
 Interview notes: [docs/interview_notes.md](docs/interview_notes.md)
+
+## Roadmap
+
+- [x] GeoJSON / OSM data loading
+- [x] R-Tree / KD-Tree spatial index
+- [x] Geofence detection
+- [x] Map Matching
+- [x] Dijkstra / A* routing
+- [x] React + Leaflet visualizer
+- [ ] PostGIS backend
+- [ ] Larger OSM dataset support
+- [ ] More robust HMM parameter tuning
+- [ ] Online demo deployment
