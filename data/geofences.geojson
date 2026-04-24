@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "fence_campus",
+      "properties": {"name": "Campus Delivery Zone"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [116.3980, 39.9080],
+            [116.4060, 39.9080],
+            [116.4060, 39.9160],
+            [116.3980, 39.9160],
+            [116.3980, 39.9080]
+          ]
+        ]
+      }
+    }
+  ]
+}
+

@@ -1,0 +1,24 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "poi_gate",
+      "properties": {"name": "North Gate", "category": "entrance"},
+      "geometry": {"type": "Point", "coordinates": [116.4000, 39.9200]}
+    },
+    {
+      "type": "Feature",
+      "id": "poi_station",
+      "properties": {"name": "Delivery Station", "category": "logistics"},
+      "geometry": {"type": "Point", "coordinates": [116.4015, 39.9110]}
+    },
+    {
+      "type": "Feature",
+      "id": "poi_parking",
+      "properties": {"name": "Parking Lot", "category": "parking"},
+      "geometry": {"type": "Point", "coordinates": [116.4090, 39.9010]}
+    }
+  ]
+}
+

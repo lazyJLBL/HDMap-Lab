@@ -1,0 +1,84 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "edge_h_00_10",
+      "properties": {"from": "node_00", "to": "node_10", "road_type": "residential", "speed_limit": 35, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.390, 39.900], [116.400, 39.900]]}
+    },
+    {
+      "type": "Feature",
+      "id": "edge_h_10_20",
+      "properties": {"from": "node_10", "to": "node_20", "road_type": "residential", "speed_limit": 35, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.400, 39.900], [116.410, 39.900]]}
+    },
+    {
+      "type": "Feature",
+      "id": "edge_h_01_11",
+      "properties": {"from": "node_01", "to": "node_11", "road_type": "primary", "speed_limit": 50, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.390, 39.910], [116.400, 39.910]]}
+    },
+    {
+      "type": "Feature",
+      "id": "edge_h_11_21",
+      "properties": {"from": "node_11", "to": "node_21", "road_type": "primary", "speed_limit": 50, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.400, 39.910], [116.410, 39.910]]}
+    },
+    {
+      "type": "Feature",
+      "id": "edge_h_02_12",
+      "properties": {"from": "node_02", "to": "node_12", "road_type": "residential", "speed_limit": 35, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.390, 39.920], [116.400, 39.920]]}
+    },
+    {
+      "type": "Feature",
+      "id": "edge_h_12_22",
+      "properties": {"from": "node_12", "to": "node_22", "road_type": "residential", "speed_limit": 35, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.400, 39.920], [116.410, 39.920]]}
+    },
+    {
+      "type": "Feature",
+      "id": "edge_v_00_01",
+      "properties": {"from": "node_00", "to": "node_01", "road_type": "secondary", "speed_limit": 45, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.390, 39.900], [116.390, 39.910]]}
+    },
+    {
+      "type": "Feature",
+      "id": "edge_v_01_02",
+      "properties": {"from": "node_01", "to": "node_02", "road_type": "secondary", "speed_limit": 45, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.390, 39.910], [116.390, 39.920]]}
+    },
+    {
+      "type": "Feature",
+      "id": "edge_v_10_11",
+      "properties": {"from": "node_10", "to": "node_11", "road_type": "secondary", "speed_limit": 45, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.400, 39.900], [116.400, 39.910]]}
+    },
+    {
+      "type": "Feature",
+      "id": "edge_v_11_12",
+      "properties": {"from": "node_11", "to": "node_12", "road_type": "secondary", "speed_limit": 45, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.400, 39.910], [116.400, 39.920]]}
+    },
+    {
+      "type": "Feature",
+      "id": "edge_v_20_21",
+      "properties": {"from": "node_20", "to": "node_21", "road_type": "secondary", "speed_limit": 45, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.410, 39.900], [116.410, 39.910]]}
+    },
+    {
+      "type": "Feature",
+      "id": "edge_v_21_22",
+      "properties": {"from": "node_21", "to": "node_22", "road_type": "secondary", "speed_limit": 45, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.410, 39.910], [116.410, 39.920]]}
+    },
+    {
+      "type": "Feature",
+      "id": "edge_diag_00_11",
+      "properties": {"from": "node_00", "to": "node_11", "road_type": "service", "speed_limit": 25, "oneway": false},
+      "geometry": {"type": "LineString", "coordinates": [[116.390, 39.900], [116.400, 39.910]]}
+    }
+  ]
+}
+
