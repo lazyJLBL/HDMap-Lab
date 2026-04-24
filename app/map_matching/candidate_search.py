@@ -24,6 +24,10 @@ class RoadCandidate:
             "distance": self.distance,
             "projection_point": [self.projection_point[0], self.projection_point[1]],
             "road_heading": self.road_heading,
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [[lon, lat] for lon, lat in self.road.geometry],
+            },
         }
 
 
@@ -79,4 +83,3 @@ def road_centroid_items(roads: list[RoadEdge]) -> list[tuple[Coordinate, str]]:
         bbox = bbox_of_coords(road.geometry)
         items.append((((bbox[0] + bbox[2]) / 2.0, (bbox[1] + bbox[3]) / 2.0), road.id))
     return items
-

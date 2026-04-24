@@ -95,7 +95,7 @@ def _parse_osm_root(root: ET.Element) -> tuple[list[RoadNode], list[RoadEdge]]:
             continue
         oneway = tags.get("oneway") in {"yes", "true", "1"}
         speed = _parse_speed(tags.get("maxspeed"), road_type)
-        for index, (start_ref, end_ref) in enumerate(zip(refs, refs[1:])):
+        for index, (start_ref, end_ref) in enumerate(zip(refs, refs[1:], strict=False)):
             start = raw_nodes[start_ref]
             end = raw_nodes[end_ref]
             used_nodes[start.id] = start

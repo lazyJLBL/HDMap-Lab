@@ -147,6 +147,12 @@ select {
   font-weight: 700;
 }
 
+.command.secondary {
+  border-color: #fed7aa;
+  background: #fff7ed;
+  color: #9a3412;
+}
+
 .command:hover,
 .toggle:hover {
   border-color: #2563eb;
@@ -228,4 +234,3 @@ select {
     order: 1;
   }
 }
-

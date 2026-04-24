@@ -10,7 +10,7 @@ from app.core.geometry import point_in_polygon, polyline_intersects_polygon
 from app.index.kdtree import KDTree
 from app.index.rtree import RTreeIndex
 from app.map_matching.candidate_search import CandidateSearcher, road_bbox_items, road_centroid_items
-from app.models import GeoFence, POI, RoadEdge, RoadNode, Trajectory, TrajectoryPoint
+from app.models import POI, GeoFence, RoadEdge, RoadNode, Trajectory, TrajectoryPoint
 from app.routing.graph_builder import RoadGraph
 from app.storage.geojson_loader import (
     load_geofences_collection,

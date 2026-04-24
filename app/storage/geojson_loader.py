@@ -6,7 +6,7 @@ from typing import Any
 
 from app.core.geojson import normalize_linestring, normalize_polygon
 from app.core.geometry import polyline_length
-from app.models import GeoFence, POI, RoadEdge, RoadNode, Trajectory, TrajectoryPoint
+from app.models import POI, GeoFence, RoadEdge, RoadNode, Trajectory, TrajectoryPoint
 
 
 def _read_json(path: str | Path) -> dict[str, Any]:

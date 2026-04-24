@@ -23,7 +23,7 @@ def shortest_route(request: RouteRequest) -> dict:
     avoid_polygons = [normalize_polygon(polygon) for polygon in request.avoid_polygons]
     excluded = edges_intersecting_polygons(runtime.roads, avoid_polygons) if avoid_polygons else set()
     segments: list[PathResult] = []
-    for start_node, end_node in zip(node_ids, node_ids[1:]):
+    for start_node, end_node in zip(node_ids, node_ids[1:], strict=False):
         if request.algorithm == "dijkstra":
             result = shortest_path(runtime.graph, start_node, end_node, request.mode, excluded)
         else:

@@ -3,7 +3,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass
 
-from app.core.bbox import bbox_of_coords, bbox_of_polygon, bbox_intersects
+from app.core.bbox import bbox_intersects, bbox_of_coords, bbox_of_polygon
 from app.models.point import Coordinate
 
 EARTH_RADIUS_M = 6_371_008.8
@@ -74,7 +74,7 @@ def point_to_polyline_distance(point: Coordinate, polyline: list[Coordinate]) ->
     if len(polyline) == 1:
         return ProjectionResult(polyline[0], haversine_distance(point, polyline[0]), 0, 0.0)
     best: ProjectionResult | None = None
-    for idx, (start, end) in enumerate(zip(polyline, polyline[1:])):
+    for idx, (start, end) in enumerate(zip(polyline, polyline[1:], strict=False)):
         result = point_to_segment_projection(point, start, end, idx)
         if best is None or result.distance < best.distance:
             best = result
@@ -84,7 +84,7 @@ def point_to_polyline_distance(point: Coordinate, polyline: list[Coordinate]) ->
 
 
 def polyline_length(polyline: list[Coordinate]) -> float:
-    return sum(haversine_distance(start, end) for start, end in zip(polyline, polyline[1:]))
+    return sum(haversine_distance(start, end) for start, end in zip(polyline, polyline[1:], strict=False))
 
 
 def point_on_segment(point: Coordinate, start: Coordinate, end: Coordinate, tolerance_m: float = 0.25) -> bool:
@@ -100,7 +100,7 @@ def point_in_polygon(point: Coordinate, polygon: list[list[Coordinate]]) -> str:
 
     inside = False
     ring = polygon[0]
-    for start, end in zip(ring, ring[1:]):
+    for start, end in zip(ring, ring[1:], strict=False):
         if point_on_segment(point, start, end):
             return "boundary"
         x, y = point
@@ -167,8 +167,8 @@ def polyline_intersects_polygon(polyline: list[Coordinate], polygon: list[list[C
     if any(point_in_polygon(coord, polygon) in {"inside", "boundary"} for coord in polyline):
         return True
     exterior = polygon[0]
-    for line_start, line_end in zip(polyline, polyline[1:]):
-        for poly_start, poly_end in zip(exterior, exterior[1:]):
+    for line_start, line_end in zip(polyline, polyline[1:], strict=False):
+        for poly_start, poly_end in zip(exterior, exterior[1:], strict=False):
             if segments_intersect(line_start, line_end, poly_start, poly_end):
                 return True
     return False

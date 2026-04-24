@@ -46,3 +46,22 @@ def load_dataset(request: DatasetLoadRequest) -> dict:
         raise HTTPException(400, str(exc)) from exc
     return {"status": "loaded", "source": request.source, "counts": counts}
 
+
+@router.post("/reset")
+def reset_dataset() -> dict:
+    runtime = get_runtime()
+    counts = runtime.load_sample()
+    return {"status": "reset", "source": "sample", "counts": counts}
+
+
+@router.get("/current")
+def current_dataset() -> dict:
+    runtime = get_runtime()
+    return {
+        "roads": len(runtime.roads),
+        "nodes": len(runtime.nodes),
+        "trajectories": [trajectory.id for trajectory in runtime.trajectories],
+        "geofences": [geofence.id for geofence in runtime.geofences],
+        "pois": [poi.id for poi in runtime.pois],
+        "bounds": runtime.visualization_state()["bounds"],
+    }

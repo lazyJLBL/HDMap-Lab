@@ -9,10 +9,13 @@ def test_health_and_visualization_state() -> None:
     client = TestClient(app)
 
     health = client.get("/health")
+    stats = client.get("/stats")
     state = client.get("/visualization/state")
 
     assert health.status_code == 200
+    assert stats.status_code == 200
     assert health.json()["roads"] > 0
+    assert stats.json()["indexes"]["road_graph"]["nodes"] > 0
     assert state.status_code == 200
     assert state.json()["roads"]["features"]
 
@@ -21,6 +24,7 @@ def test_major_api_flow() -> None:
     client = TestClient(app)
 
     load = client.post("/datasets/load", json={"source": "sample"})
+    current = client.get("/datasets/current")
     nearby = client.get("/roads/nearby", params={"lon": 116.4015, "lat": 39.911, "k": 3})
     query = client.post(
         "/spatial/query",
@@ -39,6 +43,7 @@ def test_major_api_flow() -> None:
     )
 
     assert load.status_code == 200
+    assert current.status_code == 200
     assert nearby.status_code == 200
     assert query.status_code == 200
     assert geofence.status_code == 200
@@ -46,4 +51,4 @@ def test_major_api_flow() -> None:
     assert route.status_code == 200
     assert matching.json()["matches"]
     assert route.json()["geometry"]["coordinates"]
-
+    assert nearby.json()["roads"][0]["geometry"]["coordinates"]

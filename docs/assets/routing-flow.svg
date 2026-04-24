@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="260" viewBox="0 0 1120 260" role="img" aria-label="Routing flow">
+  <rect width="1120" height="260" fill="#ffffff"/>
+  <defs><marker id="arrow-route" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker></defs>
+  <text x="34" y="42" font-family="Inter,Arial" font-size="26" font-weight="700" fill="#0f172a">Route Planning Flow</text>
+  <g font-family="Inter,Arial" font-size="15" fill="#0f172a">
+    <rect x="35" y="92" width="140" height="72" rx="8" fill="#dbeafe" stroke="#3b82f6"/><text x="70" y="133" font-weight="700">Start / End</text>
+    <rect x="225" y="92" width="160" height="72" rx="8" fill="#ede9fe" stroke="#8b5cf6"/><text x="258" y="123" font-weight="700">Nearest Node</text><text x="266" y="146">KD-Tree</text>
+    <rect x="435" y="92" width="150" height="72" rx="8" fill="#fef3c7" stroke="#f59e0b"/><text x="473" y="123" font-weight="700">Road Graph</text><text x="456" y="146">nodes + edges</text>
+    <rect x="635" y="60" width="150" height="65" rx="8" fill="#dcfce7" stroke="#22c55e"/><text x="682" y="98" font-weight="700">Dijkstra</text>
+    <rect x="635" y="145" width="150" height="65" rx="8" fill="#ecfeff" stroke="#06b6d4"/><text x="700" y="183" font-weight="700">A*</text>
+    <rect x="835" y="92" width="135" height="72" rx="8" fill="#fee2e2" stroke="#ef4444"/><text x="865" y="123" font-weight="700">Avoid Rules</text><text x="858" y="146">polygon filter</text>
+    <rect x="1020" y="92" width="80" height="72" rx="8" fill="#f0fdf4" stroke="#22c55e"/><text x="1038" y="123" font-weight="700">Route</text><text x="1029" y="146">Geometry</text>
+  </g>
+  <g stroke="#334155" stroke-width="2.1" fill="none" marker-end="url(#arrow-route)">
+    <path d="M175 128 H225"/><path d="M385 128 H435"/><path d="M585 128 C615 128 605 92 635 92"/><path d="M585 128 C615 128 605 178 635 178"/>
+    <path d="M785 92 C815 92 810 128 835 128"/><path d="M785 178 C815 178 810 128 835 128"/><path d="M970 128 H1020"/>
+  </g>
+</svg>

@@ -5,7 +5,7 @@ import sqlite3
 from pathlib import Path
 from typing import Iterable
 
-from app.models import GeoFence, POI, RoadEdge, RoadNode, Trajectory, TrajectoryPoint
+from app.models import POI, GeoFence, RoadEdge, RoadNode, Trajectory, TrajectoryPoint
 
 
 class SQLiteStore:

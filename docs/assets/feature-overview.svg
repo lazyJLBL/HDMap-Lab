@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="410" viewBox="0 0 1180 410" role="img" aria-label="HDMap-Lab feature overview">
+  <rect width="1180" height="410" fill="#ffffff"/>
+  <text x="40" y="48" font-family="Inter,Arial" font-size="28" font-weight="700" fill="#0f172a">Feature Overview</text>
+  <g font-family="Inter,Arial">
+    <rect x="40" y="88" width="250" height="120" rx="8" fill="#eff6ff" stroke="#3b82f6"/>
+    <text x="68" y="124" font-size="18" font-weight="700" fill="#1e3a8a">Spatial Query</text>
+    <text x="68" y="154" font-size="14" fill="#334155">nearby roads, bbox query</text>
+    <text x="68" y="178" font-size="14" fill="#334155">points in polygon</text>
+    <rect x="330" y="88" width="250" height="120" rx="8" fill="#f0fdf4" stroke="#22c55e"/>
+    <text x="358" y="124" font-size="18" font-weight="700" fill="#166534">Geofence</text>
+    <text x="358" y="154" font-size="14" fill="#334155">enter / exit events</text>
+    <text x="358" y="178" font-size="14" fill="#334155">trajectory analysis</text>
+    <rect x="620" y="88" width="250" height="120" rx="8" fill="#faf5ff" stroke="#a855f7"/>
+    <text x="648" y="124" font-size="18" font-weight="700" fill="#581c87">Map Matching</text>
+    <text x="648" y="154" font-size="14" fill="#334155">nearest, candidate cost</text>
+    <text x="648" y="178" font-size="14" fill="#334155">HMM + Viterbi</text>
+    <rect x="910" y="88" width="230" height="120" rx="8" fill="#fff7ed" stroke="#f97316"/>
+    <text x="938" y="124" font-size="18" font-weight="700" fill="#9a3412">Routing</text>
+    <text x="938" y="154" font-size="14" fill="#334155">Dijkstra / A*</text>
+    <text x="938" y="178" font-size="14" fill="#334155">avoid + waypoints</text>
+    <rect x="185" y="250" width="250" height="96" rx="8" fill="#f8fafc" stroke="#64748b"/>
+    <text x="216" y="287" font-size="18" font-weight="700" fill="#0f172a">FastAPI Service</text>
+    <text x="216" y="314" font-size="14" fill="#334155">Swagger, JSON APIs</text>
+    <rect x="475" y="250" width="250" height="96" rx="8" fill="#ecfeff" stroke="#06b6d4"/>
+    <text x="506" y="287" font-size="18" font-weight="700" fill="#155e75">React Visualizer</text>
+    <text x="506" y="314" font-size="14" fill="#334155">Leaflet map layers</text>
+    <rect x="765" y="250" width="250" height="96" rx="8" fill="#fefce8" stroke="#eab308"/>
+    <text x="796" y="287" font-size="18" font-weight="700" fill="#854d0e">Docker Demo</text>
+    <text x="796" y="314" font-size="14" fill="#334155">one-command startup</text>
+  </g>
+</svg>
+

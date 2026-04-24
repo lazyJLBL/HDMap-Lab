@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="270" viewBox="0 0 1120 270" role="img" aria-label="Map matching flow">
+  <rect width="1120" height="270" fill="#f8fafc"/>
+  <defs><marker id="arrow-mm" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#475569"/></marker></defs>
+  <text x="34" y="42" font-family="Inter,Arial" font-size="26" font-weight="700" fill="#0f172a">Map Matching Flow</text>
+  <g font-family="Inter,Arial" font-size="15" fill="#0f172a">
+    <rect x="35" y="90" width="145" height="75" rx="8" fill="#dbeafe" stroke="#60a5fa"/><text x="66" y="133" font-weight="700">GPS Points</text>
+    <rect x="225" y="90" width="170" height="75" rx="8" fill="#ede9fe" stroke="#8b5cf6"/><text x="252" y="121" font-weight="700">Candidate Search</text><text x="270" y="146">R-Tree / KD-Tree</text>
+    <rect x="440" y="55" width="150" height="70" rx="8" fill="#fef3c7" stroke="#f59e0b"/><text x="475" y="95" font-weight="700">Distance Cost</text>
+    <rect x="440" y="145" width="150" height="70" rx="8" fill="#dcfce7" stroke="#22c55e"/><text x="475" y="185" font-weight="700">Direction Cost</text>
+    <rect x="635" y="90" width="170" height="75" rx="8" fill="#fee2e2" stroke="#ef4444"/><text x="666" y="121" font-weight="700">Connectivity</text><text x="687" y="146">road graph</text>
+    <rect x="850" y="90" width="140" height="75" rx="8" fill="#f0f9ff" stroke="#0ea5e9"/><text x="889" y="121" font-weight="700">HMM</text><text x="880" y="146">Viterbi</text>
+    <rect x="1030" y="90" width="70" height="75" rx="8" fill="#ecfdf5" stroke="#10b981"/><text x="1048" y="121" font-weight="700">Road</text><text x="1042" y="146">Sequence</text>
+  </g>
+  <g stroke="#475569" stroke-width="2.1" fill="none" marker-end="url(#arrow-mm)">
+    <path d="M180 128 H225"/><path d="M395 128 C420 128 415 90 440 90"/><path d="M395 128 C420 128 415 180 440 180"/>
+    <path d="M590 90 C620 90 610 128 635 128"/><path d="M590 180 C620 180 610 128 635 128"/>
+    <path d="M805 128 H850"/><path d="M990 128 H1030"/>
+  </g>
+</svg>
+
