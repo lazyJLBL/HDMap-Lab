@@ -70,3 +70,29 @@ class RouteRequest(BaseModel):
     algorithm: Literal["dijkstra", "astar"] = "astar"
     avoid_polygons: list[PolygonCoordinates] = Field(default_factory=list)
 
+
+class TopologyRequest(BaseModel):
+    snap_tolerance_m: float = Field(default=1.0, ge=0)
+    apply: bool = False
+
+
+class SpatialIndexBenchmarkRequest(BaseModel):
+    query_bbox: list[float] | None = Field(default=None, min_length=4, max_length=4)
+    iterations: int = Field(default=50, ge=1, le=500)
+
+
+class MapMatchingBenchmarkRequest(BaseModel):
+    k: int = Field(default=5, ge=1, le=20)
+
+
+class TrajectoryAnalyzeRequest(BaseModel):
+    trajectory_id: str | None = None
+    trajectory: TrajectoryPayload | None = None
+    reference: list[Coordinate] | None = None
+    simplify_tolerance_m: float = Field(default=5.0, ge=0)
+    deviation_threshold_m: float = Field(default=30.0, ge=0)
+
+
+class RouteExplainRequest(RouteRequest):
+    preferred_road_classes: list[str] = Field(default_factory=list)
+    turn_penalty_seconds: float = Field(default=8.0, ge=0)

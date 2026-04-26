@@ -44,6 +44,18 @@ Avoid polygons are applied by temporarily excluding road edges that intersect re
 avoid polygon -> roads intersecting polygon -> excluded edge ids -> graph search
 ```
 
+## Explainable Routing
+
+`POST /routing/explain` uses the same road graph but returns per-edge steps and a cost breakdown:
+
+- distance
+- travel time
+- turn cost
+- road-class preference cost
+- excluded avoid-polygon edges
+
+This is the routing endpoint to use when demonstrating why a path was selected, not just what the shortest geometry is.
+
 The base graph remains unchanged.
 
 ## Waypoints
@@ -55,4 +67,3 @@ start -> waypoint_1 -> waypoint_2 -> end
 ```
 
 Each segment is planned independently and then merged into one route geometry and road sequence.
-

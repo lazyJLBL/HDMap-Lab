@@ -1,4 +1,20 @@
 services:
+  postgis:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: hdmap_lab
+      POSTGRES_USER: hdmap
+      POSTGRES_PASSWORD: hdmap
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgis-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hdmap -d hdmap_lab"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   backend:
     build:
       context: .
@@ -21,3 +37,5 @@ services:
     depends_on:
       - backend
 
+volumes:
+  postgis-data:

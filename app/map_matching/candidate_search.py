@@ -17,6 +17,8 @@ class RoadCandidate:
     projection_point: Coordinate
     segment_index: int
     road_heading: float
+    travel_direction: str = "forward"
+    oneway_allowed: bool = True
 
     def to_dict(self) -> dict:
         return {
@@ -24,6 +26,8 @@ class RoadCandidate:
             "distance": self.distance,
             "projection_point": [self.projection_point[0], self.projection_point[1]],
             "road_heading": self.road_heading,
+            "travel_direction": self.travel_direction,
+            "oneway_allowed": self.oneway_allowed,
             "geometry": {
                 "type": "LineString",
                 "coordinates": [[lon, lat] for lon, lat in self.road.geometry],
@@ -67,6 +71,8 @@ class CandidateSearcher:
                     projection_point=projection.projection,
                     segment_index=projection.segment_index,
                     road_heading=bearing(start, end),
+                    travel_direction="forward",
+                    oneway_allowed=True,
                 )
             )
         candidates.sort(key=lambda candidate: candidate.distance)

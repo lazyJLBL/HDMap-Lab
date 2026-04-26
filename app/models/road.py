@@ -27,6 +27,11 @@ class RoadEdge:
     speed_limit: float = 40.0
     road_type: str = "residential"
     oneway: bool = False
+    direction: str = "both"
+    road_class: str = "local"
+    lane_count: int = 1
+    turn_restrictions: list[dict[str, Any]] | None = None
+    metadata: dict[str, Any] | None = None
 
     @property
     def travel_time(self) -> float:
@@ -45,6 +50,11 @@ class RoadEdge:
                 "speed_limit": self.speed_limit,
                 "road_type": self.road_type,
                 "oneway": self.oneway,
+                "direction": self.direction,
+                "road_class": self.road_class,
+                "lane_count": self.lane_count,
+                "turn_restrictions": self.turn_restrictions or [],
+                "metadata": self.metadata or {},
                 "travel_time": self.travel_time,
             },
             "geometry": {
@@ -52,4 +62,3 @@ class RoadEdge:
                 "coordinates": [[lon, lat] for lon, lat in self.geometry],
             },
         }
-

@@ -41,6 +41,19 @@ def test_major_api_flow() -> None:
             "algorithm": "astar",
         },
     )
+    topology = client.post("/topology/validate")
+    spatial_benchmark = client.post("/benchmarks/spatial-index", json={"iterations": 2})
+    trajectory = client.post("/trajectory/analyze", json={})
+    routing_explain = client.post(
+        "/routing/explain",
+        json={
+            "start": [116.390, 39.900],
+            "end": [116.410, 39.920],
+            "mode": "shortest_distance",
+            "algorithm": "astar",
+        },
+    )
+    experiments = client.get("/visualization/experiments")
 
     assert load.status_code == 200
     assert current.status_code == 200
@@ -49,6 +62,13 @@ def test_major_api_flow() -> None:
     assert geofence.status_code == 200
     assert matching.status_code == 200
     assert route.status_code == 200
+    assert topology.status_code == 200
+    assert spatial_benchmark.status_code == 200
+    assert trajectory.status_code == 200
+    assert routing_explain.status_code == 200
+    assert experiments.status_code == 200
     assert matching.json()["matches"]
     assert route.json()["geometry"]["coordinates"]
     assert nearby.json()["roads"][0]["geometry"]["coordinates"]
+    assert topology.json()["status"] == "ok"
+    assert spatial_benchmark.json()["data"]["results"]

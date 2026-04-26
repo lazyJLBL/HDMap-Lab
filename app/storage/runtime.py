@@ -106,6 +106,9 @@ class RuntimeState:
             raise ValueError("osm_online requires either bbox or place")
         return self._replace(nodes, roads, self.trajectories, self.geofences, self.pois)
 
+    def replace_network(self, nodes: list[RoadNode], roads: list[RoadEdge]) -> dict[str, int]:
+        return self._replace(nodes, roads, self.trajectories, self.geofences, self.pois)
+
     def rebuild_indexes(self) -> None:
         with self.lock:
             self.nodes = self.store.list_nodes()
@@ -230,4 +233,3 @@ def geofences_from_payload(payload: list[dict[str, Any]]) -> list[GeoFence]:
             )
         )
     return geofences
-

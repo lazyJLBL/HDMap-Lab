@@ -58,6 +58,11 @@ def load_roads_collection(collection: dict[str, Any]) -> tuple[list[RoadNode], l
             speed_limit=_speed_limit(props),
             road_type=str(props.get("road_type") or props.get("highway") or "residential"),
             oneway=bool(props.get("oneway", False)),
+            direction=str(props.get("direction") or ("forward" if bool(props.get("oneway", False)) else "both")),
+            road_class=str(props.get("road_class") or props.get("class") or props.get("highway") or "local"),
+            lane_count=int(props.get("lane_count") or props.get("lanes") or 1),
+            turn_restrictions=list(props.get("turn_restrictions") or []),
+            metadata={key: value for key, value in props.items() if key not in {"from", "to", "length"}},
         )
         roads.append(road)
     return list(nodes_by_id.values()), roads
@@ -135,4 +140,3 @@ def load_pois_collection(collection: dict[str, Any]) -> list[POI]:
             )
         )
     return pois
-

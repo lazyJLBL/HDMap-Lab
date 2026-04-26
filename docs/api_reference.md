@@ -470,6 +470,61 @@ Response:
 }
 ```
 
+## Experiment APIs
+
+New algorithm-lab endpoints return a uniform envelope:
+
+```json
+{
+  "status": "ok",
+  "data": {},
+  "metrics": {},
+  "warnings": [],
+  "debug_layers": {}
+}
+```
+
+### POST /topology/validate
+
+Validates the loaded road graph and reports connected components, dangling edges, duplicate edges, illegal crossings, overlapping roads, and self-intersections.
+
+### POST /topology/repair
+
+Request:
+
+```json
+{
+  "snap_tolerance_m": 1.0,
+  "apply": false
+}
+```
+
+Returns `fixed_roads` GeoJSON, before/after topology reports, and operation counts.
+
+### POST /benchmarks/spatial-index
+
+Request:
+
+```json
+{
+  "iterations": 50
+}
+```
+
+Compares brute force, grid, quadtree, R-tree, and STR R-tree with build time, candidate count, p50, p95, and p99 latency.
+
+### POST /benchmarks/map-matching
+
+Runs synthetic GPS stress cases and compares nearest matching with HMM using precision, recall, confidence, and latency.
+
+### POST /trajectory/analyze
+
+Analyzes a loaded or custom trajectory with Frechet, Hausdorff, DTW, simplification, outlier detection, and route-deviation metrics.
+
+### POST /routing/explain
+
+Runs turn-cost aware routing and returns route steps plus a cost breakdown for distance, travel time, turn cost, road-class preference, and excluded edges.
+
 ### GET /visualization/export
 
 Request: no body.

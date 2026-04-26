@@ -111,6 +111,10 @@ def _parse_osm_root(root: ET.Element) -> tuple[list[RoadNode], list[RoadEdge]]:
                     speed_limit=speed,
                     road_type=road_type,
                     oneway=oneway,
+                    direction="forward" if oneway else "both",
+                    road_class=road_type,
+                    lane_count=int(tags.get("lanes") or 1),
+                    metadata={key: value for key, value in tags.items() if value is not None},
                 )
             )
     return list(used_nodes.values()), roads

@@ -2,15 +2,19 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import L, { GeoJSON as LeafletGeoJSON, Map as LeafletMap } from "leaflet";
 import {
   Activity,
+  BarChart3,
   Boxes,
   Ban,
   Crosshair,
+  FileSearch,
   GitBranch,
   Layers,
   LocateFixed,
   MapPinned,
+  Network,
   Route,
-  Search
+  Search,
+  Wrench
 } from "lucide-react";
 
 type FeatureCollection = GeoJSON.FeatureCollection;
@@ -239,6 +243,66 @@ export function App() {
     });
   }
 
+  async function runTopologyRepair() {
+    await runAction(async () => {
+      const payload = await request("/topology/repair", {
+        method: "POST",
+        body: JSON.stringify({ snap_tolerance_m: 1, apply: false })
+      });
+      renderFixedRoads(payload.debug_layers?.fixed_roads);
+      return payload;
+    });
+  }
+
+  async function runSpatialBenchmark() {
+    await runAction(async () => {
+      return request("/benchmarks/spatial-index", {
+        method: "POST",
+        body: JSON.stringify({ iterations: 10 })
+      });
+    });
+  }
+
+  async function runMapMatchingBenchmark() {
+    await runAction(async () => {
+      return request("/benchmarks/map-matching", {
+        method: "POST",
+        body: JSON.stringify({ k: 5 })
+      });
+    });
+  }
+
+  async function runTrajectoryAnalysis() {
+    await runAction(async () => {
+      return request("/trajectory/analyze", {
+        method: "POST",
+        body: JSON.stringify({})
+      });
+    });
+  }
+
+  async function runRoutingExplain() {
+    await runAction(async () => {
+      const payload = await request("/routing/explain", {
+        method: "POST",
+        body: JSON.stringify({
+          start: [116.390, 39.900],
+          end: [116.410, 39.920],
+          mode: routeMode,
+          algorithm: routeAlgorithm,
+          preferred_road_classes: ["primary", "secondary", "residential"],
+          turn_penalty_seconds: 8
+        })
+      });
+      renderRoute(payload.data?.geometry);
+      return payload;
+    });
+  }
+
+  async function loadExperiments() {
+    await runAction(async () => request("/visualization/experiments"));
+  }
+
   function clearOverlay(key: string) {
     const layer = layerRef.current[key];
     if (layer && mapRef.current) {
@@ -342,6 +406,13 @@ export function App() {
     addLayer("route", L.layerGroup([L.polyline(latlngs, { color: "#0891b2", weight: 7, opacity: 0.85 })]));
   }
 
+  function renderFixedRoads(collection?: FeatureCollection) {
+    if (!collection?.features?.length) return;
+    addLayer("fixedRoads", L.geoJSON(collection, {
+      style: { color: "#16a34a", weight: 3, opacity: 0.85, dashArray: "5 5" }
+    }));
+  }
+
   function toggleLayer(key: keyof LayerFlags) {
     setFlags((current) => ({ ...current, [key]: !current[key] }));
   }
@@ -433,6 +504,31 @@ export function App() {
           </button>
           <button className="command" disabled={busy} onClick={runSpatialQuery}>
             <Search size={18} /> Query
+          </button>
+        </section>
+
+        <section className="panel">
+          <div className="panel-title">
+            <Network size={18} />
+            <span>Experiments</span>
+          </div>
+          <button className="command" disabled={busy} onClick={runTopologyRepair}>
+            <Wrench size={18} /> Repair
+          </button>
+          <button className="command" disabled={busy} onClick={runSpatialBenchmark}>
+            <BarChart3 size={18} /> Index Bench
+          </button>
+          <button className="command" disabled={busy} onClick={runMapMatchingBenchmark}>
+            <GitBranch size={18} /> Match Bench
+          </button>
+          <button className="command" disabled={busy} onClick={runTrajectoryAnalysis}>
+            <Activity size={18} /> Trajectory
+          </button>
+          <button className="command" disabled={busy} onClick={runRoutingExplain}>
+            <Route size={18} /> Explain
+          </button>
+          <button className="command secondary" disabled={busy} onClick={loadExperiments}>
+            <FileSearch size={18} /> Catalog
           </button>
         </section>
 

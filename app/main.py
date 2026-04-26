@@ -9,7 +9,19 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from app.api import datasets, geofence, mapmatch, roads, route, spatial_query, visualization
+from app.api import (
+    benchmarks,
+    datasets,
+    geofence,
+    mapmatch,
+    roads,
+    route,
+    routing_explain,
+    spatial_query,
+    topology,
+    trajectory,
+    visualization,
+)
 from app.settings import settings
 from app.storage.runtime import get_runtime
 
@@ -45,6 +57,10 @@ app.include_router(spatial_query.router)
 app.include_router(geofence.router)
 app.include_router(mapmatch.router)
 app.include_router(route.router)
+app.include_router(routing_explain.router)
+app.include_router(topology.router)
+app.include_router(benchmarks.router)
+app.include_router(trajectory.router)
 app.include_router(visualization.router)
 
 
@@ -95,6 +111,7 @@ def stats() -> dict:
         "indexes": {
             "road_rtree": "ready" if runtime.roads else "empty",
             "road_kdtree": "ready" if runtime.roads else "empty",
+            "available_implementations": ["brute_force", "grid", "kdtree", "quadtree", "rtree", "str_rtree"],
             "road_graph": {
                 "nodes": len(runtime.graph.nodes),
                 "edges": sum(len(arcs) for arcs in runtime.graph.adjacency.values()),

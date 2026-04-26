@@ -77,3 +77,27 @@ GPS Points -> Candidate Search -> Emission + Transition Scores -> Viterbi -> Roa
 - add speed feasibility checks
 - support bidirectional candidate states explicitly
 
+## Evaluation Upgrade
+
+The upgraded matcher adds:
+
+- heading consistency
+- one-way direction handling
+- turn penalty between candidate roads
+- road-class prior
+- transition path cost through the road graph
+- synthetic GPS stress cases
+
+Run:
+
+```bash
+python -m benchmarks.map_matching_benchmark
+```
+
+Or call:
+
+```text
+POST /benchmarks/map-matching
+```
+
+The report compares nearest matching and HMM with sequence precision, recall, confidence, and latency for failure cases such as parallel-road drift and low-frequency GPS.

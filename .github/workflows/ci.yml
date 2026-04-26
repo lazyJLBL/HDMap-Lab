@@ -25,7 +25,7 @@ jobs:
           python -m pip install -r requirements.txt
 
       - name: Backend lint
-        run: ruff check app tests benchmarks
+        run: python -m ruff check app tests benchmarks scripts
 
       - name: Backend tests
         run: python -m pytest
@@ -47,4 +47,3 @@ jobs:
 
       - name: Docker image build
         run: docker build -t hdmap-lab:ci .
-

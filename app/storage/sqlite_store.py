@@ -32,7 +32,12 @@ class SQLiteStore:
                 length REAL NOT NULL,
                 speed_limit REAL NOT NULL,
                 road_type TEXT NOT NULL,
-                oneway INTEGER NOT NULL
+                oneway INTEGER NOT NULL,
+                direction TEXT NOT NULL DEFAULT 'both',
+                road_class TEXT NOT NULL DEFAULT 'local',
+                lane_count INTEGER NOT NULL DEFAULT 1,
+                turn_restrictions_json TEXT NOT NULL DEFAULT '[]',
+                metadata_json TEXT NOT NULL DEFAULT '{}'
             );
             CREATE TABLE IF NOT EXISTS trajectories (
                 id TEXT PRIMARY KEY,
@@ -52,7 +57,22 @@ class SQLiteStore:
             );
             """
         )
+        self._ensure_road_edge_columns()
         self._conn.commit()
+
+    def _ensure_road_edge_columns(self) -> None:
+        rows = self._conn.execute("PRAGMA table_info(road_edges)").fetchall()
+        columns = {row["name"] for row in rows}
+        migrations = {
+            "direction": "ALTER TABLE road_edges ADD COLUMN direction TEXT NOT NULL DEFAULT 'both'",
+            "road_class": "ALTER TABLE road_edges ADD COLUMN road_class TEXT NOT NULL DEFAULT 'local'",
+            "lane_count": "ALTER TABLE road_edges ADD COLUMN lane_count INTEGER NOT NULL DEFAULT 1",
+            "turn_restrictions_json": "ALTER TABLE road_edges ADD COLUMN turn_restrictions_json TEXT NOT NULL DEFAULT '[]'",
+            "metadata_json": "ALTER TABLE road_edges ADD COLUMN metadata_json TEXT NOT NULL DEFAULT '{}'",
+        }
+        for column, statement in migrations.items():
+            if column not in columns:
+                self._conn.execute(statement)
 
     def clear(self) -> None:
         self._conn.executescript(
@@ -92,8 +112,9 @@ class SQLiteStore:
         self._conn.executemany(
             """
             INSERT OR REPLACE INTO road_edges
-                (id, from_node, to_node, geometry_json, length, speed_limit, road_type, oneway)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                (id, from_node, to_node, geometry_json, length, speed_limit, road_type, oneway,
+                 direction, road_class, lane_count, turn_restrictions_json, metadata_json)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             [
                 (
@@ -105,6 +126,11 @@ class SQLiteStore:
                     road.speed_limit,
                     road.road_type,
                     int(road.oneway),
+                    road.direction,
+                    road.road_class,
+                    road.lane_count,
+                    json.dumps(road.turn_restrictions or []),
+                    json.dumps(road.metadata or {}),
                 )
                 for road in roads
             ],
@@ -179,6 +205,11 @@ class SQLiteStore:
                 speed_limit=row["speed_limit"],
                 road_type=row["road_type"],
                 oneway=bool(row["oneway"]),
+                direction=row["direction"],
+                road_class=row["road_class"],
+                lane_count=row["lane_count"],
+                turn_restrictions=json.loads(row["turn_restrictions_json"]),
+                metadata=json.loads(row["metadata_json"]),
             )
             for row in rows
         ]
@@ -221,4 +252,3 @@ class SQLiteStore:
     def has_roads(self) -> bool:
         row = self._conn.execute("SELECT COUNT(*) AS count FROM road_edges").fetchone()
         return bool(row and row["count"])
-
