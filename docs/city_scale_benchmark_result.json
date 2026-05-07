@@ -1,0 +1,75 @@
+{
+  "dataset": {
+    "roads": 13,
+    "bbox": [
+      116.39,
+      39.9,
+      116.41,
+      39.92
+    ],
+    "total_length_m": 13190.693073780367,
+    "query_count": 20
+  },
+  "results": [
+    {
+      "index": "brute_force",
+      "build_ms": 0.003800028935074806,
+      "memory_delta_kb": 4.0,
+      "mean_candidates": 0.5,
+      "p50_ms": 0.001300009898841381,
+      "p95_ms": 0.001700012944638729,
+      "p99_ms": 0.001800013706088066,
+      "recall": 1.0,
+      "false_positive_rate": 0.0,
+      "correctness_passed": true
+    },
+    {
+      "index": "grid",
+      "build_ms": 0.0315000070258975,
+      "memory_delta_kb": 8.0,
+      "mean_candidates": 0.5,
+      "p50_ms": 0.001300009898841381,
+      "p95_ms": 0.0028999056667089462,
+      "p99_ms": 0.003300025127828121,
+      "recall": 1.0,
+      "false_positive_rate": 0.0,
+      "correctness_passed": true
+    },
+    {
+      "index": "quadtree",
+      "build_ms": 0.03250001464039087,
+      "memory_delta_kb": 0.0,
+      "mean_candidates": 0.5,
+      "p50_ms": 0.0018500140868127346,
+      "p95_ms": 0.002900022082030773,
+      "p99_ms": 0.004199915565550327,
+      "recall": 1.0,
+      "false_positive_rate": 0.0,
+      "correctness_passed": true
+    },
+    {
+      "index": "rtree",
+      "build_ms": 0.03330002073198557,
+      "memory_delta_kb": 4.0,
+      "mean_candidates": 0.5,
+      "p50_ms": 0.001400010660290718,
+      "p95_ms": 0.002100015990436077,
+      "p99_ms": 0.004100031219422817,
+      "recall": 1.0,
+      "false_positive_rate": 0.0,
+      "correctness_passed": true
+    },
+    {
+      "index": "str_rtree",
+      "build_ms": 0.024600070901215076,
+      "memory_delta_kb": 0.0,
+      "mean_candidates": 0.5,
+      "p50_ms": 0.001400010660290718,
+      "p95_ms": 0.001999898813664913,
+      "p99_ms": 0.002200016751885414,
+      "recall": 1.0,
+      "false_positive_rate": 0.0,
+      "correctness_passed": true
+    }
+  ]
+}

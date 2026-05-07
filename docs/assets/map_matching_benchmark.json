@@ -33,7 +33,7 @@
         "matched_point_error_p95": 2.590762858958225,
         "continuity_score": 0.8181818181818181,
         "illegal_transition_count": 2,
-        "latency_ms": 1.3586999848484993,
+        "latency_ms": 0.941899954341352,
         "candidate_count_avg": 5.0,
         "confidence": 0.931
       },
@@ -54,7 +54,7 @@
         "matched_point_error_p95": 7.5157885785217315,
         "continuity_score": 0.7272727272727273,
         "illegal_transition_count": 0,
-        "latency_ms": 4.921299871057272,
+        "latency_ms": 3.7584000965580344,
         "candidate_count_avg": 5.0,
         "confidence": 0.807
       }
@@ -85,7 +85,7 @@
         "matched_point_error_p95": 7.140402961313159,
         "continuity_score": 0.0,
         "illegal_transition_count": 0,
-        "latency_ms": 0.4328000359237194,
+        "latency_ms": 0.5379000212997198,
         "candidate_count_avg": 5.0,
         "confidence": 0.883
       },
@@ -106,7 +106,7 @@
         "matched_point_error_p95": 7.140402961313159,
         "continuity_score": 0.0,
         "illegal_transition_count": 0,
-        "latency_ms": 1.395300030708313,
+        "latency_ms": 1.8387000309303403,
         "candidate_count_avg": 5.0,
         "confidence": 0.89
       }
@@ -145,7 +145,7 @@
         "matched_point_error_p95": 2.565752906660597,
         "continuity_score": 0.7272727272727273,
         "illegal_transition_count": 0,
-        "latency_ms": 1.33050000295043,
+        "latency_ms": 1.088000019080937,
         "candidate_count_avg": 5.0,
         "confidence": 0.94
       },
@@ -166,7 +166,7 @@
         "matched_point_error_p95": 2.565752906660597,
         "continuity_score": 0.7272727272727273,
         "illegal_transition_count": 0,
-        "latency_ms": 4.900899715721607,
+        "latency_ms": 4.37830004375428,
         "candidate_count_avg": 5.0,
         "confidence": 0.944
       }

@@ -75,3 +75,17 @@ def test_empty_and_single_item_indexes() -> None:
     for index in _indexes(single):
         assert index.query_bbox((0.5, 0.5, 1.5, 1.5)) == ["single"]
         assert index.nearest((1.0, 1.0), k=1) == ["single"]
+
+
+def test_bbox_query_includes_boundary_touching_items() -> None:
+    items = [
+        ((0.0, 0.0, 1.0, 1.0), "left"),
+        ((1.0, 1.0, 2.0, 2.0), "corner_touch"),
+        ((2.1, 2.1, 3.0, 3.0), "outside"),
+    ]
+    query = (1.0, 1.0, 2.0, 2.0)
+    expected = set(BruteForceIndex(items).query_bbox(query))
+
+    assert expected == {"left", "corner_touch"}
+    for index in _indexes(items):
+        assert set(index.query_bbox(query)) == expected

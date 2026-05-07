@@ -44,6 +44,8 @@ def main() -> None:
     payload = {"cases": rows, "algorithms": sorted(algorithms)}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    markdown_output = args.output.with_suffix(".md")
+    markdown_output.write_text(render_markdown_report(payload), encoding="utf-8")
     print("| Case | Algorithm | Seq accuracy | F1 | Latency ms | Candidate avg |")
     print("| --- | --- | ---: | ---: | ---: | ---: |")
     for row in rows:
@@ -55,7 +57,35 @@ def main() -> None:
                 f"| {row['case_id']} | {algorithm} | {metrics['sequence_accuracy']:.3f} | "
                 f"{metrics['f1']:.3f} | {metrics['latency_ms']:.3f} | {metrics['candidate_count_avg']:.2f} |"
             )
-    print(f"output: {args.output}")
+    print(f"output: {args.output} and {markdown_output}")
+
+
+def render_markdown_report(payload: dict) -> str:
+    lines = [
+        "# Map Matching Benchmark",
+        "",
+        "Synthetic stress cases compare nearest-road matching with HMM sequence matching.",
+        "",
+        "| Case | Algorithm | Seq accuracy | F1 | Latency ms | Candidate avg |",
+        "| --- | --- | ---: | ---: | ---: | ---: |",
+    ]
+    for row in payload["cases"]:
+        for algorithm in payload["algorithms"]:
+            metrics = row.get(algorithm)
+            if not metrics:
+                continue
+            lines.append(
+                f"| {row['case_id']} | {algorithm} | {metrics['sequence_accuracy']:.3f} | "
+                f"{metrics['f1']:.3f} | {metrics['latency_ms']:.3f} | {metrics['candidate_count_avg']:.2f} |"
+            )
+    lines.extend(
+        [
+            "",
+            "Correctness is evaluated against each synthetic case's ground-truth road sequence.",
+            "Latency is measured on the local machine and should not be read as a city-scale production benchmark.",
+        ]
+    )
+    return "\n".join(lines) + "\n"
 
 
 if __name__ == "__main__":

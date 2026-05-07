@@ -97,6 +97,24 @@ export function App() {
       pois: state?.pois.features.length ?? 0
     };
   }, [state]);
+  const resultMetrics = useMemo(() => {
+    const direct = asRecord(result.metrics);
+    const data = asRecord(result.data);
+    return direct ?? asRecord(data?.metrics) ?? {};
+  }, [result]);
+  const warnings = useMemo(() => {
+    return Array.isArray(result.warnings) ? result.warnings.map((item) => String(item)) : [];
+  }, [result]);
+  const debugLayerKeys = useMemo(() => {
+    const data = asRecord(result.data);
+    const layers = asRecord(result.debug_layers) ?? asRecord(data?.debug_layers);
+    return Object.keys(layers ?? {});
+  }, [result]);
+  const benchmarkRows = useMemo(() => {
+    const data = asRecord(result.data);
+    const rows = Array.isArray(data?.results) ? data.results : [];
+    return rows.filter(isRecord).slice(0, 8);
+  }, [result]);
 
   useEffect(() => {
     const map = L.map("map", { zoomControl: false }).setView([39.91, 116.4], 14);
@@ -259,6 +277,12 @@ export function App() {
         body: JSON.stringify({ snap_tolerance_m: 1, apply: false })
       });
       renderFixedRoads(payload.debug_layers?.fixed_roads);
+      renderFeatureCollection("issueMarkers", payload.debug_layers?.split_points as FeatureCollection | undefined, {
+        color: "#dc2626",
+        weight: 4,
+        opacity: 0.92,
+        fillOpacity: 0.24
+      });
       return payload;
     });
   }
@@ -300,10 +324,22 @@ export function App() {
 
   async function runSpatialBenchmark() {
     await runAction(async () => {
-      return request("/benchmarks/spatial-index", {
+      const payload = await request("/benchmarks/spatial-index", {
         method: "POST",
-        body: JSON.stringify({ iterations: 10 })
+        body: JSON.stringify({ iterations: 10, return_debug_layers: true })
       });
+      renderFeatureCollection("benchmarkItems", payload.debug_layers?.items_sample as FeatureCollection | undefined, {
+        color: "#475569",
+        weight: 2,
+        opacity: 0.4
+      });
+      renderFeatureCollection("queryBbox", payload.debug_layers?.sample_bbox_query as FeatureCollection | undefined, {
+        color: "#f59e0b",
+        weight: 3,
+        opacity: 0.95,
+        fillOpacity: 0.08
+      });
+      return payload;
     });
   }
 
@@ -516,7 +552,7 @@ export function App() {
           <MapPinned size={24} />
           <div>
             <h1>HDMap-Lab</h1>
-            <p>Spatial Algorithm Platform</p>
+            <p>Computational Geometry Workbench for Map Algorithms</p>
           </div>
         </header>
 
@@ -525,6 +561,12 @@ export function App() {
           <Metric label="Traj" value={metrics.trajectories} />
           <Metric label="Fence" value={metrics.geofences} />
           <Metric label="POI" value={metrics.pois} />
+        </section>
+
+        <section className="focus-strip" aria-label="Demo scenarios">
+          <span>Dirty Road Repair</span>
+          <span>Spatial Index Benchmark</span>
+          <span>HMM Matching / Routing</span>
         </section>
 
         <section className="panel">
@@ -658,11 +700,53 @@ export function App() {
             <Search size={18} />
             <span>Result</span>
           </div>
+          <div className="result-summary">
+            <SummaryBlock title="Metrics" values={resultMetrics} />
+            <div className="summary-block">
+              <span>Warnings</span>
+              <strong>{warnings.length}</strong>
+            </div>
+            <div className="summary-block wide">
+              <span>Debug Layers</span>
+              <strong>{debugLayerKeys.length ? debugLayerKeys.join(", ") : "none"}</strong>
+            </div>
+          </div>
+          {benchmarkRows.length ? (
+            <table className="benchmark-table">
+              <thead>
+                <tr>
+                  <th>Index</th>
+                  <th>Query</th>
+                  <th>p95 ms</th>
+                  <th>Recall</th>
+                </tr>
+              </thead>
+              <tbody>
+                {benchmarkRows.map((row, index) => (
+                  <tr key={`${String(row.index)}-${String(row.query_type)}-${index}`}>
+                    <td>{String(row.index ?? "-")}</td>
+                    <td>{String(row.query_type ?? "-")}</td>
+                    <td>{formatCell(row.p95_ms)}</td>
+                    <td>{formatCell(row.recall)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : null}
           <pre>{JSON.stringify(result, null, 2)}</pre>
         </section>
       </aside>
       <main className="map-shell">
         <div id="map" />
+        <div className="map-legend" aria-label="Map layer legend">
+          <LegendItem color="#334155" label="Original road" />
+          <LegendItem color="#16a34a" label="Repaired road" />
+          <LegendItem color="#2563eb" label="GPS / trajectory" />
+          <LegendItem color="#7c3aed" label="Matched path" />
+          <LegendItem color="#f59e0b" label="Query bbox" />
+          <LegendItem color="#0891b2" label="Route" />
+          <LegendItem color="#dc2626" label="Issue marker" />
+        </div>
       </main>
     </div>
   );
@@ -675,4 +759,44 @@ function Metric({ label, value }: { label: string; value: number }) {
       <strong>{value}</strong>
     </div>
   );
+}
+
+function SummaryBlock({ title, values }: { title: string; values: Record<string, unknown> }) {
+  const entries = Object.entries(values).slice(0, 3);
+  return (
+    <div className="summary-block wide">
+      <span>{title}</span>
+      <strong>{entries.length ? entries.map(([key, value]) => `${key}: ${formatCell(value)}`).join(" | ") : "none"}</strong>
+    </div>
+  );
+}
+
+function LegendItem({ color, label }: { color: string; label: string }) {
+  return (
+    <span className="legend-item">
+      <i style={{ backgroundColor: color }} />
+      {label}
+    </span>
+  );
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function asRecord(value: unknown): Record<string, unknown> | null {
+  return isRecord(value) ? value : null;
+}
+
+function formatCell(value: unknown) {
+  if (typeof value === "number") {
+    return Number.isInteger(value) ? String(value) : value.toFixed(3);
+  }
+  if (typeof value === "string") {
+    return value;
+  }
+  if (typeof value === "boolean") {
+    return value ? "true" : "false";
+  }
+  return "-";
 }

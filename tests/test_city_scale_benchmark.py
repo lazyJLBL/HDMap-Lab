@@ -23,4 +23,5 @@ def test_city_scale_benchmark_report_shape() -> None:
 
     assert report["dataset"]["roads"] == 2
     assert len(report["results"]) == 5
-    assert "City-Scale Spatial Index Benchmark Result" in markdown
+    assert "Local Road Extract Spatial Index Benchmark Result" in markdown
+    assert all(row["correctness_passed"] for row in report["results"])

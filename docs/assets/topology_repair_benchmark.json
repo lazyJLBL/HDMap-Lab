@@ -1,0 +1,209 @@
+{
+  "dataset": "synthetic_dirty_crossing_duplicate",
+  "elapsed_ms": 1.1183000169694424,
+  "operations": {
+    "snapped_nodes": 2,
+    "snap_report": {
+      "snapped_pairs": [
+        {
+          "source_node": "b",
+          "target_node": "b",
+          "source_coordinate": [
+            2.0,
+            0.0
+          ],
+          "target_coordinate": [
+            2.000000005,
+            0.0
+          ],
+          "distance_m": 0.0005559754157441642
+        },
+        {
+          "source_node": "b_near",
+          "target_node": "b",
+          "source_coordinate": [
+            2.00000001,
+            0.0
+          ],
+          "target_coordinate": [
+            2.000000005,
+            0.0
+          ],
+          "distance_m": 0.0005559753715364101
+        }
+      ],
+      "clusters": [
+        {
+          "representative": "a",
+          "node_ids": [
+            "a"
+          ],
+          "coordinate": [
+            0.0,
+            0.0
+          ],
+          "size": 1
+        },
+        {
+          "representative": "b",
+          "node_ids": [
+            "b",
+            "b_near"
+          ],
+          "coordinate": [
+            2.000000005,
+            0.0
+          ],
+          "size": 2
+        },
+        {
+          "representative": "c",
+          "node_ids": [
+            "c"
+          ],
+          "coordinate": [
+            1.0,
+            -1.0
+          ],
+          "size": 1
+        },
+        {
+          "representative": "d",
+          "node_ids": [
+            "d"
+          ],
+          "coordinate": [
+            1.0,
+            1.0
+          ],
+          "size": 1
+        }
+      ],
+      "moved_distance_stats": {
+        "count": 5.0,
+        "max_m": 0.0005559754157441642,
+        "mean_m": 0.0002223901574561149,
+        "total_m": 0.0011119507872805745
+      }
+    },
+    "split_edges_added": 3,
+    "split_events": [
+      {
+        "road_id": "horizontal",
+        "other_road_id": "vertical",
+        "segment_index": 0,
+        "point": [
+          1.0,
+          -0.0
+        ],
+        "t": 0.49999999875,
+        "relation": "cross"
+      },
+      {
+        "road_id": "vertical",
+        "other_road_id": "duplicate",
+        "segment_index": 0,
+        "point": [
+          1.0,
+          -0.0
+        ],
+        "t": 0.5,
+        "relation": "cross"
+      },
+      {
+        "road_id": "duplicate",
+        "other_road_id": "vertical",
+        "segment_index": 0,
+        "point": [
+          1.0,
+          -0.0
+        ],
+        "t": 0.49999999875,
+        "relation": "cross"
+      }
+    ],
+    "duplicate_edges_removed": 2,
+    "duplicate_groups": [
+      {
+        "kept_road_id": "horizontal_split_0",
+        "removed_road_ids": [
+          "duplicate_split_0"
+        ],
+        "direction": "same_direction",
+        "reason": "same geometry and compatible semantics"
+      },
+      {
+        "kept_road_id": "horizontal_split_1",
+        "removed_road_ids": [
+          "duplicate_split_1"
+        ],
+        "direction": "same_direction",
+        "reason": "same geometry and compatible semantics"
+      }
+    ],
+    "merged_collinear_roads": 0,
+    "merged_events": [],
+    "dangling_edges": [
+      {
+        "road_id": "horizontal_split_0",
+        "mode": "mark_only",
+        "action": "marked",
+        "length_m": 111195.0802335329
+      },
+      {
+        "road_id": "horizontal_split_1",
+        "mode": "mark_only",
+        "action": "marked",
+        "length_m": 111195.08078950833
+      },
+      {
+        "road_id": "vertical_split_0",
+        "mode": "mark_only",
+        "action": "marked",
+        "length_m": 111195.0802335329
+      },
+      {
+        "road_id": "vertical_split_1",
+        "mode": "mark_only",
+        "action": "marked",
+        "length_m": 111195.0802335329
+      }
+    ],
+    "dangling_edges_removed": 0
+  },
+  "before": {
+    "node_count": 5,
+    "edge_count": 3,
+    "components": 2,
+    "connected_components": 2,
+    "largest_component_ratio": 0.6,
+    "isolated_nodes": 0,
+    "dangling_edges": 3,
+    "duplicate_edges": 1,
+    "illegal_crossings": 2,
+    "crossing_without_node": 2,
+    "self_intersections": 0,
+    "issues": 6,
+    "quality_score": 79.0
+  },
+  "after": {
+    "node_count": 9,
+    "edge_count": 4,
+    "components": 5,
+    "connected_components": 5,
+    "largest_component_ratio": 0.5555555555555556,
+    "isolated_nodes": 4,
+    "dangling_edges": 4,
+    "duplicate_edges": 0,
+    "illegal_crossings": 0,
+    "crossing_without_node": 0,
+    "self_intersections": 0,
+    "issues": 8,
+    "quality_score": 84.0
+  },
+  "correctness": {
+    "duplicate_edges_removed": true,
+    "illegal_crossings_repaired": true,
+    "quality_score_improved": true
+  }
+}
