@@ -26,8 +26,15 @@ class BasicRTreeIndex(MeasuredIndex[T], Generic[T]):
 
     def __init__(self, items: Iterable[tuple[BBox, T] | IndexedItem[T]] = (), max_children: int = 8):
         self.max_children = max(2, max_children)
+        self.entries: list[IndexedItem[T]] = []
+        self.root: _RNode[T] | None = None
+        self.build(items)
+
+    def build(self, items: Iterable[tuple[BBox, T] | IndexedItem[T]]) -> "BasicRTreeIndex[T]":
         self.entries = normalize_items(items)
+        self.items = self.entries
         self.root = self._build(self.entries)
+        return self
 
     def query(self, bbox: BBox) -> list[T]:
         return _query_node(self.root, bbox) if self.root is not None else []
@@ -47,6 +54,11 @@ class BasicRTreeIndex(MeasuredIndex[T], Generic[T]):
             if child is not None
         ]
         return _RNode(bbox_union([child.bbox for child in children]), children=children)
+
+    def stats(self) -> dict[str, object]:
+        stats = super().stats()
+        stats.update({"max_children": self.max_children, "node_count": _count_nodes(self.root)})
+        return stats
 
 
 class STRRTreeIndex(BasicRTreeIndex[T], Generic[T]):
@@ -86,3 +98,12 @@ def _query_node(node: _RNode[T] | None, bbox: BBox) -> list[T]:
     for child in node.children:
         results.extend(_query_node(child, bbox))
     return results
+
+
+def _count_nodes(node: _RNode[T] | None) -> int:
+    if node is None:
+        return 0
+    return 1 + sum(_count_nodes(child) for child in node.children)
+
+
+RTreeIndex = BasicRTreeIndex

@@ -41,14 +41,14 @@ def road_class_prior(candidate: RoadCandidate) -> float:
     priors = {
         "motorway": 0.0,
         "trunk": 0.05,
-        "primary": 0.08,
-        "secondary": 0.12,
-        "tertiary": 0.16,
-        "residential": 0.22,
-        "service": 0.32,
-        "local": 0.22,
+        "primary": 0.02,
+        "secondary": 0.08,
+        "tertiary": 0.14,
+        "residential": 0.24,
+        "local": 0.24,
+        "service": 0.55,
     }
-    return priors.get(candidate.road.road_class, priors.get(candidate.road.road_type, 0.25))
+    return priors.get(candidate.road.road_class, priors.get(candidate.road.road_type, 0.3))
 
 
 def speed_feasibility_penalty(
@@ -63,7 +63,7 @@ def speed_feasibility_penalty(
     allowed = max(previous.road.speed_limit, current.road.speed_limit) * 1.35 + 10.0
     if observed_speed_kph <= allowed:
         return 0.0
-    return min(1.0, (observed_speed_kph - allowed) / max(allowed, 1.0))
+    return min(10.0, (observed_speed_kph - allowed) / max(allowed, 1.0))
 
 
 def edge_connectivity_distance(
@@ -85,6 +85,65 @@ def edge_connectivity_distance(
     return best
 
 
+def emission_probability(candidate: RoadCandidate, sigma: float = 20.0) -> float:
+    return max(0.0, min(1.0, _exp_like(-0.5 * (candidate.distance_m / max(sigma, 1.0)) ** 2)))
+
+
+def transition_probability(
+    graph: RoadGraph,
+    previous: RoadCandidate,
+    current: RoadCandidate,
+    gps_distance: float,
+    beta: float = 50.0,
+) -> float:
+    network_distance = edge_connectivity_distance(graph, previous, current)
+    if network_distance == inf:
+        return 0.0
+    return max(0.0, min(1.0, _exp_like(-abs(network_distance - gps_distance) / max(beta, 1.0))))
+
+
+def cost_breakdown(
+    graph: RoadGraph,
+    candidate: RoadCandidate,
+    gps_heading: float | None,
+    previous: RoadCandidate | None = None,
+    gps_distance: float | None = None,
+    step_seconds: float | None = None,
+    sigma: float = 20.0,
+    beta: float = 50.0,
+) -> dict[str, float]:
+    emission = 0.5 * (candidate.distance_m / max(sigma, 1.0)) ** 2
+    heading = direction_cost(candidate, gps_heading) * 4.0
+    speed = speed_feasibility_penalty(previous, candidate, gps_distance, step_seconds)
+    turn = turn_penalty(previous, candidate) * 2.0
+    road_class = road_class_prior(candidate) * 5.0
+    oneway = 0.0 if candidate.is_oneway_compatible else 25.0
+    layer = 0.0
+    transition = 0.0
+    if previous is not None and gps_distance is not None:
+        if previous.layer != candidate.layer:
+            layer = 6.0
+        network_distance = edge_connectivity_distance(graph, previous, candidate)
+        if network_distance == inf:
+            transition = 1_000_000.0
+        else:
+            transition = abs(network_distance - gps_distance) / max(beta, 1.0)
+    return {
+        "emission": emission,
+        "transition": transition,
+        "heading": heading,
+        "speed": speed,
+        "turn": turn,
+        "road_class": road_class,
+        "oneway": oneway,
+        "layer": layer,
+    }
+
+
+def total_cost(breakdown: dict[str, float]) -> float:
+    return sum(breakdown.values())
+
+
 def transition_log_probability(
     graph: RoadGraph,
     previous: RoadCandidate,
@@ -102,7 +161,7 @@ def transition_log_probability(
 
 
 def emission_log_probability(candidate: RoadCandidate, sigma: float) -> float:
-    return -0.5 * (candidate.distance / max(sigma, 1.0)) ** 2
+    return -0.5 * (candidate.distance_m / max(sigma, 1.0)) ** 2
 
 
 def candidate_total_cost(
@@ -112,7 +171,7 @@ def candidate_total_cost(
     previous: RoadCandidate | None,
     weights: tuple[float, float, float, float, float] = (1.0, 30.0, 0.02, 25.0, 12.0),
 ) -> dict[str, float]:
-    distance = candidate.distance
+    distance = candidate.distance_m
     direction = direction_cost(candidate, gps_heading)
     connectivity = 0.0
     if previous is not None:
@@ -141,3 +200,13 @@ def gps_step_distance(trajectory: Trajectory, index: int) -> float:
     if index <= 0:
         return 0.0
     return haversine_distance(trajectory.coordinates[index - 1], trajectory.coordinates[index])
+
+
+def breakdown_with_total(breakdown: dict[str, float]) -> dict[str, float]:
+    return breakdown | {"total": total_cost(breakdown)}
+
+
+def _exp_like(value: float) -> float:
+    if value < -50:
+        return 0.0
+    return 2.718281828459045**value

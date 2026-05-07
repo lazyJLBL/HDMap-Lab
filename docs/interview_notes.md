@@ -12,6 +12,10 @@ KD-Tree indexes points and is useful for nearest node or centroid lookup. R-Tree
 
 HDMap-Lab uses ray casting. A horizontal ray from the point counts polygon edge crossings. Odd crossings mean inside, even crossings mean outside. Boundary is handled separately with point-to-segment distance.
 
+## How to prove geometry robustness in an interview
+
+Use the degenerate case gallery instead of only describing the algorithm. Run `python -m scripts.run_geometry_cases` and show cases such as near-collinear large coordinates, endpoint touch, T-junction, reversed overlap, polygon holes, bowtie self-intersection, duplicate points, and zero-length segments. The important point is that each case has expected output, actual output, pass/fail status, and debug GeoJSON, so the discussion moves from "I know orientation and ray casting" to "I can build regression tests for the edge cases that break topology repair and map matching."
+
 ## How is point-to-road distance computed?
 
 Each road polyline is split into line segments. The GPS point is projected onto each segment, clamped to the segment endpoints, and the minimum projected distance is selected.
@@ -43,4 +47,3 @@ Partition the road network by tiles, use disk-backed spatial indexes, cache grap
 ## How to handle GPS drift and parallel roads
 
 Increase candidate count, use heading and speed constraints, add road class priors, tune HMM sigma/beta, and use multiple observations instead of making a per-point greedy decision.
-

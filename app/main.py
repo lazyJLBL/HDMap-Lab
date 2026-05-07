@@ -13,6 +13,7 @@ from app.api import (
     benchmarks,
     datasets,
     geofence,
+    geometry,
     mapmatch,
     roads,
     route,
@@ -52,6 +53,7 @@ app.add_middleware(
 )
 
 app.include_router(datasets.router)
+app.include_router(geometry.router)
 app.include_router(roads.router)
 app.include_router(spatial_query.router)
 app.include_router(geofence.router)

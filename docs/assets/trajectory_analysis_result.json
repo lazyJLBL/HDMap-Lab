@@ -1,0 +1,1065 @@
+{
+  "point_count": 5,
+  "length_m": 294.97753325181407,
+  "simplified_point_count": 5,
+  "simplified": [
+    [
+      116.0,
+      39.0
+    ],
+    [
+      116.0005,
+      39.0002
+    ],
+    [
+      116.001,
+      39.001
+    ],
+    [
+      116.0015,
+      39.0002
+    ],
+    [
+      116.002,
+      39.0
+    ]
+  ],
+  "debug_layers": {
+    "raw_trajectory": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "layer": "raw_trajectory"
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0,
+                39.0
+              ],
+              [
+                116.0005,
+                39.0002
+              ],
+              [
+                116.001,
+                39.001
+              ],
+              [
+                116.0015,
+                39.0002
+              ],
+              [
+                116.002,
+                39.0
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "simplified_trajectory": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "layer": "simplified_trajectory"
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0,
+                39.0
+              ],
+              [
+                116.0005,
+                39.0002
+              ],
+              [
+                116.001,
+                39.001
+              ],
+              [
+                116.0015,
+                39.0002
+              ],
+              [
+                116.002,
+                39.0
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "frechet_pairs": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "path_a_index": 0,
+            "path_b_index": 0
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0,
+                39.0
+              ],
+              [
+                116.0,
+                39.0
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "path_a_index": 1,
+            "path_b_index": 0
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0005,
+                39.0002
+              ],
+              [
+                116.0,
+                39.0
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "path_a_index": 2,
+            "path_b_index": 0
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.001,
+                39.001
+              ],
+              [
+                116.0,
+                39.0
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "path_a_index": 3,
+            "path_b_index": 0
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0015,
+                39.0002
+              ],
+              [
+                116.0,
+                39.0
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "path_a_index": 3,
+            "path_b_index": 1
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0015,
+                39.0002
+              ],
+              [
+                116.002,
+                39.0
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "path_a_index": 4,
+            "path_b_index": 1
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.002,
+                39.0
+              ],
+              [
+                116.002,
+                39.0
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "frechet_witness": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "layer": "frechet_witness"
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.001,
+                39.001
+              ],
+              [
+                116.0,
+                39.0
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "hausdorff_witness": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "distance_m": 140.82527929132308,
+            "source": "path_a"
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.001,
+                39.001
+              ],
+              [
+                116.0,
+                39.0
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "dtw_alignment": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "path_a_index": 0,
+            "path_b_index": 0
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0,
+                39.0
+              ],
+              [
+                116.0,
+                39.0
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "path_a_index": 1,
+            "path_b_index": 0
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0005,
+                39.0002
+              ],
+              [
+                116.0,
+                39.0
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "path_a_index": 2,
+            "path_b_index": 0
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.001,
+                39.001
+              ],
+              [
+                116.0,
+                39.0
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "path_a_index": 3,
+            "path_b_index": 1
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0015,
+                39.0002
+              ],
+              [
+                116.002,
+                39.0
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "path_a_index": 4,
+            "path_b_index": 1
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.002,
+                39.0
+              ],
+              [
+                116.002,
+                39.0
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "reference_route": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "layer": "reference_route"
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0,
+                39.0
+              ],
+              [
+                116.002,
+                39.0
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "off_route_points": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "index": 2,
+            "distance_m": 111.19508023327376,
+            "severity": "warning"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              116.001,
+              39.001
+            ]
+          }
+        }
+      ]
+    },
+    "deviation_residuals": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "index": 2,
+            "distance_m": 111.19508023327376
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.001,
+                39.001
+              ],
+              [
+                116.001,
+                39.0
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "frechet": {
+    "distance_m": 140.82527929132308,
+    "matching_pairs": [
+      {
+        "path_a_index": 0,
+        "path_b_index": 0
+      },
+      {
+        "path_a_index": 1,
+        "path_b_index": 0
+      },
+      {
+        "path_a_index": 2,
+        "path_b_index": 0
+      },
+      {
+        "path_a_index": 3,
+        "path_b_index": 0
+      },
+      {
+        "path_a_index": 3,
+        "path_b_index": 1
+      },
+      {
+        "path_a_index": 4,
+        "path_b_index": 1
+      }
+    ],
+    "witness_pair": {
+      "path_a_index": 2,
+      "path_b_index": 0
+    },
+    "debug_layers": {
+      "frechet_pairs": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "path_a_index": 0,
+              "path_b_index": 0
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.0,
+                  39.0
+                ],
+                [
+                  116.0,
+                  39.0
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "path_a_index": 1,
+              "path_b_index": 0
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.0005,
+                  39.0002
+                ],
+                [
+                  116.0,
+                  39.0
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "path_a_index": 2,
+              "path_b_index": 0
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.001,
+                  39.001
+                ],
+                [
+                  116.0,
+                  39.0
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "path_a_index": 3,
+              "path_b_index": 0
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.0015,
+                  39.0002
+                ],
+                [
+                  116.0,
+                  39.0
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "path_a_index": 3,
+              "path_b_index": 1
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.0015,
+                  39.0002
+                ],
+                [
+                  116.002,
+                  39.0
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "path_a_index": 4,
+              "path_b_index": 1
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.002,
+                  39.0
+                ],
+                [
+                  116.002,
+                  39.0
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "frechet_witness": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "layer": "frechet_witness"
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.001,
+                  39.001
+                ],
+                [
+                  116.0,
+                  39.0
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "hausdorff": {
+    "distance_m": 140.82527929132308,
+    "witness_points": [
+      {
+        "distance_m": 140.82527929132308,
+        "source": "path_a",
+        "point": [
+          116.001,
+          39.001
+        ],
+        "nearest": [
+          116.0,
+          39.0
+        ]
+      }
+    ],
+    "debug_layers": {
+      "hausdorff_witness": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "distance_m": 140.82527929132308,
+              "source": "path_a"
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.001,
+                  39.001
+                ],
+                [
+                  116.0,
+                  39.0
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "dtw": {
+    "distance_m": 238.0147498757601,
+    "alignment_path": [
+      {
+        "path_a_index": 0,
+        "path_b_index": 0
+      },
+      {
+        "path_a_index": 1,
+        "path_b_index": 0
+      },
+      {
+        "path_a_index": 2,
+        "path_b_index": 0
+      },
+      {
+        "path_a_index": 3,
+        "path_b_index": 1
+      },
+      {
+        "path_a_index": 4,
+        "path_b_index": 1
+      }
+    ],
+    "debug_layers": {
+      "dtw_alignment": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "path_a_index": 0,
+              "path_b_index": 0
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.0,
+                  39.0
+                ],
+                [
+                  116.0,
+                  39.0
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "path_a_index": 1,
+              "path_b_index": 0
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.0005,
+                  39.0002
+                ],
+                [
+                  116.0,
+                  39.0
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "path_a_index": 2,
+              "path_b_index": 0
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.001,
+                  39.001
+                ],
+                [
+                  116.0,
+                  39.0
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "path_a_index": 3,
+              "path_b_index": 1
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.0015,
+                  39.0002
+                ],
+                [
+                  116.002,
+                  39.0
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "path_a_index": 4,
+              "path_b_index": 1
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.002,
+                  39.0
+                ],
+                [
+                  116.002,
+                  39.0
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "distances": {
+    "frechet_m": 140.82527929132308,
+    "hausdorff_m": 140.82527929132308,
+    "dtw_m": 238.0147498757601
+  },
+  "simplification": {
+    "rdp": {
+      "method": "douglas_peucker",
+      "original_point_count": 5,
+      "simplified_point_count": 5,
+      "compression_ratio": 1.0,
+      "max_error_estimate": 0.0,
+      "simplified": [
+        [
+          116.0,
+          39.0
+        ],
+        [
+          116.0005,
+          39.0002
+        ],
+        [
+          116.001,
+          39.001
+        ],
+        [
+          116.0015,
+          39.0002
+        ],
+        [
+          116.002,
+          39.0
+        ]
+      ]
+    },
+    "visvalingam_whyatt": {
+      "method": "visvalingam_whyatt",
+      "original_point_count": 5,
+      "simplified_point_count": 5,
+      "compression_ratio": 1.0,
+      "max_error_estimate": 0.0,
+      "simplified": [
+        [
+          116.0,
+          39.0
+        ],
+        [
+          116.0005,
+          39.0002
+        ],
+        [
+          116.001,
+          39.001
+        ],
+        [
+          116.0015,
+          39.0002
+        ],
+        [
+          116.002,
+          39.0
+        ]
+      ]
+    },
+    "simplified_vw": [
+      [
+        116.0,
+        39.0
+      ],
+      [
+        116.0005,
+        39.0002
+      ],
+      [
+        116.001,
+        39.001
+      ],
+      [
+        116.0015,
+        39.0002
+      ],
+      [
+        116.002,
+        39.0
+      ]
+    ]
+  },
+  "outliers": {
+    "speed": [
+      {
+        "index": 2,
+        "speed_mps": 98.89403133368853,
+        "coordinate": [
+          116.001,
+          39.001
+        ],
+        "type": "speed"
+      },
+      {
+        "index": 3,
+        "speed_mps": 98.89403133368853,
+        "coordinate": [
+          116.0015,
+          39.0002
+        ],
+        "type": "speed"
+      }
+    ],
+    "angle": [],
+    "distance_jump": [],
+    "map_matching_residual": []
+  },
+  "outlier_indices": [
+    2,
+    3
+  ],
+  "deviation": {
+    "max_m": 111.19508023327376,
+    "mean_m": 31.134622465316653,
+    "p95_m": 111.19508023327376,
+    "exceeds_threshold": [
+      2
+    ],
+    "deviation_segments": [
+      {
+        "start_index": 2,
+        "end_index": 2,
+        "max_deviation_m": 111.19508023327376
+      }
+    ],
+    "max_deviation_m": 111.19508023327376,
+    "mean_deviation_m": 31.134622465316653,
+    "p95_deviation_m": 111.19508023327376,
+    "off_route_points": [
+      {
+        "index": 2,
+        "point": [
+          116.001,
+          39.001
+        ],
+        "projected_point": [
+          116.001,
+          39.0
+        ],
+        "distance_m": 111.19508023327376,
+        "along_track_distance": 86.41358618979062
+      }
+    ],
+    "debug_layers": {
+      "raw_trajectory": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "layer": "raw_trajectory"
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.0,
+                  39.0
+                ],
+                [
+                  116.0005,
+                  39.0002
+                ],
+                [
+                  116.001,
+                  39.001
+                ],
+                [
+                  116.0015,
+                  39.0002
+                ],
+                [
+                  116.002,
+                  39.0
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "reference_route": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "layer": "reference_route"
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.0,
+                  39.0
+                ],
+                [
+                  116.002,
+                  39.0
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "off_route_points": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "index": 2,
+              "distance_m": 111.19508023327376,
+              "severity": "warning"
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                116.001,
+                39.001
+              ]
+            }
+          }
+        ]
+      },
+      "deviation_residuals": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "index": 2,
+              "distance_m": 111.19508023327376
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  116.001,
+                  39.001
+                ],
+                [
+                  116.001,
+                  39.0
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

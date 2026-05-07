@@ -1,0 +1,557 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "collinear_three_points",
+        "layer": "input_points"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0
+          ],
+          [
+            2.0,
+            2.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "near_collinear_large_coordinates",
+        "layer": "input_points"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            1000000000.0,
+            1000000000.0
+          ],
+          [
+            1000001000.0,
+            1000001000.0
+          ],
+          [
+            1000002000.0,
+            1000002000.001
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "endpoint_touch_segments",
+        "layer": "segment_a"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "endpoint_touch_segments",
+        "layer": "segment_b"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            1.0,
+            1.0
+          ],
+          [
+            2.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "t_junction_segments",
+        "layer": "segment_a"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            2.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "t_junction_segments",
+        "layer": "segment_b"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            1.0,
+            -1.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "overlapping_segments",
+        "layer": "segment_a"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            3.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "overlapping_segments",
+        "layer": "segment_b"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            4.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "reversed_overlapping_segments",
+        "layer": "segment_a"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            3.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "reversed_overlapping_segments",
+        "layer": "segment_b"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            4.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "almost_parallel_segments",
+        "layer": "segment_a"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            1000000.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "almost_parallel_segments",
+        "layer": "segment_b"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            2.0
+          ],
+          [
+            1000000.0,
+            3.000001
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "polygon_with_hole",
+        "layer": "polygon"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              4.0,
+              0.0
+            ],
+            [
+              4.0,
+              4.0
+            ],
+            [
+              0.0,
+              4.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          [
+            [
+              1.0,
+              1.0
+            ],
+            [
+              1.0,
+              3.0
+            ],
+            [
+              3.0,
+              3.0
+            ],
+            [
+              3.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "self_intersecting_bowtie_polygon",
+        "layer": "ring"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            2.0,
+            2.0
+          ],
+          [
+            0.0,
+            2.0
+          ],
+          [
+            2.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "duplicate_points_polyline",
+        "layer": "polyline"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "duplicate_points_polyline",
+        "layer": "query_point"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.25,
+          0.001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "zero_length_segment",
+        "layer": "segment"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "zero_length_segment",
+        "layer": "query_point"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.0,
+          0.001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "tiny_angle_polyline",
+        "layer": "polyline"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.001,
+            0.0001
+          ],
+          [
+            0.002,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "road_crossing_without_node",
+        "layer": "segment_a"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            2.0,
+            2.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "road_crossing_without_node",
+        "layer": "segment_b"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            2.0
+          ],
+          [
+            2.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "road_overlap_same_direction",
+        "layer": "segment_a"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            3.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "road_overlap_same_direction",
+        "layer": "segment_b"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            3.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "road_overlap_reverse_direction",
+        "layer": "segment_a"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            3.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "case_id": "road_overlap_reverse_direction",
+        "layer": "segment_b"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            3.0,
+            0.0
+          ]
+        ]
+      }
+    }
+  ]
+}

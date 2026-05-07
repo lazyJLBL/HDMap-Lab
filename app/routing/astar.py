@@ -46,6 +46,5 @@ def _heuristic(graph: RoadGraph, node_id: str, end_node_id: str, mode: str) -> f
     end = graph.nodes[end_node_id]
     distance = haversine_distance(node.coordinate, end.coordinate)
     if mode == "shortest_time":
-        return distance / 33.33
+        return distance / graph.max_speed_mps()
     return distance
-

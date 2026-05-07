@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Any
 
 from app.geometry_kernel.polyline import bearing
 from app.index.kdtree import KDTree
@@ -21,6 +22,24 @@ class GraphArc:
     direction: str = "both"
     lane_count: int = 1
     heading: float = 0.0
+    oneway: bool = False
+    layer: int = 0
+    bridge: bool = False
+    tunnel: bool = False
+    metadata: dict[str, Any] = field(default_factory=dict)
+    turn_restrictions: list[dict[str, Any]] = field(default_factory=list)
+
+    @property
+    def length_m(self) -> float:
+        return self.length
+
+    @property
+    def speed_kph(self) -> float:
+        return self.speed_limit
+
+    @property
+    def travel_time_s(self) -> float:
+        return self.travel_time
 
 
 @dataclass
@@ -36,6 +55,10 @@ class RoadGraph:
         road_map = {road.id: road for road in roads}
         adjacency: dict[str, list[GraphArc]] = {node.id: [] for node in nodes}
         for road in roads:
+            metadata = road.metadata or {}
+            layer = _parse_layer(metadata.get("layer", metadata.get("level", 0)))
+            bridge = bool(metadata.get("bridge", False))
+            tunnel = bool(metadata.get("tunnel", False))
             adjacency.setdefault(road.from_node, []).append(
                 GraphArc(
                     edge_id=road.id,
@@ -49,6 +72,12 @@ class RoadGraph:
                     direction=road.direction,
                     lane_count=road.lane_count,
                     heading=bearing(road.geometry[0], road.geometry[-1]),
+                    oneway=road.oneway,
+                    layer=layer,
+                    bridge=bridge,
+                    tunnel=tunnel,
+                    metadata=metadata,
+                    turn_restrictions=list(road.turn_restrictions or []),
                 )
             )
             if not road.oneway:
@@ -65,6 +94,12 @@ class RoadGraph:
                         direction="reverse" if road.direction == "forward" else road.direction,
                         lane_count=road.lane_count,
                         heading=bearing(road.geometry[-1], road.geometry[0]),
+                        oneway=road.oneway,
+                        layer=layer,
+                        bridge=bridge,
+                        tunnel=tunnel,
+                        metadata=metadata,
+                        turn_restrictions=list(road.turn_restrictions or []),
                     )
                 )
         node_index = KDTree((node.coordinate, node.id) for node in nodes)
@@ -77,4 +112,23 @@ class RoadGraph:
         return matches[0] if matches else None
 
     def arc_weight(self, arc: GraphArc, mode: str) -> float:
-        return arc.travel_time if mode == "shortest_time" else arc.length
+        return arc.travel_time if mode in {"shortest_time", "time", "fastest_time"} else arc.length
+
+    def node_degree(self, node_id: str) -> int:
+        neighbors = {arc.to_node for arc in self.adjacency.get(node_id, [])}
+        for arcs in self.adjacency.values():
+            for arc in arcs:
+                if arc.to_node == node_id:
+                    neighbors.add(arc.from_node)
+        return len(neighbors)
+
+    def max_speed_mps(self) -> float:
+        speeds = [max(1.0, road.speed_limit) * 1000.0 / 3600.0 for road in self.roads.values()]
+        return max(speeds, default=33.33)
+
+
+def _parse_layer(value: Any) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0

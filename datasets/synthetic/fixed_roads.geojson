@@ -1,0 +1,564 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "edge_h_00_10",
+      "properties": {
+        "id": "edge_h_00_10",
+        "from": "node_00",
+        "to": "node_10",
+        "length": 853.0499056391786,
+        "speed_limit": 35.0,
+        "road_type": "residential",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "residential",
+          "speed_limit": 35,
+          "oneway": false,
+          "source_edge": "edge_h_00_10",
+          "original_ids": [
+            "edge_h_00_10"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 87.74227600860124
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.39,
+            39.9
+          ],
+          [
+            116.4,
+            39.9
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "edge_h_10_20",
+      "properties": {
+        "id": "edge_h_10_20",
+        "from": "node_10",
+        "to": "node_20",
+        "length": 853.0499056391786,
+        "speed_limit": 35.0,
+        "road_type": "residential",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "residential",
+          "speed_limit": 35,
+          "oneway": false,
+          "source_edge": "edge_h_10_20",
+          "original_ids": [
+            "edge_h_10_20"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 87.74227600860124
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.4,
+            39.9
+          ],
+          [
+            116.41,
+            39.9
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "edge_h_01_11",
+      "properties": {
+        "id": "edge_h_01_11",
+        "from": "node_01",
+        "to": "node_11",
+        "length": 852.9254052172865,
+        "speed_limit": 50.0,
+        "road_type": "primary",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "primary",
+          "speed_limit": 50,
+          "oneway": false,
+          "source_edge": "edge_h_01_11",
+          "original_ids": [
+            "edge_h_01_11"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 61.41062917564463
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.39,
+            39.91
+          ],
+          [
+            116.4,
+            39.91
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "edge_h_11_21",
+      "properties": {
+        "id": "edge_h_11_21",
+        "from": "node_11",
+        "to": "node_21",
+        "length": 852.9254052172865,
+        "speed_limit": 50.0,
+        "road_type": "primary",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "primary",
+          "speed_limit": 50,
+          "oneway": false,
+          "source_edge": "edge_h_11_21",
+          "original_ids": [
+            "edge_h_11_21"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 61.41062917564463
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.4,
+            39.91
+          ],
+          [
+            116.41,
+            39.91
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "edge_h_02_12",
+      "properties": {
+        "id": "edge_h_02_12",
+        "from": "node_02",
+        "to": "node_12",
+        "length": 852.8008788138012,
+        "speed_limit": 35.0,
+        "road_type": "residential",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "residential",
+          "speed_limit": 35,
+          "oneway": false,
+          "source_edge": "edge_h_02_12",
+          "original_ids": [
+            "edge_h_02_12"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 87.71666182084813
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.39,
+            39.92
+          ],
+          [
+            116.4,
+            39.92
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "edge_h_12_22",
+      "properties": {
+        "id": "edge_h_12_22",
+        "from": "node_12",
+        "to": "node_22",
+        "length": 852.8008788138012,
+        "speed_limit": 35.0,
+        "road_type": "residential",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "residential",
+          "speed_limit": 35,
+          "oneway": false,
+          "source_edge": "edge_h_12_22",
+          "original_ids": [
+            "edge_h_12_22"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 87.71666182084813
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.4,
+            39.92
+          ],
+          [
+            116.41,
+            39.92
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "edge_v_00_01",
+      "properties": {
+        "id": "edge_v_00_01",
+        "from": "node_00",
+        "to": "node_01",
+        "length": 1111.9508023352598,
+        "speed_limit": 45.0,
+        "road_type": "secondary",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "secondary",
+          "speed_limit": 45,
+          "oneway": false,
+          "source_edge": "edge_v_00_01",
+          "original_ids": [
+            "edge_v_00_01"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 88.95606418682078
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.39,
+            39.9
+          ],
+          [
+            116.39,
+            39.91
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "edge_v_01_02",
+      "properties": {
+        "id": "edge_v_01_02",
+        "from": "node_01",
+        "to": "node_02",
+        "length": 1111.9508023359672,
+        "speed_limit": 45.0,
+        "road_type": "secondary",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "secondary",
+          "speed_limit": 45,
+          "oneway": false,
+          "source_edge": "edge_v_01_02",
+          "original_ids": [
+            "edge_v_01_02"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 88.95606418687737
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.39,
+            39.91
+          ],
+          [
+            116.39,
+            39.92
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "edge_v_10_11",
+      "properties": {
+        "id": "edge_v_10_11",
+        "from": "node_10",
+        "to": "node_11",
+        "length": 1111.9508023352598,
+        "speed_limit": 45.0,
+        "road_type": "secondary",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "secondary",
+          "speed_limit": 45,
+          "oneway": false,
+          "source_edge": "edge_v_10_11",
+          "original_ids": [
+            "edge_v_10_11"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 88.95606418682078
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.4,
+            39.9
+          ],
+          [
+            116.4,
+            39.91
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "edge_v_11_12",
+      "properties": {
+        "id": "edge_v_11_12",
+        "from": "node_11",
+        "to": "node_12",
+        "length": 1111.9508023359672,
+        "speed_limit": 45.0,
+        "road_type": "secondary",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "secondary",
+          "speed_limit": 45,
+          "oneway": false,
+          "source_edge": "edge_v_11_12",
+          "original_ids": [
+            "edge_v_11_12"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 88.95606418687737
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.4,
+            39.91
+          ],
+          [
+            116.4,
+            39.92
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "edge_v_20_21",
+      "properties": {
+        "id": "edge_v_20_21",
+        "from": "node_20",
+        "to": "node_21",
+        "length": 1111.9508023352598,
+        "speed_limit": 45.0,
+        "road_type": "secondary",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "secondary",
+          "speed_limit": 45,
+          "oneway": false,
+          "source_edge": "edge_v_20_21",
+          "original_ids": [
+            "edge_v_20_21"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 88.95606418682078
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.41,
+            39.9
+          ],
+          [
+            116.41,
+            39.91
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "edge_v_21_22",
+      "properties": {
+        "id": "edge_v_21_22",
+        "from": "node_21",
+        "to": "node_22",
+        "length": 1111.9508023359672,
+        "speed_limit": 45.0,
+        "road_type": "secondary",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "secondary",
+          "speed_limit": 45,
+          "oneway": false,
+          "source_edge": "edge_v_21_22",
+          "original_ids": [
+            "edge_v_21_22"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 88.95606418687737
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.41,
+            39.91
+          ],
+          [
+            116.41,
+            39.92
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "edge_diag_00_11",
+      "properties": {
+        "id": "edge_diag_00_11",
+        "from": "node_00",
+        "to": "node_11",
+        "length": 1401.4358804261526,
+        "speed_limit": 25.0,
+        "road_type": "service",
+        "oneway": false,
+        "direction": "both",
+        "road_class": "local",
+        "lane_count": 1,
+        "turn_restrictions": [],
+        "metadata": {
+          "road_type": "service",
+          "speed_limit": 25,
+          "oneway": false,
+          "source_edge": "edge_diag_00_11",
+          "original_ids": [
+            "edge_diag_00_11"
+          ],
+          "repair_history": [
+            "snap_close_nodes"
+          ]
+        },
+        "travel_time": 201.80676678136598
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.39,
+            39.9
+          ],
+          [
+            116.4,
+            39.91
+          ]
+        ]
+      }
+    }
+  ]
+}

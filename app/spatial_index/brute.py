@@ -12,7 +12,11 @@ class BruteForceIndex(MeasuredIndex[T], Generic[T]):
     name = "brute_force"
 
     def __init__(self, items: Iterable[tuple[BBox, T] | IndexedItem[T]] = ()):
+        self.build(items)
+
+    def build(self, items: Iterable[tuple[BBox, T] | IndexedItem[T]]) -> "BruteForceIndex[T]":
         self.items = normalize_items(items)
+        return self
 
     def query(self, bbox: BBox) -> list[T]:
         return [entry.item for entry in self.items if bbox_intersects(entry.bbox, bbox)]

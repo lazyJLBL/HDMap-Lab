@@ -1,0 +1,3743 @@
+{
+  "dataset": "synthetic_clustered",
+  "item_count": 1000,
+  "query_count": 100,
+  "query_types": [
+    "bbox",
+    "radius",
+    "nearest"
+  ],
+  "index_types": [
+    "brute",
+    "grid",
+    "kdtree",
+    "quadtree",
+    "rtree",
+    "str_rtree",
+    "morton"
+  ],
+  "results": [
+    {
+      "index": "brute",
+      "query_type": "bbox",
+      "build_time_ms": 0.41659967973828316,
+      "query_count": 100,
+      "p50_ms": 0.07029995322227478,
+      "p95_ms": 0.08430005982518196,
+      "p99_ms": 0.1055002212524414,
+      "max_ms": 0.13490021228790283,
+      "avg_candidate_count": 0.94,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "brute_force",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000
+      }
+    },
+    {
+      "index": "brute",
+      "query_type": "radius",
+      "build_time_ms": 0.41659967973828316,
+      "query_count": 100,
+      "p50_ms": 0.09740004315972328,
+      "p95_ms": 0.1960000954568386,
+      "p99_ms": 0.2780999056994915,
+      "max_ms": 0.30849967151880264,
+      "avg_candidate_count": 1.24,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "brute_force",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000
+      }
+    },
+    {
+      "index": "brute",
+      "query_type": "nearest",
+      "build_time_ms": 0.41659967973828316,
+      "query_count": 100,
+      "p50_ms": 0.5781999789178371,
+      "p95_ms": 0.6939000450074673,
+      "p99_ms": 0.9216996841132641,
+      "max_ms": 0.9828000329434872,
+      "avg_candidate_count": 3.0,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "brute_force",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000
+      }
+    },
+    {
+      "index": "grid",
+      "query_type": "bbox",
+      "build_time_ms": 1.0658996179699898,
+      "query_count": 100,
+      "p50_ms": 0.0018998980522155762,
+      "p95_ms": 0.01019984483718872,
+      "p99_ms": 0.014200340956449509,
+      "max_ms": 0.017200130969285965,
+      "avg_candidate_count": 0.94,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "grid",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "cell_size_degrees": 0.005,
+        "cell_count": 159
+      }
+    },
+    {
+      "index": "grid",
+      "query_type": "radius",
+      "build_time_ms": 1.0658996179699898,
+      "query_count": 100,
+      "p50_ms": 0.02239970490336418,
+      "p95_ms": 0.12960005551576614,
+      "p99_ms": 0.22820010781288147,
+      "max_ms": 0.24140020832419395,
+      "avg_candidate_count": 1.24,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "grid",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "cell_size_degrees": 0.005,
+        "cell_count": 159
+      }
+    },
+    {
+      "index": "grid",
+      "query_type": "nearest",
+      "build_time_ms": 1.0658996179699898,
+      "query_count": 100,
+      "p50_ms": 0.5768002010881901,
+      "p95_ms": 0.7555000483989716,
+      "p99_ms": 0.7818997837603092,
+      "max_ms": 0.8716997690498829,
+      "avg_candidate_count": 3.0,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "grid",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "cell_size_degrees": 0.005,
+        "cell_count": 159
+      }
+    },
+    {
+      "index": "kdtree",
+      "query_type": "bbox",
+      "build_time_ms": 2.1611000411212444,
+      "query_count": 100,
+      "p50_ms": 0.07019983604550362,
+      "p95_ms": 0.09059999138116837,
+      "p99_ms": 0.10390020906925201,
+      "max_ms": 0.10489998385310173,
+      "avg_candidate_count": 0.94,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "kdtree",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "center_count": 1000,
+        "bbox_queries": "exact_scan"
+      }
+    },
+    {
+      "index": "kdtree",
+      "query_type": "radius",
+      "build_time_ms": 2.1611000411212444,
+      "query_count": 100,
+      "p50_ms": 0.09740004315972328,
+      "p95_ms": 0.19650021567940712,
+      "p99_ms": 0.2743997611105442,
+      "max_ms": 0.29559992253780365,
+      "avg_candidate_count": 1.24,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "kdtree",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "center_count": 1000,
+        "bbox_queries": "exact_scan"
+      }
+    },
+    {
+      "index": "kdtree",
+      "query_type": "nearest",
+      "build_time_ms": 2.1611000411212444,
+      "query_count": 100,
+      "p50_ms": 0.5692997947335243,
+      "p95_ms": 0.744200311601162,
+      "p99_ms": 0.8292002603411674,
+      "max_ms": 1.0202000848948956,
+      "avg_candidate_count": 3.0,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "kdtree",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "center_count": 1000,
+        "bbox_queries": "exact_scan"
+      }
+    },
+    {
+      "index": "quadtree",
+      "query_type": "bbox",
+      "build_time_ms": 3.5749999806284904,
+      "query_count": 100,
+      "p50_ms": 0.004699919372797012,
+      "p95_ms": 0.017999671399593353,
+      "p99_ms": 0.02859998494386673,
+      "max_ms": 0.1759999431669712,
+      "avg_candidate_count": 0.94,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "quadtree",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "max_entries": 12,
+        "max_depth": 10,
+        "node_count": 187
+      }
+    },
+    {
+      "index": "quadtree",
+      "query_type": "radius",
+      "build_time_ms": 3.5749999806284904,
+      "query_count": 100,
+      "p50_ms": 0.023799948394298553,
+      "p95_ms": 0.14359969645738602,
+      "p99_ms": 0.273099634796381,
+      "max_ms": 0.28579961508512497,
+      "avg_candidate_count": 1.24,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "quadtree",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "max_entries": 12,
+        "max_depth": 10,
+        "node_count": 187
+      }
+    },
+    {
+      "index": "quadtree",
+      "query_type": "nearest",
+      "build_time_ms": 3.5749999806284904,
+      "query_count": 100,
+      "p50_ms": 0.5645998753607273,
+      "p95_ms": 0.7333001121878624,
+      "p99_ms": 0.8821999654173851,
+      "max_ms": 0.9322003461420536,
+      "avg_candidate_count": 3.0,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "quadtree",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "max_entries": 12,
+        "max_depth": 10,
+        "node_count": 187
+      }
+    },
+    {
+      "index": "rtree",
+      "query_type": "bbox",
+      "build_time_ms": 1.6124998219311237,
+      "query_count": 100,
+      "p50_ms": 0.016700010746717453,
+      "p95_ms": 0.026399735361337662,
+      "p99_ms": 0.031800009310245514,
+      "max_ms": 0.040499959141016006,
+      "avg_candidate_count": 0.94,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "rtree",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "max_children": 8,
+        "node_count": 126
+      }
+    },
+    {
+      "index": "rtree",
+      "query_type": "radius",
+      "build_time_ms": 1.6124998219311237,
+      "query_count": 100,
+      "p50_ms": 0.03750016912817955,
+      "p95_ms": 0.14090025797486305,
+      "p99_ms": 0.21919980645179749,
+      "max_ms": 0.34690042957663536,
+      "avg_candidate_count": 1.24,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "rtree",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "max_children": 8,
+        "node_count": 126
+      }
+    },
+    {
+      "index": "rtree",
+      "query_type": "nearest",
+      "build_time_ms": 1.6124998219311237,
+      "query_count": 100,
+      "p50_ms": 0.5641002207994461,
+      "p95_ms": 0.6933999247848988,
+      "p99_ms": 0.8323001675307751,
+      "max_ms": 1.0457001626491547,
+      "avg_candidate_count": 3.0,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "rtree",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "max_children": 8,
+        "node_count": 126
+      }
+    },
+    {
+      "index": "str_rtree",
+      "query_type": "bbox",
+      "build_time_ms": 1.2718001380562782,
+      "query_count": 100,
+      "p50_ms": 0.003400258719921112,
+      "p95_ms": 0.0112997367978096,
+      "p99_ms": 0.012699980288743973,
+      "max_ms": 0.02019992098212242,
+      "avg_candidate_count": 0.94,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "str_rtree",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "max_children": 8,
+        "node_count": 152
+      }
+    },
+    {
+      "index": "str_rtree",
+      "query_type": "radius",
+      "build_time_ms": 1.2718001380562782,
+      "query_count": 100,
+      "p50_ms": 0.024099834263324738,
+      "p95_ms": 0.13280007988214493,
+      "p99_ms": 0.1758001744747162,
+      "max_ms": 0.22529996931552887,
+      "avg_candidate_count": 1.24,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "str_rtree",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "max_children": 8,
+        "node_count": 152
+      }
+    },
+    {
+      "index": "str_rtree",
+      "query_type": "nearest",
+      "build_time_ms": 1.2718001380562782,
+      "query_count": 100,
+      "p50_ms": 0.5636001005768776,
+      "p95_ms": 0.7834001444280148,
+      "p99_ms": 0.8491999469697475,
+      "max_ms": 0.9771999903023243,
+      "avg_candidate_count": 3.0,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "str_rtree",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "max_children": 8,
+        "node_count": 152
+      }
+    },
+    {
+      "index": "morton",
+      "query_type": "bbox",
+      "build_time_ms": 4.741699900478125,
+      "query_count": 100,
+      "p50_ms": 0.0704997219145298,
+      "p95_ms": 0.1183999702334404,
+      "p99_ms": 0.1721000298857689,
+      "max_ms": 0.2858000807464123,
+      "avg_candidate_count": 0.94,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "morton",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "bits": 16,
+        "bounds": [
+          116.00534514427387,
+          39.00173577267955,
+          116.12031936595038,
+          39.119539577320545
+        ],
+        "encoded_count": 1000,
+        "query_strategy": "z_order_sorted_exact_filter"
+      }
+    },
+    {
+      "index": "morton",
+      "query_type": "radius",
+      "build_time_ms": 4.741699900478125,
+      "query_count": 100,
+      "p50_ms": 0.09740004315972328,
+      "p95_ms": 0.21849991753697395,
+      "p99_ms": 0.3042002208530903,
+      "max_ms": 0.3207004629075527,
+      "avg_candidate_count": 1.24,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "morton",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "bits": 16,
+        "bounds": [
+          116.00534514427387,
+          39.00173577267955,
+          116.12031936595038,
+          39.119539577320545
+        ],
+        "encoded_count": 1000,
+        "query_strategy": "z_order_sorted_exact_filter"
+      }
+    },
+    {
+      "index": "morton",
+      "query_type": "nearest",
+      "build_time_ms": 4.741699900478125,
+      "query_count": 100,
+      "p50_ms": 0.5633998662233353,
+      "p95_ms": 0.7279999554157257,
+      "p99_ms": 0.7938002236187458,
+      "max_ms": 0.8728001266717911,
+      "avg_candidate_count": 3.0,
+      "false_positive_rate": 0.0,
+      "recall": 1.0,
+      "memory_estimate_bytes": 96000,
+      "index_stats": {
+        "name": "morton",
+        "item_count": 1000,
+        "memory_estimate_bytes": 96000,
+        "bits": 16,
+        "bounds": [
+          116.00534514427387,
+          39.00173577267955,
+          116.12031936595038,
+          39.119539577320545
+        ],
+        "encoded_count": 1000,
+        "query_strategy": "z_order_sorted_exact_filter"
+      }
+    }
+  ],
+  "debug_layers": {
+    "items_sample": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "id": "clustered_0",
+          "properties": {
+            "id": "clustered_0",
+            "from": "c_0_a",
+            "to": "c_0_b",
+            "length": 102.65244962882832,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 9.238720466594549
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.01846471826931,
+                39.0230685890751
+              ],
+              [
+                116.01964697445439,
+                39.0231505815744
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_1",
+          "properties": {
+            "id": "clustered_1",
+            "from": "c_1_a",
+            "to": "c_1_b",
+            "length": 50.90023823249676,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 4.581021440924709
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.06326795411427,
+                39.07667150428592
+              ],
+              [
+                116.06385661505207,
+                39.076687016341026
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_2",
+          "properties": {
+            "id": "clustered_2",
+            "from": "c_2_a",
+            "to": "c_2_b",
+            "length": 210.27819463088517,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 18.925037516779664
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.09612337715286,
+                39.04218954016701
+              ],
+              [
+                116.09800041806179,
+                39.04098838548062
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_3",
+          "properties": {
+            "id": "clustered_3",
+            "from": "c_3_a",
+            "to": "c_3_b",
+            "length": 141.76404549423725,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 12.758764094481354
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.04281138660986,
+                39.09459041890316
+              ],
+              [
+                116.04444733337336,
+                39.09449192928495
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_4",
+          "properties": {
+            "id": "clustered_4",
+            "from": "c_4_a",
+            "to": "c_4_b",
+            "length": 112.54072306072108,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 10.128665075464898
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.00692760233801,
+                39.0299207024414
+              ],
+              [
+                116.00822797728198,
+                39.029880185129734
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_5",
+          "properties": {
+            "id": "clustered_5",
+            "from": "c_5_a",
+            "to": "c_5_b",
+            "length": 54.0653068020644,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 4.865877612185796
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.05888187791437,
+                39.06244858324773
+              ],
+              [
+                116.05889833582475,
+                39.06293408979442
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_6",
+          "properties": {
+            "id": "clustered_6",
+            "from": "c_6_a",
+            "to": "c_6_b",
+            "length": 46.02621644375304,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 4.142359479937774
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.09651018756706,
+                39.03832544643628
+              ],
+              [
+                116.09704229627482,
+                39.03831406794713
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_7",
+          "properties": {
+            "id": "clustered_7",
+            "from": "c_7_a",
+            "to": "c_7_b",
+            "length": 178.7873233714493,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 16.09085910343044
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.03936147201078,
+                39.10247589472598
+              ],
+              [
+                116.04098476394628,
+                39.10147960594406
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_8",
+          "properties": {
+            "id": "clustered_8",
+            "from": "c_8_a",
+            "to": "c_8_b",
+            "length": 164.31397023997067,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 14.788257321597362
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.00671431447604,
+                39.02291699497605
+              ],
+              [
+                116.00811527306865,
+                39.023914049994836
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_9",
+          "properties": {
+            "id": "clustered_9",
+            "from": "c_9_a",
+            "to": "c_9_b",
+            "length": 196.90043668108436,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 17.721039301297594
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.07015415653758,
+                39.07029084614683
+              ],
+              [
+                116.07192437958314,
+                39.069177414938025
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_10",
+          "properties": {
+            "id": "clustered_10",
+            "from": "c_10_a",
+            "to": "c_10_b",
+            "length": 175.07107196957114,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 15.756396477261402
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.09936316498823,
+                39.03509643818538
+              ],
+              [
+                116.10138402212279,
+                39.035192904651545
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_11",
+          "properties": {
+            "id": "clustered_11",
+            "from": "c_11_a",
+            "to": "c_11_b",
+            "length": 212.9735304312403,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 19.16761773881163
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.04421869002337,
+                39.10401601413893
+              ],
+              [
+                116.04667704733191,
+                39.104160640150994
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_12",
+          "properties": {
+            "id": "clustered_12",
+            "from": "c_12_a",
+            "to": "c_12_b",
+            "length": 126.8848371303127,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 11.419635341728144
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02677389215982,
+                39.02359315939536
+              ],
+              [
+                116.02785184110195,
+                39.02436638528808
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_13",
+          "properties": {
+            "id": "clustered_13",
+            "from": "c_13_a",
+            "to": "c_13_b",
+            "length": 209.76600259496843,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 18.87894023354716
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.06470146140589,
+                39.07065767192767
+              ],
+              [
+                116.06712758105816,
+                39.07060322874285
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_14",
+          "properties": {
+            "id": "clustered_14",
+            "from": "c_14_a",
+            "to": "c_14_b",
+            "length": 141.92005268277785,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 12.772804741450006
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.09125376667852,
+                39.041436106578246
+              ],
+              [
+                116.0928951428825,
+                39.04142573790661
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_15",
+          "properties": {
+            "id": "clustered_15",
+            "from": "c_15_a",
+            "to": "c_15_b",
+            "length": 199.10245406404698,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 17.919220865764228
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.03487130167152,
+                39.097270971037126
+              ],
+              [
+                116.0363673773064,
+                39.09591050638908
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_16",
+          "properties": {
+            "id": "clustered_16",
+            "from": "c_16_a",
+            "to": "c_16_b",
+            "length": 45.906567576292424,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 4.131591081866318
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.01183672197189,
+                39.031692261559044
+              ],
+              [
+                116.01220465551066,
+                39.0319895376883
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_17",
+          "properties": {
+            "id": "clustered_17",
+            "from": "c_17_a",
+            "to": "c_17_b",
+            "length": 108.61107053105304,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 9.774996347794774
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.06260617685899,
+                39.07036098132293
+              ],
+              [
+                116.06265872822868,
+                39.07133579327755
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_18",
+          "properties": {
+            "id": "clustered_18",
+            "from": "c_18_a",
+            "to": "c_18_b",
+            "length": 198.4260078916798,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 17.858340710251184
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.1060904981667,
+                39.03649127617876
+              ],
+              [
+                116.10631026717093,
+                39.03826556635753
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_19",
+          "properties": {
+            "id": "clustered_19",
+            "from": "c_19_a",
+            "to": "c_19_b",
+            "length": 165.68339125685284,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 14.911505213116756
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.04237801930223,
+                39.10505382156309
+              ],
+              [
+                116.0439158670734,
+                39.1059432568532
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_20",
+          "properties": {
+            "id": "clustered_20",
+            "from": "c_20_a",
+            "to": "c_20_b",
+            "length": 67.60027977071852,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 6.084025179364667
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02905861019511,
+                39.01922788613344
+              ],
+              [
+                116.02963515096381,
+                39.01881786124844
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_21",
+          "properties": {
+            "id": "clustered_21",
+            "from": "c_21_a",
+            "to": "c_21_b",
+            "length": 188.75230889013295,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 16.987707800111966
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.05909916749232,
+                39.07049479885074
+              ],
+              [
+                116.06073032023895,
+                39.06936728647753
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_22",
+          "properties": {
+            "id": "clustered_22",
+            "from": "c_22_a",
+            "to": "c_22_b",
+            "length": 139.77312638568253,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 12.579581374711427
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.10201389901017,
+                39.04444857675694
+              ],
+              [
+                116.10212222785684,
+                39.045701352382785
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_23",
+          "properties": {
+            "id": "clustered_23",
+            "from": "c_23_a",
+            "to": "c_23_b",
+            "length": 119.47908860753182,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 10.753117974677865
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.04280840784878,
+                39.10879298544582
+              ],
+              [
+                116.04419073276884,
+                39.108754799173035
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_24",
+          "properties": {
+            "id": "clustered_24",
+            "from": "c_24_a",
+            "to": "c_24_b",
+            "length": 124.08172136056102,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 11.167354922450492
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.03018402648803,
+                39.009287995285796
+              ],
+              [
+                116.03113116392288,
+                39.008450872685216
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_25",
+          "properties": {
+            "id": "clustered_25",
+            "from": "c_25_a",
+            "to": "c_25_b",
+            "length": 116.51597064007885,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 10.486437357607096
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.06358917171075,
+                39.06683679611806
+              ],
+              [
+                116.06354810991823,
+                39.06788298645896
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_26",
+          "properties": {
+            "id": "clustered_26",
+            "from": "c_26_a",
+            "to": "c_26_b",
+            "length": 53.770908084180356,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 4.8393817275762325
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.106266941103,
+                39.045179711183636
+              ],
+              [
+                116.10688822929721,
+                39.04520183497229
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_27",
+          "properties": {
+            "id": "clustered_27",
+            "from": "c_27_a",
+            "to": "c_27_b",
+            "length": 148.60276274086857,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 13.374248646678172
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.04000503685884,
+                39.09910708903253
+              ],
+              [
+                116.039981395716,
+                39.100441878172525
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_28",
+          "properties": {
+            "id": "clustered_28",
+            "from": "c_28_a",
+            "to": "c_28_b",
+            "length": 56.34040048013128,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 5.070636043211815
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02272268605613,
+                39.02367656924044
+              ],
+              [
+                116.02321554441653,
+                39.02400753923163
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_29",
+          "properties": {
+            "id": "clustered_29",
+            "from": "c_29_a",
+            "to": "c_29_b",
+            "length": 124.50941143700985,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 11.205847029330886
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.05592304183843,
+                39.053486734408395
+              ],
+              [
+                116.05695819541604,
+                39.052709035293745
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_30",
+          "properties": {
+            "id": "clustered_30",
+            "from": "c_30_a",
+            "to": "c_30_b",
+            "length": 163.03050223638223,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 14.6727452012744
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.1023900123665,
+                39.04143143997317
+              ],
+              [
+                116.10373068210905,
+                39.042461268350955
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_31",
+          "properties": {
+            "id": "clustered_31",
+            "from": "c_31_a",
+            "to": "c_31_b",
+            "length": 62.12146969633178,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 5.5909322726698605
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.03316479597697,
+                39.095954800523074
+              ],
+              [
+                116.03367605398432,
+                39.096347199183384
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_32",
+          "properties": {
+            "id": "clustered_32",
+            "from": "c_32_a",
+            "to": "c_32_b",
+            "length": 163.79640539294334,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 14.741676485364902
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.01864642825984,
+                39.019623550720354
+              ],
+              [
+                116.01975797127602,
+                39.02081486586892
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_33",
+          "properties": {
+            "id": "clustered_33",
+            "from": "c_33_a",
+            "to": "c_33_b",
+            "length": 100.80379141724492,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 9.072341227552043
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.05838794152847,
+                39.06959979885491
+              ],
+              [
+                116.05829905812178,
+                39.07050269734471
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_34",
+          "properties": {
+            "id": "clustered_34",
+            "from": "c_34_a",
+            "to": "c_34_b",
+            "length": 180.85386385926097,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 16.276847747333488
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.10127480669965,
+                39.04738448700184
+              ],
+              [
+                116.1028568204184,
+                39.04844744895262
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_35",
+          "properties": {
+            "id": "clustered_35",
+            "from": "c_35_a",
+            "to": "c_35_b",
+            "length": 186.39159451519404,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 16.775243506367463
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0337472249291,
+                39.10020664378702
+              ],
+              [
+                116.03386075250981,
+                39.101878700815014
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_36",
+          "properties": {
+            "id": "clustered_36",
+            "from": "c_36_a",
+            "to": "c_36_b",
+            "length": 40.16835895308193,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 3.615152305777374
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.01972639932542,
+                39.015705914473166
+              ],
+              [
+                116.02005084303899,
+                39.01544773464713
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_37",
+          "properties": {
+            "id": "clustered_37",
+            "from": "c_37_a",
+            "to": "c_37_b",
+            "length": 117.73712038684384,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 10.596340834815946
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0611466185469,
+                39.0691458292121
+              ],
+              [
+                116.06204946360305,
+                39.0699378360745
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_38",
+          "properties": {
+            "id": "clustered_38",
+            "from": "c_38_a",
+            "to": "c_38_b",
+            "length": 121.96479671739519,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 10.976831704565567
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.11647195133627,
+                39.03311896573409
+              ],
+              [
+                116.11743638109462,
+                39.03391844200426
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_39",
+          "properties": {
+            "id": "clustered_39",
+            "from": "c_39_a",
+            "to": "c_39_b",
+            "length": 123.70258385838457,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 11.133232547254611
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.04135014652348,
+                39.096392024182464
+              ],
+              [
+                116.04277761007582,
+                39.09647887860691
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_40",
+          "properties": {
+            "id": "clustered_40",
+            "from": "c_40_a",
+            "to": "c_40_b",
+            "length": 106.87911260668956,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 9.619120134602062
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0138401105137,
+                39.011179163676374
+              ],
+              [
+                116.01507547288287,
+                39.01119884973723
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_41",
+          "properties": {
+            "id": "clustered_41",
+            "from": "c_41_a",
+            "to": "c_41_b",
+            "length": 115.27613901339511,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 10.37485251120556
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.05738639105763,
+                39.069041474641004
+              ],
+              [
+                116.05745543481638,
+                39.07007562472513
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_42",
+          "properties": {
+            "id": "clustered_42",
+            "from": "c_42_a",
+            "to": "c_42_b",
+            "length": 50.71006114846284,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 4.563905503361656
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.09831978739815,
+                39.038073718984805
+              ],
+              [
+                116.09867796420231,
+                39.03771300734643
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_43",
+          "properties": {
+            "id": "clustered_43",
+            "from": "c_43_a",
+            "to": "c_43_b",
+            "length": 62.962879570575616,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 5.666659161351806
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.04227013749929,
+                39.11025886395457
+              ],
+              [
+                116.04298272662126,
+                39.11037795979531
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_44",
+          "properties": {
+            "id": "clustered_44",
+            "from": "c_44_a",
+            "to": "c_44_b",
+            "length": 122.75603239681298,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 11.048042915713168
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02898857023332,
+                39.01387915513564
+              ],
+              [
+                116.02910523189422,
+                39.01497815441901
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_45",
+          "properties": {
+            "id": "clustered_45",
+            "from": "c_45_a",
+            "to": "c_45_b",
+            "length": 38.958384749553666,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 3.50625462745983
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.05479043804057,
+                39.07322721922687
+              ],
+              [
+                116.05479847689962,
+                39.07357713109997
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_46",
+          "properties": {
+            "id": "clustered_46",
+            "from": "c_46_a",
+            "to": "c_46_b",
+            "length": 115.25474580013484,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 10.372927122012136
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.10294788231924,
+                39.030801062394694
+              ],
+              [
+                116.10425826983865,
+                39.03061189848446
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_47",
+          "properties": {
+            "id": "clustered_47",
+            "from": "c_47_a",
+            "to": "c_47_b",
+            "length": 40.178839240889545,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 3.616095531680059
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.037676852757,
+                39.107772264244005
+              ],
+              [
+                116.0377269723044,
+                39.10813109386097
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_48",
+          "properties": {
+            "id": "clustered_48",
+            "from": "c_48_a",
+            "to": "c_48_b",
+            "length": 59.24863015314442,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 5.332376713782998
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0216398319727,
+                39.026883680648325
+              ],
+              [
+                116.02212665539358,
+                39.027258179415306
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_49",
+          "properties": {
+            "id": "clustered_49",
+            "from": "c_49_a",
+            "to": "c_49_b",
+            "length": 157.55784361004473,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 14.180205924904026
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0662420086007,
+                39.07473434055724
+              ],
+              [
+                116.0674785220094,
+                39.07369426036356
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_50",
+          "properties": {
+            "id": "clustered_50",
+            "from": "c_50_a",
+            "to": "c_50_b",
+            "length": 38.460400562502706,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 3.4614360506252435
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.10287577506587,
+                39.033359860246556
+              ],
+              [
+                116.10291817295975,
+                39.03370378105251
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_51",
+          "properties": {
+            "id": "clustered_51",
+            "from": "c_51_a",
+            "to": "c_51_b",
+            "length": 178.5672086316834,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 16.071048776851505
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.03854884650563,
+                39.09645086934079
+              ],
+              [
+                116.04061538298521,
+                39.096480852920415
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_52",
+          "properties": {
+            "id": "clustered_52",
+            "from": "c_52_a",
+            "to": "c_52_b",
+            "length": 130.8945118500618,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 11.780506066505563
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02195189351391,
+                39.0226795515895
+              ],
+              [
+                116.02346204342716,
+                39.02260125941278
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_53",
+          "properties": {
+            "id": "clustered_53",
+            "from": "c_53_a",
+            "to": "c_53_b",
+            "length": 198.39714567106057,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 17.85574311039545
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.05814827173116,
+                39.060122646574904
+              ],
+              [
+                116.06044089211379,
+                39.0600374394679
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_54",
+          "properties": {
+            "id": "clustered_54",
+            "from": "c_54_a",
+            "to": "c_54_b",
+            "length": 138.91993653144812,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 12.50279428783033
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.10366343676847,
+                39.041366506331116
+              ],
+              [
+                116.10527002504726,
+                39.04138307634523
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_55",
+          "properties": {
+            "id": "clustered_55",
+            "from": "c_55_a",
+            "to": "c_55_b",
+            "length": 95.2385229119484,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 8.571467062075357
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.03292650725527,
+                39.100830997350755
+              ],
+              [
+                116.03355730821056,
+                39.10012934857587
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_56",
+          "properties": {
+            "id": "clustered_56",
+            "from": "c_56_a",
+            "to": "c_56_b",
+            "length": 133.65780595214662,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 12.029202535693196
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02807615116527,
+                39.01863542625562
+              ],
+              [
+                116.0281239144074,
+                39.01983551565293
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_57",
+          "properties": {
+            "id": "clustered_57",
+            "from": "c_57_a",
+            "to": "c_57_b",
+            "length": 205.7150794827197,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 18.514357153444774
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.05383745540374,
+                39.055839421524304
+              ],
+              [
+                116.05547550161293,
+                39.05717993960437
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_58",
+          "properties": {
+            "id": "clustered_58",
+            "from": "c_58_a",
+            "to": "c_58_b",
+            "length": 116.79184633088308,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 10.511266169779477
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.10315486048042,
+                39.037480766741936
+              ],
+              [
+                116.10413496783072,
+                39.03675884360063
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_59",
+          "properties": {
+            "id": "clustered_59",
+            "from": "c_59_a",
+            "to": "c_59_b",
+            "length": 74.34761292377372,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 6.691285163139636
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.04231894952397,
+                39.103997419849854
+              ],
+              [
+                116.04317931402822,
+                39.10401486939867
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_60",
+          "properties": {
+            "id": "clustered_60",
+            "from": "c_60_a",
+            "to": "c_60_b",
+            "length": 102.74390855022605,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 9.246951769520345
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.01900196970448,
+                39.02289835452403
+              ],
+              [
+                116.01887545653018,
+                39.023816066230296
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_61",
+          "properties": {
+            "id": "clustered_61",
+            "from": "c_61_a",
+            "to": "c_61_b",
+            "length": 75.62374869835514,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 6.806137382851963
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.05680292594998,
+                39.06993633914945
+              ],
+              [
+                116.05744794905442,
+                39.069477300654235
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_62",
+          "properties": {
+            "id": "clustered_62",
+            "from": "c_62_a",
+            "to": "c_62_b",
+            "length": 76.38675141983643,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 6.8748076277852785
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.10578007137822,
+                39.03822198200201
+              ],
+              [
+                116.10644218775282,
+                39.03776770155608
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_63",
+          "properties": {
+            "id": "clustered_63",
+            "from": "c_63_a",
+            "to": "c_63_b",
+            "length": 97.73648670268167,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 8.796283803241352
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.04760393689615,
+                39.094792733395195
+              ],
+              [
+                116.04818437690258,
+                39.094039134516926
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_64",
+          "properties": {
+            "id": "clustered_64",
+            "from": "c_64_a",
+            "to": "c_64_b",
+            "length": 116.48474883349988,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 10.48362739501499
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02175681033334,
+                39.02495230943958
+              ],
+              [
+                116.02260844717719,
+                39.02576299572838
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_65",
+          "properties": {
+            "id": "clustered_65",
+            "from": "c_65_a",
+            "to": "c_65_b",
+            "length": 129.76852262573928,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 11.679167036316535
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.06093110693826,
+                39.07535003473157
+              ],
+              [
+                116.0619842268986,
+                39.076181008795224
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_66",
+          "properties": {
+            "id": "clustered_66",
+            "from": "c_66_a",
+            "to": "c_66_b",
+            "length": 84.12939038355115,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 7.5716451345196045
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.11600007895177,
+                39.04683936574844
+              ],
+              [
+                116.11596403717792,
+                39.047594590918656
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_67",
+          "properties": {
+            "id": "clustered_67",
+            "from": "c_67_a",
+            "to": "c_67_b",
+            "length": 174.8186613542421,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 15.73367952188179
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.03950060068252,
+                39.11010458173567
+              ],
+              [
+                116.040881912163,
+                39.111252376288924
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_68",
+          "properties": {
+            "id": "clustered_68",
+            "from": "c_68_a",
+            "to": "c_68_b",
+            "length": 130.23478456258817,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 11.721130610632937
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02495781045823,
+                39.009425730153886
+              ],
+              [
+                116.02610643874532,
+                39.01018209177302
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_69",
+          "properties": {
+            "id": "clustered_69",
+            "from": "c_69_a",
+            "to": "c_69_b",
+            "length": 45.64240480157507,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 4.107816432141757
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.06414615661748,
+                39.06466284393761
+              ],
+              [
+                116.06451865630349,
+                39.064953463241274
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_70",
+          "properties": {
+            "id": "clustered_70",
+            "from": "c_70_a",
+            "to": "c_70_b",
+            "length": 51.38469553218252,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 4.624622597896427
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.09760911605588,
+                39.03415473515698
+              ],
+              [
+                116.09820336319974,
+                39.03415392805968
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_71",
+          "properties": {
+            "id": "clustered_71",
+            "from": "c_71_a",
+            "to": "c_71_b",
+            "length": 47.32516895177537,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 4.2592652056597835
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.04109772582498,
+                39.09945585419471
+              ],
+              [
+                116.04103798510874,
+                39.0998784459328
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_72",
+          "properties": {
+            "id": "clustered_72",
+            "from": "c_72_a",
+            "to": "c_72_b",
+            "length": 204.35394011105635,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 18.39185460999507
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02429403304687,
+                39.01498988674264
+              ],
+              [
+                116.02582014791018,
+                39.01639127433307
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_73",
+          "properties": {
+            "id": "clustered_73",
+            "from": "c_73_a",
+            "to": "c_73_b",
+            "length": 208.55329457855612,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 18.76979651207005
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.05977678314733,
+                39.06871319990522
+              ],
+              [
+                116.059816502091,
+                39.07058640364457
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_74",
+          "properties": {
+            "id": "clustered_74",
+            "from": "c_74_a",
+            "to": "c_74_b",
+            "length": 91.42599860765695,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 8.228339874689127
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.10458870496267,
+                39.039101113589176
+              ],
+              [
+                116.10456687449462,
+                39.03992222849805
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_75",
+          "properties": {
+            "id": "clustered_75",
+            "from": "c_75_a",
+            "to": "c_75_b",
+            "length": 85.04663772281398,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 7.6541973950532585
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0449524567286,
+                39.10029615650741
+              ],
+              [
+                116.04501747002669,
+                39.10105847218681
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_76",
+          "properties": {
+            "id": "clustered_76",
+            "from": "c_76_a",
+            "to": "c_76_b",
+            "length": 136.9440886820819,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 12.324967981387372
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02640478183594,
+                39.00173577267955
+              ],
+              [
+                116.02797453300478,
+                39.001894539519945
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_77",
+          "properties": {
+            "id": "clustered_77",
+            "from": "c_77_a",
+            "to": "c_77_b",
+            "length": 54.66204883001191,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 4.919584394701072
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0609388393096,
+                39.07252812135547
+              ],
+              [
+                116.06142214710796,
+                39.0722113737067
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_78",
+          "properties": {
+            "id": "clustered_78",
+            "from": "c_78_a",
+            "to": "c_78_b",
+            "length": 214.5077936257191,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 19.30570142631472
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.10267867993905,
+                39.034205793745755
+              ],
+              [
+                116.10412948961476,
+                39.03264274537506
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_79",
+          "properties": {
+            "id": "clustered_79",
+            "from": "c_79_a",
+            "to": "c_79_b",
+            "length": 98.40035570223279,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 8.85603201320095
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0364233899257,
+                39.098516655290446
+              ],
+              [
+                116.03636411931838,
+                39.099399399077924
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_80",
+          "properties": {
+            "id": "clustered_80",
+            "from": "c_80_a",
+            "to": "c_80_b",
+            "length": 45.06187930586071,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 4.055569137527463
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02464526521013,
+                39.011830543661205
+              ],
+              [
+                116.02467705981543,
+                39.012234584977996
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_81",
+          "properties": {
+            "id": "clustered_81",
+            "from": "c_81_a",
+            "to": "c_81_b",
+            "length": 114.68703095019315,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 10.321832785517383
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.06312539193034,
+                39.07157503763256
+              ],
+              [
+                116.06404257036107,
+                39.07231960352127
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_82",
+          "properties": {
+            "id": "clustered_82",
+            "from": "c_82_a",
+            "to": "c_82_b",
+            "length": 87.15765722672646,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 7.844189150405382
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.10834400133606,
+                39.04302780025608
+              ],
+              [
+                116.10911274580694,
+                39.04252132071621
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_83",
+          "properties": {
+            "id": "clustered_83",
+            "from": "c_83_a",
+            "to": "c_83_b",
+            "length": 69.2901252891391,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 6.236111276022519
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.03350297629358,
+                39.10024439416259
+              ],
+              [
+                116.03410658392252,
+                39.09983450406651
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_84",
+          "properties": {
+            "id": "clustered_84",
+            "from": "c_84_a",
+            "to": "c_84_b",
+            "length": 136.20857421199804,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 12.258771679079825
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.01993900240161,
+                39.02050753149147
+              ],
+              [
+                116.02079806646582,
+                39.0215330482712
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_85",
+          "properties": {
+            "id": "clustered_85",
+            "from": "c_85_a",
+            "to": "c_85_b",
+            "length": 75.30518357431906,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 6.777466521688716
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.05617249788153,
+                39.07054355805188
+              ],
+              [
+                116.05664838977562,
+                39.07111022491029
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_86",
+          "properties": {
+            "id": "clustered_86",
+            "from": "c_86_a",
+            "to": "c_86_b",
+            "length": 72.18131002719095,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 6.496317902447186
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.10221744455889,
+                39.04494900924896
+              ],
+              [
+                116.1030486898708,
+                39.04488855420514
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_87",
+          "properties": {
+            "id": "clustered_87",
+            "from": "c_87_a",
+            "to": "c_87_b",
+            "length": 186.1531920105545,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 16.753787280949908
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.04112521851039,
+                39.09940249920004
+              ],
+              [
+                116.04264924976461,
+                39.10058466744354
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_88",
+          "properties": {
+            "id": "clustered_88",
+            "from": "c_88_a",
+            "to": "c_88_b",
+            "length": 78.06976981929913,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 7.026279283736922
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02493409126404,
+                39.026268186815905
+              ],
+              [
+                116.0256140125432,
+                39.02580684336968
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_89",
+          "properties": {
+            "id": "clustered_89",
+            "from": "c_89_a",
+            "to": "c_89_b",
+            "length": 156.64557956284443,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 14.098102160656
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.06071990756793,
+                39.063674746719826
+              ],
+              [
+                116.06081101894901,
+                39.06508013209065
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_90",
+          "properties": {
+            "id": "clustered_90",
+            "from": "c_90_a",
+            "to": "c_90_b",
+            "length": 126.42528941967102,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 11.378276047770392
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.09738471157594,
+                39.02794696246094
+              ],
+              [
+                116.098430252383,
+                39.02715317321565
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_91",
+          "properties": {
+            "id": "clustered_91",
+            "from": "c_91_a",
+            "to": "c_91_b",
+            "length": 43.10079233794338,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 3.8790713104149046
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0304560282834,
+                39.098224532985235
+              ],
+              [
+                116.03040198334526,
+                39.09860943374042
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_92",
+          "properties": {
+            "id": "clustered_92",
+            "from": "c_92_a",
+            "to": "c_92_b",
+            "length": 60.771907853552804,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 5.4694717068197525
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02646288466924,
+                39.00911709439886
+              ],
+              [
+                116.02695225277843,
+                39.00872539196026
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_93",
+          "properties": {
+            "id": "clustered_93",
+            "from": "c_93_a",
+            "to": "c_93_b",
+            "length": 187.88568747786633,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 16.90971187300797
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.04908289921268,
+                39.062969990637626
+              ],
+              [
+                116.05125640951185,
+                39.0629461992406
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_94",
+          "properties": {
+            "id": "clustered_94",
+            "from": "c_94_a",
+            "to": "c_94_b",
+            "length": 152.86717725344658,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 13.758045952810193
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.08904731310687,
+                39.03360946989763
+              ],
+              [
+                116.08901172684172,
+                39.03498241458702
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_95",
+          "properties": {
+            "id": "clustered_95",
+            "from": "c_95_a",
+            "to": "c_95_b",
+            "length": 138.3275406017479,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "collector",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 12.44947865415731
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0408940857512,
+                39.105645560777404
+              ],
+              [
+                116.04200402520044,
+                39.10474987446931
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_96",
+          "properties": {
+            "id": "clustered_96",
+            "from": "c_96_a",
+            "to": "c_96_b",
+            "length": 182.57404713310774,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 16.431664241979696
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.0141522550264,
+                39.01394529513742
+              ],
+              [
+                116.0141659836045,
+                39.015585343516285
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_97",
+          "properties": {
+            "id": "clustered_97",
+            "from": "c_97_a",
+            "to": "c_97_b",
+            "length": 156.9704055213047,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 14.127336496917424
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.06003286177804,
+                39.06992267567387
+              ],
+              [
+                116.06184097608465,
+                39.06978949298912
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_98",
+          "properties": {
+            "id": "clustered_98",
+            "from": "c_98_a",
+            "to": "c_98_b",
+            "length": 78.435340038888,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 7.059180603499921
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.10897116509076,
+                39.04395266516557
+              ],
+              [
+                116.10957556244544,
+                39.04447812048061
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "clustered_99",
+          "properties": {
+            "id": "clustered_99",
+            "from": "c_99_a",
+            "to": "c_99_b",
+            "length": 126.38052408712565,
+            "speed_limit": 40.0,
+            "road_type": "residential",
+            "oneway": false,
+            "direction": "both",
+            "road_class": "local",
+            "lane_count": 1,
+            "turn_restrictions": [],
+            "metadata": {},
+            "travel_time": 11.37424716784131
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                116.02918572238332,
+                39.10017584280452
+              ],
+              [
+                116.03015857025282,
+                39.09932796328636
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "sample_bbox_query": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "layer": "sample_bbox_query"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  116.01890471550952,
+                  39.09669771487198
+                ],
+                [
+                  116.02179849672997,
+                  39.09669771487198
+                ],
+                [
+                  116.02179849672997,
+                  39.098943492809454
+                ],
+                [
+                  116.01890471550952,
+                  39.098943492809454
+                ],
+                [
+                  116.01890471550952,
+                  39.09669771487198
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "sample_points": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "layer": "sample_nearest_query"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              116.02035160611975,
+              39.09782060384072
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

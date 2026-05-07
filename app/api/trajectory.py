@@ -20,11 +20,18 @@ def trajectory_analyze(request: TrajectoryAnalyzeRequest) -> dict:
         trajectory = runtime.get_trajectory(request.trajectory_id)
     if trajectory is None:
         raise HTTPException(404, "Trajectory not found")
-    reference = [normalize_coordinate(point) for point in request.reference] if request.reference else None
+    reference_payload = request.reference_route or request.reference
+    reference = [normalize_coordinate(point) for point in reference_payload] if reference_payload else None
     data = analyze_trajectory(
         trajectory.coordinates,
         reference=reference,
         simplify_tolerance_m=request.simplify_tolerance_m,
         deviation_threshold_m=request.deviation_threshold_m,
+        methods=request.methods,
+        return_debug_layers=request.return_debug_layers,
     )
-    return ok(data, metrics={"point_count": data["point_count"], "length_m": data["length_m"]})
+    return ok(
+        data,
+        metrics={"point_count": data["point_count"], "length_m": data["length_m"], **data.get("distances", {})},
+        debug_layers=data.get("debug_layers", {}) if request.return_debug_layers else {},
+    )

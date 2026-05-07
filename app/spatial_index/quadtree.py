@@ -25,10 +25,15 @@ class QuadTreeIndex(MeasuredIndex[T], Generic[T]):
         max_entries: int = 12,
         max_depth: int = 10,
     ):
-        self.items = normalize_items(items)
         self.max_entries = max(1, max_entries)
         self.max_depth = max_depth
+        self.root: _QuadNode[T] | None = None
+        self.build(items)
+
+    def build(self, items: Iterable[tuple[BBox, T] | IndexedItem[T]]) -> "QuadTreeIndex[T]":
+        self.items = normalize_items(items)
         self.root = self._build(self.items, 0) if self.items else None
+        return self
 
     def query(self, bbox: BBox) -> list[T]:
         if self.root is None:
@@ -75,6 +80,23 @@ class QuadTreeIndex(MeasuredIndex[T], Generic[T]):
         node.children = [self._build(bucket, depth + 1) for _, bucket in quadrants if bucket]
         return node
 
+    def stats(self) -> dict[str, object]:
+        stats = super().stats()
+        stats.update(
+            {
+                "max_entries": self.max_entries,
+                "max_depth": self.max_depth,
+                "node_count": _count_nodes(self.root),
+            }
+        )
+        return stats
+
 
 def _contains(outer: BBox, inner: BBox) -> bool:
     return outer[0] <= inner[0] and inner[2] <= outer[2] and outer[1] <= inner[1] and inner[3] <= outer[3]
+
+
+def _count_nodes(node: _QuadNode[T] | None) -> int:
+    if node is None:
+        return 0
+    return 1 + sum(_count_nodes(child) for child in node.children)

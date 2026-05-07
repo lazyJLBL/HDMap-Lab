@@ -1,33 +1,61 @@
 from __future__ import annotations
 
-import sys
+import argparse
+import json
+import time
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parents[1]))
-
-from app.map_matching.evaluation import evaluate_case
-from app.map_matching.synthetic import generate_low_frequency_case, generate_parallel_road_case
-from app.storage.runtime import RuntimeState
+from app.map_matching import match_hmm, match_nearest
+from app.map_matching.candidate_search import CandidateSearcher
+from app.map_matching.evaluation import evaluate_match_result
+from app.map_matching.synthetic import generate_synthetic_case
+from app.routing.graph_builder import RoadGraph
 
 
 def main() -> None:
-    runtime = RuntimeState("data/benchmark.sqlite")
-    runtime.load_sample()
-    if runtime.candidate_searcher is None:
-        raise RuntimeError("candidate searcher is not initialized")
-    by_id = {road.id: road for road in runtime.roads}
-    preferred = ["edge_h_01_11", "edge_h_11_21", "edge_v_21_22"]
-    route = [by_id[road_id] for road_id in preferred] if all(road_id in by_id for road_id in preferred) else runtime.roads[:3]
-    cases = [generate_parallel_road_case(route), generate_low_frequency_case(route)]
-    print("| Case | Nearest precision | HMM precision | Nearest ms | HMM ms |")
-    print("| --- | ---: | ---: | ---: | ---: |")
-    for case in cases:
-        result = evaluate_case(case, runtime.candidate_searcher, runtime.graph)
-        print(
-            f"| {result['case']} | {result['nearest']['precision']:.3f} | "
-            f"{result['hmm']['precision']:.3f} | {result['nearest']['latency_ms']:.3f} | "
-            f"{result['hmm']['latency_ms']:.3f} |"
-        )
+    parser = argparse.ArgumentParser(description="Run HDMap-Lab map matching benchmark cases.")
+    parser.add_argument("--cases", default="parallel_roads_drift,low_frequency_sampling,overpass_layer_confusion")
+    parser.add_argument("--algorithms", default="nearest,hmm")
+    parser.add_argument("--output", type=Path, default=Path("docs/assets/map_matching_benchmark.json"))
+    parser.add_argument("--k", type=int, default=5)
+    parser.add_argument("--radius-m", type=float, default=150.0)
+    parser.add_argument("--noise-sigma-m", type=float, default=4.0)
+    parser.add_argument("--sampling-interval", type=int, default=1)
+    args = parser.parse_args()
+
+    case_ids = [item.strip() for item in args.cases.split(",") if item.strip()]
+    algorithms = {item.strip() for item in args.algorithms.split(",") if item.strip()}
+    rows = []
+    for case_id in case_ids:
+        case = generate_synthetic_case(case_id, noise_sigma_m=args.noise_sigma_m, sampling_interval=args.sampling_interval)
+        searcher = CandidateSearcher(case.roads)
+        graph = RoadGraph.build(case.nodes, case.roads)
+        row = {"case_id": case.case_id, "description": case.description, "ground_truth": case.ground_truth_road_sequence}
+        if "nearest" in algorithms:
+            started = time.perf_counter()
+            nearest = match_nearest(case.trajectory, searcher, args.k)
+            row["nearest"] = evaluate_match_result(nearest, case, latency_ms=(time.perf_counter() - started) * 1000.0)
+        if "hmm" in algorithms:
+            started = time.perf_counter()
+            hmm = match_hmm(case.trajectory, searcher, graph, k=args.k, radius_m=args.radius_m)
+            row["hmm"] = evaluate_match_result(hmm, case, latency_ms=(time.perf_counter() - started) * 1000.0)
+        rows.append(row)
+
+    payload = {"cases": rows, "algorithms": sorted(algorithms)}
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    print("| Case | Algorithm | Seq accuracy | F1 | Latency ms | Candidate avg |")
+    print("| --- | --- | ---: | ---: | ---: | ---: |")
+    for row in rows:
+        for algorithm in sorted(algorithms):
+            metrics = row.get(algorithm)
+            if not metrics:
+                continue
+            print(
+                f"| {row['case_id']} | {algorithm} | {metrics['sequence_accuracy']:.3f} | "
+                f"{metrics['f1']:.3f} | {metrics['latency_ms']:.3f} | {metrics['candidate_count_avg']:.2f} |"
+            )
+    print(f"output: {args.output}")
 
 
 if __name__ == "__main__":

@@ -56,6 +56,12 @@ type GeofenceEvent = {
   timestamp?: string;
 };
 
+type GeometryCase = {
+  id: string;
+  category: string;
+  description: string;
+};
+
 const apiBase = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 const defaultFlags: LayerFlags = {
@@ -78,6 +84,9 @@ export function App() {
   const [routeAlgorithm, setRouteAlgorithm] = useState("astar");
   const [routeMode, setRouteMode] = useState("shortest_distance");
   const [routeScenario, setRouteScenario] = useState("direct");
+  const [geometryCases, setGeometryCases] = useState<GeometryCase[]>([]);
+  const [selectedGeometryCaseId, setSelectedGeometryCaseId] = useState("");
+  const [mapMatchingStressCase, setMapMatchingStressCase] = useState("parallel_roads_drift");
   const [busy, setBusy] = useState(false);
 
   const metrics = useMemo(() => {
@@ -254,6 +263,41 @@ export function App() {
     });
   }
 
+  async function loadGeometryCases() {
+    await runAction(async () => {
+      const payload = await request("/geometry/cases");
+      const cases = (payload.data ?? []) as GeometryCase[];
+      setGeometryCases(cases);
+      if (!selectedGeometryCaseId && cases.length) {
+        setSelectedGeometryCaseId(cases[0].id);
+      }
+      renderFeatureCollection("geometryCases", payload.debug_layers?.cases as FeatureCollection | undefined, {
+        color: "#0f766e",
+        weight: 4,
+        opacity: 0.86,
+        fillOpacity: 0.16
+      });
+      return payload;
+    });
+  }
+
+  async function runGeometryCase() {
+    await runAction(async () => {
+      const caseId = selectedGeometryCaseId || geometryCases[0]?.id;
+      const payload = await request("/geometry/cases/run", {
+        method: "POST",
+        body: JSON.stringify({ case_id: caseId })
+      });
+      renderFeatureCollection("geometryCaseResult", payload.debug_layers?.case_geometry as FeatureCollection | undefined, {
+        color: payload.data?.passed ? "#16a34a" : "#dc2626",
+        weight: 5,
+        opacity: 0.9,
+        fillOpacity: 0.18
+      });
+      return payload;
+    });
+  }
+
   async function runSpatialBenchmark() {
     await runAction(async () => {
       return request("/benchmarks/spatial-index", {
@@ -269,6 +313,33 @@ export function App() {
         method: "POST",
         body: JSON.stringify({ k: 5 })
       });
+    });
+  }
+
+  async function runMapMatchingStress() {
+    await runAction(async () => {
+      const payload = await request("/benchmarks/map-matching", {
+        method: "POST",
+        body: JSON.stringify({
+          cases: [mapMatchingStressCase],
+          algorithms: ["nearest", "hmm"],
+          k: 5,
+          radius_m: 150,
+          return_debug_layers: true
+        })
+      });
+      const layers = payload.debug_layers?.[mapMatchingStressCase];
+      renderFeatureCollection("mapMatchingStressRoads", layers?.roads as FeatureCollection | undefined, {
+        color: "#334155",
+        weight: 5,
+        opacity: 0.78
+      });
+      renderFeatureCollection("mapMatchingStressGps", layers?.trajectory as FeatureCollection | undefined, {
+        color: "#7c3aed",
+        weight: 4,
+        opacity: 0.9
+      });
+      return payload;
     });
   }
 
@@ -408,8 +479,29 @@ export function App() {
 
   function renderFixedRoads(collection?: FeatureCollection) {
     if (!collection?.features?.length) return;
-    addLayer("fixedRoads", L.geoJSON(collection, {
-      style: { color: "#16a34a", weight: 3, opacity: 0.85, dashArray: "5 5" }
+    renderFeatureCollection("fixedRoads", collection, { color: "#16a34a", weight: 3, opacity: 0.85, dashArray: "5 5" });
+  }
+
+  function renderFeatureCollection(key: string, collection?: FeatureCollection, style?: L.PathOptions) {
+    if (!collection?.features?.length) return;
+    addLayer(key, L.geoJSON(collection, {
+      style: () => style ?? { color: "#2563eb", weight: 4, opacity: 0.82, fillOpacity: 0.16 },
+      pointToLayer: (feature, latlng) => {
+        const layer = String(feature.properties?.layer ?? "");
+        const color = layer.includes("intersection") || layer.includes("projection") ? "#dc2626" : (style?.color as string | undefined) ?? "#2563eb";
+        return L.circleMarker(latlng, {
+          radius: 7,
+          color,
+          fillColor: color,
+          fillOpacity: 0.9,
+          weight: 2
+        });
+      },
+      onEachFeature: (feature, layer) => {
+        const props = feature.properties ?? {};
+        const label = [props.case_id, props.layer].filter(Boolean).join(" / ");
+        if (label) layer.bindTooltip(label);
+      }
     }));
   }
 
@@ -512,6 +604,23 @@ export function App() {
             <Network size={18} />
             <span>Experiments</span>
           </div>
+          <div className="field-row">
+            <label>Geom Case</label>
+            <select value={selectedGeometryCaseId} onChange={(event) => setSelectedGeometryCaseId(event.target.value)}>
+              {geometryCases.length === 0 ? <option value="">Load cases</option> : null}
+              {geometryCases.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.id}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button className="command" disabled={busy} onClick={loadGeometryCases}>
+            <FileSearch size={18} /> Geometry Cases
+          </button>
+          <button className="command secondary" disabled={busy || (!selectedGeometryCaseId && geometryCases.length === 0)} onClick={runGeometryCase}>
+            <Crosshair size={18} /> Run Case
+          </button>
           <button className="command" disabled={busy} onClick={runTopologyRepair}>
             <Wrench size={18} /> Repair
           </button>
@@ -520,6 +629,18 @@ export function App() {
           </button>
           <button className="command" disabled={busy} onClick={runMapMatchingBenchmark}>
             <GitBranch size={18} /> Match Bench
+          </button>
+          <div className="field-row">
+            <label>Stress</label>
+            <select value={mapMatchingStressCase} onChange={(event) => setMapMatchingStressCase(event.target.value)}>
+              <option value="parallel_roads_drift">Parallel Drift</option>
+              <option value="low_frequency_sampling">Low Frequency</option>
+              <option value="overpass_layer_confusion">Overpass</option>
+              <option value="wrong_nearest_road">Wrong Nearest</option>
+            </select>
+          </div>
+          <button className="command secondary" disabled={busy} onClick={runMapMatchingStress}>
+            <GitBranch size={18} /> Stress Test
           </button>
           <button className="command" disabled={busy} onClick={runTrajectoryAnalysis}>
             <Activity size={18} /> Trajectory

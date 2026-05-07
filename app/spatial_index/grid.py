@@ -14,12 +14,17 @@ class GridIndex(MeasuredIndex[T], Generic[T]):
     name = "grid"
 
     def __init__(self, items: Iterable[tuple[BBox, T] | IndexedItem[T]] = (), cell_size_degrees: float = 0.005):
-        self.items = normalize_items(items)
         self.cell_size = max(cell_size_degrees, 1e-9)
+        self.cells: dict[tuple[int, int], list[IndexedItem[T]]] = defaultdict(list)
+        self.build(items)
+
+    def build(self, items: Iterable[tuple[BBox, T] | IndexedItem[T]]) -> "GridIndex[T]":
+        self.items = normalize_items(items)
         self.cells: dict[tuple[int, int], list[IndexedItem[T]]] = defaultdict(list)
         for entry in self.items:
             for cell in self._cells_for_bbox(entry.bbox):
                 self.cells[cell].append(entry)
+        return self
 
     def query(self, bbox: BBox) -> list[T]:
         seen: set[T] = set()
@@ -39,3 +44,8 @@ class GridIndex(MeasuredIndex[T], Generic[T]):
         max_x = math.floor(bbox[2] / self.cell_size)
         max_y = math.floor(bbox[3] / self.cell_size)
         return [(x, y) for x in range(min_x, max_x + 1) for y in range(min_y, max_y + 1)]
+
+    def stats(self) -> dict[str, object]:
+        stats = super().stats()
+        stats.update({"cell_size_degrees": self.cell_size, "cell_count": len(self.cells)})
+        return stats

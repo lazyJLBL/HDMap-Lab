@@ -1,17 +1,18 @@
 from __future__ import annotations
 
-import statistics
 import time
 
 from fastapi import APIRouter, HTTPException
 
 from app.api.response import ok
-from app.core.bbox import bbox_of_coords
-from app.map_matching.evaluation import evaluate_case
-from app.map_matching.synthetic import generate_low_frequency_case, generate_parallel_road_case
+from app.map_matching import match_hmm, match_nearest
+from app.map_matching.candidate_search import CandidateSearcher
+from app.map_matching.evaluation import evaluate_match_result
+from app.map_matching.synthetic import generate_synthetic_case
+from app.routing.graph_builder import RoadGraph
 from app.schemas import MapMatchingBenchmarkRequest, SpatialIndexBenchmarkRequest
-from app.spatial_index import BasicRTreeIndex, BruteForceIndex, GridIndex, QuadTreeIndex, STRRTreeIndex
 from app.storage.runtime import get_runtime
+from benchmarks.spatial_index_benchmark import run_spatial_index_benchmark
 
 router = APIRouter(prefix="/benchmarks", tags=["benchmarks"])
 
@@ -21,51 +22,51 @@ def spatial_index_benchmark(request: SpatialIndexBenchmarkRequest) -> dict:
     runtime = get_runtime()
     if not runtime.roads:
         raise HTTPException(404, "No roads loaded")
-    items = [(bbox_of_coords(road.geometry), road.id) for road in runtime.roads]
-    query = tuple(request.query_bbox) if request.query_bbox else runtime.visualization_state()["bounds"]
-    if query is None:
-        raise HTTPException(400, "No query bbox available")
-    query_bbox = (query[0], query[1], query[2], query[3])
-    rows = []
-    for label, factory in [
-        ("brute_force", lambda: BruteForceIndex(items)),
-        ("grid", lambda: GridIndex(items)),
-        ("quadtree", lambda: QuadTreeIndex(items)),
-        ("rtree", lambda: BasicRTreeIndex(items)),
-        ("str_rtree", lambda: STRRTreeIndex(items)),
-    ]:
-        build_started = time.perf_counter()
-        index = factory()
-        build_ms = (time.perf_counter() - build_started) * 1000.0
-        latencies: list[float] = []
-        count = 0
-        for _ in range(request.iterations):
-            started = time.perf_counter()
-            result = index.query(query_bbox)
-            latencies.append((time.perf_counter() - started) * 1000.0)
-            count = len(result)
-        rows.append(
-            {
-                "index": label,
-                "build_ms": build_ms,
-                "candidate_count": count,
-                "p50_ms": statistics.median(latencies),
-                "p95_ms": _percentile(latencies, 0.95),
-                "p99_ms": _percentile(latencies, 0.99),
-            }
-        )
-    return ok({"query_bbox": list(query_bbox), "results": rows}, metrics={"roads": len(runtime.roads)})
+    query_types = request.query_types or ["bbox"]
+    index_types = request.index_types or ["brute", "grid", "quadtree", "rtree", "str_rtree"]
+    payload = run_spatial_index_benchmark(
+        dataset=request.dataset,
+        item_count=min(request.items, len(runtime.roads)),
+        query_count=request.query_count if request.query_bbox is None else request.iterations,
+        index_types=index_types,
+        query_types=query_types,
+        seed=request.seed,
+        radius_m=request.radius_m,
+        bbox_size_m=request.bbox_size_m,
+        roads=runtime.roads[: request.items],
+        bbox_queries=[tuple(request.query_bbox)] * request.iterations if request.query_bbox is not None else None,
+        return_debug_layers=request.return_debug_layers,
+    )
+    if request.query_bbox is not None:
+        payload["query_bbox"] = request.query_bbox
+    return ok(
+        {"results": payload["results"], "dataset": payload["dataset"], "debug_layers": payload["debug_layers"]},
+        metrics={"roads": payload["item_count"], "query_count": payload["query_count"]},
+        debug_layers=payload["debug_layers"],
+    )
 
 
 @router.post("/map-matching")
 def map_matching_benchmark(request: MapMatchingBenchmarkRequest) -> dict:
-    runtime = get_runtime()
-    if runtime.candidate_searcher is None or len(runtime.roads) < 2:
-        raise HTTPException(404, "No routable road network loaded")
-    route = _sample_connected_route(runtime.roads)
-    cases = [generate_parallel_road_case(route), generate_low_frequency_case(route)]
-    results = [evaluate_case(case, runtime.candidate_searcher, runtime.graph, request.k) for case in cases]
-    return ok({"cases": results}, metrics={"cases": len(results)})
+    results = []
+    debug_layers = {}
+    for case_id in request.cases:
+        case = generate_synthetic_case(case_id, noise_sigma_m=request.noise_sigma_m, sampling_interval=request.sampling_interval)
+        searcher = CandidateSearcher(case.roads)
+        graph = RoadGraph.build(case.nodes, case.roads)
+        row = {"case": case.case_id, "description": case.description, "ground_truth": case.ground_truth_road_sequence}
+        if "nearest" in request.algorithms:
+            started = time.perf_counter()
+            nearest = match_nearest(case.trajectory, searcher, request.k)
+            row["nearest"] = evaluate_match_result(nearest, case, latency_ms=(time.perf_counter() - started) * 1000.0)
+        if "hmm" in request.algorithms:
+            started = time.perf_counter()
+            hmm = match_hmm(case.trajectory, searcher, graph, k=request.k, radius_m=request.radius_m)
+            row["hmm"] = evaluate_match_result(hmm, case, latency_ms=(time.perf_counter() - started) * 1000.0)
+        results.append(row)
+        if request.return_debug_layers:
+            debug_layers[case.case_id] = case.debug_layers
+    return ok({"cases": results}, metrics={"cases": len(results)}, debug_layers=debug_layers)
 
 
 def _percentile(values: list[float], percentile: float) -> float:

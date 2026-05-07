@@ -1,0 +1,88 @@
+{
+  "start_node": "node_00",
+  "end_node": "node_22",
+  "iterations": 10,
+  "results": [
+    {
+      "scenario": "dijkstra_distance",
+      "latency_ms": 0.08957991376519203,
+      "p50_ms": 0.08659996092319489,
+      "p95_ms": 0.10169995948672295,
+      "visited_nodes": 9,
+      "path_length_m": 3366.187561575921,
+      "path_time_s": 378.47949278909147,
+      "turn_count": 2,
+      "edge_count": 3,
+      "found": true
+    },
+    {
+      "scenario": "astar_distance",
+      "latency_ms": 0.055129919201135635,
+      "p50_ms": 0.05459971725940704,
+      "p95_ms": 0.0591999851167202,
+      "visited_nodes": 6,
+      "path_length_m": 3366.187561575921,
+      "path_time_s": 378.47949278909147,
+      "turn_count": 2,
+      "edge_count": 3,
+      "found": true
+    },
+    {
+      "scenario": "dijkstra_time",
+      "latency_ms": 0.09352997876703739,
+      "p50_ms": 0.09249988943338394,
+      "p95_ms": 0.10059960186481476,
+      "visited_nodes": 9,
+      "path_length_m": 3929.7524151058,
+      "path_time_s": 300.73338672498744,
+      "turn_count": 2,
+      "edge_count": 4,
+      "found": true
+    },
+    {
+      "scenario": "astar_time",
+      "latency_ms": 0.13843998312950134,
+      "p50_ms": 0.13739988207817078,
+      "p95_ms": 0.14270003885030746,
+      "visited_nodes": 8,
+      "path_length_m": 3929.7524151058,
+      "path_time_s": 300.73338672498744,
+      "turn_count": 2,
+      "edge_count": 4,
+      "found": true
+    },
+    {
+      "scenario": "astar_with_turn_cost",
+      "latency_ms": 0.08850996382534504,
+      "p50_ms": 0.08819997310638428,
+      "p95_ms": 0.09390013292431831,
+      "visited_nodes": 7,
+      "path_length_m": 3366.187561575921,
+      "path_time_s": 378.47949278909147,
+      "turn_count": 2,
+      "edge_count": 3,
+      "found": true
+    },
+    {
+      "scenario": "astar_with_avoid_polygon",
+      "latency_ms": 0.06100009195506573,
+      "p50_ms": 0.06050011143088341,
+      "p95_ms": 0.06810016930103302,
+      "visited_nodes": 7,
+      "path_length_m": 3929.5033622988294,
+      "path_time_s": 353.3454520153944,
+      "turn_count": 1,
+      "edge_count": 4,
+      "found": true
+    }
+  ],
+  "debug_layers": {
+    "avoid_polygon_edges": [
+      "edge_diag_00_11",
+      "edge_h_01_11",
+      "edge_h_11_21",
+      "edge_v_10_11",
+      "edge_v_11_12"
+    ]
+  }
+}

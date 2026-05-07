@@ -1,69 +1,108 @@
-# Spatial Index
+# Spatial Index Benchmark v2
 
-HDMap-Lab uses lightweight in-memory indexes after loading roads from SQLite. The goal is to avoid scanning every road for each spatial query or GPS point.
+HDMap-Lab uses in-memory spatial indexes as an engineering experiment bench for road-network queries. The goal is not to replace PostGIS, but to make the candidate generation, recall, false positives, and tail latency visible.
 
-The upgraded `app/spatial_index/` package provides a common interface for:
+## Unified Interface
 
-- brute force
-- grid index
-- KD-tree nearest lookup
-- quadtree
-- basic R-tree
-- STR bulk-loaded R-tree
+Every bbox-based index implements:
 
-## Why Spatial Indexing
-
-A road network can contain thousands or millions of road segments. A brute-force nearby-road query must compute point-to-polyline distance for every segment, which is expensive and unnecessary. Spatial indexes reduce the candidate set before exact geometry calculation.
-
-## R-Tree Usage
-
-The R-Tree stores each road edge by its bounding box:
-
-```text
-RoadEdge geometry -> bbox(min_lon, min_lat, max_lon, max_lat) -> R-Tree
+```python
+index.build(items)
+index.query_bbox((min_lon, min_lat, max_lon, max_lat))
+index.query_radius((lon, lat), radius_m=100)
+index.nearest((lon, lat), k=3)
+index.stats()
 ```
 
-Used by:
+Items are `(bbox, id)` pairs. The old `query(bbox)` method is still available for compatibility.
 
-- roads in bbox query
-- roads in polygon query prefilter
-- map matching candidate prefilter around GPS points
+## Implementations
 
-Query flow:
+| Index | Strength | Weakness |
+| --- | --- | --- |
+| BruteForceIndex | Exact baseline; simple correctness oracle | O(n) for every query |
+| GridIndex | Good for uniformly distributed roads and fixed-radius lookup | Cell size is sensitive; clustered data can overload cells |
+| KDTreeIndex | Good for point nearest-neighbor over bbox centroids | Not a natural rectangle index; bbox queries require exact scan |
+| QuadTreeIndex | Adaptive subdivision for mixed density | Can degenerate when many long/overlapping bboxes cross quadrants |
+| RTreeIndex | Hierarchical bbox pruning | Simple packed tree here, no dynamic insert/delete optimization |
+| STRRTreeIndex | Sort-tile-recursive bulk loading improves static query locality | Static only; rebuild required after large updates |
+| MortonIndex | Z-order sorting exposes cache-friendly spatial locality | Current query path uses exact filtering after Morton sort |
 
-```text
-query bbox -> R-Tree bbox intersection -> candidate road ids -> exact geometry check
-```
+## Benchmark Data
 
-## KD-Tree Usage
+The v2 benchmark supports:
 
-The KD-Tree stores road bbox centroids and road node coordinates.
+- `synthetic_uniform`: random short road segments across a uniform extent.
+- `synthetic_clustered`: roads clustered around several centers to test overloaded cells and tree balance.
+- `osm_roads_sample`: loads `data/roads.geojson` as a small OSM-like sample, with synthetic fallback if the file is unavailable.
 
-Used by:
+For each dataset it generates bbox, radius, and nearest queries. All outputs are checked against `BruteForceIndex`.
 
-- nearest road fallback candidate search
-- nearest road node lookup for routing start/end points
+## Metrics
 
-KNN flow:
+Each index/query row reports:
 
-```text
-GPS point -> KD-Tree nearest centroids -> road candidates -> exact point-to-polyline distance
-```
+- `build_time_ms`
+- `p50_ms`, `p95_ms`, `p99_ms`, `max_ms`
+- `avg_candidate_count`
+- `false_positive_rate`
+- `recall`
+- `memory_estimate_bytes`
+- `index_stats`
+
+`recall == 1.0` means the index did not miss any brute-force result. `false_positive_rate` is the share of returned candidates that brute force did not consider exact matches. Spatial prefilters can legally have false positives, but false negatives are unacceptable for candidate generation.
+
+Tail latency matters because a map-matching or routing workflow usually performs many small spatial queries. A low average can hide overloaded grid cells or unbalanced tree branches; `p95` and `p99` show those worst-case query paths.
 
 ## Complexity
 
-| Query | Brute force | Indexed flow |
-| --- | ---: | ---: |
-| roads in bbox | O(n) bbox checks | O(log n + k) candidate traversal |
-| nearby roads | O(n * segment_count) distance checks | O(log n + k) prefilter + exact distance on candidates |
+| Query | Brute force | Grid | KD-tree bbox | Quadtree | R-tree / STR R-tree | Morton |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Build | O(n) | O(n * touched_cells) | O(n log n) | O(n log n) avg | O(n log n) | O(n log n) |
+| BBox query | O(n) | O(c + k) avg | O(n) | O(log n + k) avg | O(log n + k) avg | O(n) currently |
+| Radius query | O(n) exact | bbox prefilter + exact distance | O(n) exact | bbox prefilter + exact distance | bbox prefilter + exact distance | O(n) currently |
+| Nearest | O(n log n) here | O(n log n) here | O(n log n) exact fallback | O(n log n) here | O(n log n) here | O(n log n) here |
 
-Run the new comparison suite:
+`k` is candidate count and `c` is the number of touched cells. The current KDTree and Morton indexes are included to show design tradeoffs, not because they are the best bbox query structures.
+
+## CLI
 
 ```bash
-python -m benchmarks.spatial_index_benchmark
+python -m benchmarks.spatial_index_benchmark \
+  --dataset synthetic_clustered \
+  --items 10000 \
+  --queries 1000 \
+  --indexes brute,grid,kdtree,quadtree,rtree,str_rtree,morton \
+  --output docs/assets/spatial_index_benchmark.json
 ```
 
-The `/benchmarks/spatial-index` API reports build time, candidate count, p50, p95, and p99 latency for each implementation.
-| route start node | O(node_count) distance checks | O(log node_count) nearest lookup |
+The command writes:
 
-The implementation is intentionally static and small. For production-scale GIS data, a disk-backed index, PostGIS, or tiled spatial partitioning would be more appropriate.
+- `docs/assets/spatial_index_benchmark.json`
+- `docs/assets/spatial_index_benchmark.md`
+
+## API
+
+`POST /benchmarks/spatial-index`
+
+```json
+{
+  "dataset": "synthetic_clustered",
+  "index_types": ["brute", "grid", "quadtree", "rtree", "str_rtree"],
+  "query_types": ["bbox", "radius", "nearest"],
+  "query_count": 100,
+  "seed": 7,
+  "radius_m": 150,
+  "bbox_size_m": 250,
+  "return_debug_layers": true
+}
+```
+
+The response contains `results`, aggregate metrics, and optional debug layers with sample road features and sample query geometries for frontend rendering.
+
+## Current Limits
+
+- Coordinates are treated with local meter approximations; this is acceptable for city-scale experiments but not global geodesy.
+- KDTreeIndex uses bbox centroid logic and exact fallback for correctness, so it is not optimized for rectangle intersection.
+- MortonIndex currently sorts by Z-order code but still exact-filters all entries; a production version would range-scan code intervals.
+- Dynamic updates are not optimized. STR R-tree and Morton indexes are static bulk-loaded structures.

@@ -1,0 +1,11 @@
+{
+  "type": "Feature",
+  "properties": {"id": "reference_route"},
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [116.0, 39.0],
+      [116.002, 39.0]
+    ]
+  }
+}

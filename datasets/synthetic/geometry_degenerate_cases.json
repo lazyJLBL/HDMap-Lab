@@ -1,0 +1,122 @@
+[
+  {
+    "id": "collinear_three_points",
+    "category": "predicate",
+    "description": "Three points lie exactly on the same line.",
+    "input": {"operation": "orientation", "points": [[0, 0], [1, 1], [2, 2]]},
+    "expected": {"orientation": "COLLINEAR"},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "near_collinear_large_coordinates",
+    "category": "predicate",
+    "description": "Large coordinates with tiny local determinant should still classify reliably.",
+    "input": {"operation": "orientation", "points": [[1000000000, 1000000000], [1000001000, 1000001000], [1000002000, 1000002000.001]]},
+    "expected": {"orientation": "COUNTER_CLOCKWISE"},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "endpoint_touch_segments",
+    "category": "intersection",
+    "description": "Two segments share a single endpoint.",
+    "input": {"operation": "segment_intersection", "segment_a": [[0, 0], [1, 1]], "segment_b": [[1, 1], [2, 0]]},
+    "expected": {"kind": "point", "relation": "endpoint_touch", "point": [1, 1]},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "t_junction_segments",
+    "category": "intersection",
+    "description": "A vertical segment terminates on the interior of a horizontal segment.",
+    "input": {"operation": "segment_intersection", "segment_a": [[0, 0], [2, 0]], "segment_b": [[1, -1], [1, 0]]},
+    "expected": {"kind": "point", "relation": "touch", "point": [1, 0]},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "overlapping_segments",
+    "category": "intersection",
+    "description": "Two collinear segments partially overlap in the same direction.",
+    "input": {"operation": "segment_intersection", "segment_a": [[0, 0], [3, 0]], "segment_b": [[1, 0], [4, 0]]},
+    "expected": {"kind": "overlap", "relation": "overlap", "overlap": [[1, 0], [3, 0]]},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "reversed_overlapping_segments",
+    "category": "intersection",
+    "description": "Two collinear segments overlap while one geometry is digitized in reverse.",
+    "input": {"operation": "segment_intersection", "segment_a": [[3, 0], [0, 0]], "segment_b": [[1, 0], [4, 0]]},
+    "expected": {"kind": "overlap", "relation": "overlap", "overlap": [[1, 0], [3, 0]]},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "almost_parallel_segments",
+    "category": "intersection",
+    "description": "Nearly parallel segments are close in angle but spatially disjoint.",
+    "input": {"operation": "segment_intersection", "segment_a": [[0, 0], [1000000, 1]], "segment_b": [[0, 2], [1000000, 3.000001]]},
+    "expected": {"kind": "none", "relation": "disjoint"},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "polygon_with_hole",
+    "category": "polygon",
+    "description": "A square polygon with a square hole tests outer, hole, and boundary policy.",
+    "input": {"operation": "point_in_polygon", "polygon": [[[0, 0], [4, 0], [4, 4], [0, 4], [0, 0]], [[1, 1], [1, 3], [3, 3], [3, 1], [1, 1]]], "points": {"outer_inside": [0.5, 0.5], "hole_inside": [2, 2], "hole_boundary": [1, 2]}},
+    "expected": {"outer_inside": "inside", "hole_inside": "outside", "hole_boundary": "boundary", "area": 12},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "self_intersecting_bowtie_polygon",
+    "category": "polygon",
+    "description": "A bowtie ring crosses itself at its center.",
+    "input": {"operation": "detect_self_intersections", "ring": [[0, 0], [2, 2], [0, 2], [2, 0], [0, 0]]},
+    "expected": {"self_intersection_count": 1, "kind": "point", "point": [1, 1]},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "duplicate_points_polyline",
+    "category": "polyline",
+    "description": "Projection should ignore a zero-length duplicate segment when a real segment is available.",
+    "input": {"operation": "point_to_polyline_projection", "polyline": [[0, 0], [0, 0], [1, 0]], "point": [0.25, 0.001]},
+    "expected": {"segment_index": 1, "t_min": 0.24, "t_max": 0.26},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "zero_length_segment",
+    "category": "polyline",
+    "description": "A segment with identical endpoints projects to the only endpoint.",
+    "input": {"operation": "point_to_segment_projection", "segment": [[0, 0], [0, 0]], "point": [0, 0.001]},
+    "expected": {"projected_point": [0, 0], "segment_index": 0, "t": 0},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "tiny_angle_polyline",
+    "category": "polyline",
+    "description": "A tiny-angle polyline should keep the middle point when simplification tolerance is small.",
+    "input": {"operation": "simplify_polyline", "polyline": [[0, 0], [0.001, 0.0001], [0.002, 0]], "tolerance_m": 1},
+    "expected": {"simplified_point_count": 3},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "road_crossing_without_node",
+    "category": "topology",
+    "description": "Two road centerlines cross at an interior point where topology repair should later split.",
+    "input": {"operation": "segment_intersection", "segment_a": [[0, 0], [2, 2]], "segment_b": [[0, 2], [2, 0]]},
+    "expected": {"kind": "point", "relation": "cross", "point": [1, 1]},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "road_overlap_same_direction",
+    "category": "topology",
+    "description": "Duplicate road centerlines overlap in the same direction.",
+    "input": {"operation": "segment_intersection", "segment_a": [[0, 0], [3, 0]], "segment_b": [[1, 0], [3, 0]]},
+    "expected": {"kind": "overlap", "relation": "overlap", "overlap": [[1, 0], [3, 0]]},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  },
+  {
+    "id": "road_overlap_reverse_direction",
+    "category": "topology",
+    "description": "Duplicate road centerlines overlap while digitized in opposite directions.",
+    "input": {"operation": "segment_intersection", "segment_a": [[3, 0], [0, 0]], "segment_b": [[1, 0], [3, 0]]},
+    "expected": {"kind": "overlap", "relation": "overlap", "overlap": [[1, 0], [3, 0]]},
+    "debug_geojson": {"type": "FeatureCollection", "features": []}
+  }
+]

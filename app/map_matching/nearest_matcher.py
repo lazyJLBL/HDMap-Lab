@@ -10,8 +10,11 @@ def _match_record(index: int, candidate: RoadCandidate, costs: dict | None = Non
     payload = {
         "point_index": index,
         "matched_road_id": candidate.road.id,
-        "distance": candidate.distance,
-        "projection_point": [candidate.projection_point[0], candidate.projection_point[1]],
+        "distance": candidate.distance_m,
+        "distance_m": candidate.distance_m,
+        "projection_point": [candidate.projected_point[0], candidate.projected_point[1]],
+        "projected_point": [candidate.projected_point[0], candidate.projected_point[1]],
+        "candidate_count": 1,
     }
     if costs:
         payload.update(costs)
@@ -20,16 +23,20 @@ def _match_record(index: int, candidate: RoadCandidate, costs: dict | None = Non
 
 def match_nearest(trajectory: Trajectory, searcher: CandidateSearcher, k: int = 5) -> dict:
     matches = []
+    candidate_layers = []
     for index, point in enumerate(trajectory.points):
         candidates = searcher.nearby_roads(point.coordinate, k)
+        candidate_layers.append(candidates)
         if candidates:
-            matches.append(_match_record(index, candidates[0]))
+            matches.append(_match_record(index, candidates[0], {"candidate_count": len(candidates), "candidates": [candidate.to_dict() for candidate in candidates]}))
     return {
         "trajectory_id": trajectory.id,
         "algorithm": "nearest",
         "matched_road_sequence": _dedupe_sequence([match["matched_road_id"] for match in matches]),
         "confidence": _distance_confidence(matches),
         "matches": matches,
+        "metrics": {"candidate_count_avg": sum(len(layer) for layer in candidate_layers) / len(candidate_layers) if candidate_layers else 0.0},
+        "debug_layers": _debug_layers(trajectory, matches),
     }
 
 
@@ -41,8 +48,10 @@ def match_candidate_cost(
 ) -> dict:
     matches = []
     previous: RoadCandidate | None = None
+    candidate_layers = []
     for index, point in enumerate(trajectory.points):
         candidates = searcher.nearby_roads(point.coordinate, k)
+        candidate_layers.append(candidates)
         if not candidates:
             continue
         heading = trajectory_heading(trajectory, index)
@@ -51,7 +60,7 @@ def match_candidate_cost(
             for candidate in candidates
         ]
         costs, best = min(scored, key=lambda item: item[0]["total_cost"])
-        matches.append(_match_record(index, best, costs | {"candidate_count": len(candidates)}))
+        matches.append(_match_record(index, best, costs | {"candidate_count": len(candidates), "candidates": [candidate.to_dict() for candidate in candidates]}))
         previous = best
     return {
         "trajectory_id": trajectory.id,
@@ -59,6 +68,8 @@ def match_candidate_cost(
         "matched_road_sequence": _dedupe_sequence([match["matched_road_id"] for match in matches]),
         "confidence": _distance_confidence(matches),
         "matches": matches,
+        "metrics": {"candidate_count_avg": sum(len(layer) for layer in candidate_layers) / len(candidate_layers) if candidate_layers else 0.0},
+        "debug_layers": _debug_layers(trajectory, matches),
     }
 
 
@@ -76,3 +87,29 @@ def _distance_confidence(matches: list[dict]) -> float:
     avg = sum(match["distance"] for match in matches) / len(matches)
     return round(1.0 / (1.0 + avg / 25.0), 3)
 
+
+def _debug_layers(trajectory: Trajectory, matches: list[dict]) -> dict:
+    return {
+        "gps_points": {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {"layer": "gps_points", "point_index": index},
+                    "geometry": {"type": "Point", "coordinates": [point.lon, point.lat]},
+                }
+                for index, point in enumerate(trajectory.points)
+            ],
+        },
+        "matched_points": {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {"layer": "matched_points", "point_index": match["point_index"], "road_id": match["matched_road_id"]},
+                    "geometry": {"type": "Point", "coordinates": match["projection_point"]},
+                }
+                for match in matches
+            ],
+        },
+    }
