@@ -60,6 +60,14 @@ class MapMatchRequest(BaseModel):
     k: int = Field(default=5, ge=1, le=20)
     sigma: float = Field(default=20.0, gt=0)
     beta: float = Field(default=50.0, gt=0)
+    emission_weight: float = Field(default=1.0, ge=0)
+    transition_weight: float = Field(default=1.0, ge=0)
+    heading_weight: float = Field(default=4.0, ge=0)
+    turn_weight: float = Field(default=2.0, ge=0)
+    road_class_weight: float = Field(default=5.0, ge=0)
+    oneway_weight: float = Field(default=25.0, ge=0)
+    layer_weight: float = Field(default=6.0, ge=0)
+    speed_weight: float = Field(default=1.0, ge=0)
 
 
 class RouteRequest(BaseModel):
@@ -115,6 +123,16 @@ class MapMatchingBenchmarkRequest(BaseModel):
     sampling_interval: int = Field(default=1, ge=1)
     k: int = Field(default=5, ge=1, le=20)
     radius_m: float = Field(default=150.0, gt=0)
+    sigma: float = Field(default=20.0, gt=0)
+    beta: float = Field(default=50.0, gt=0)
+    emission_weight: float = Field(default=1.0, ge=0)
+    transition_weight: float = Field(default=1.0, ge=0)
+    heading_weight: float = Field(default=4.0, ge=0)
+    turn_weight: float = Field(default=2.0, ge=0)
+    road_class_weight: float = Field(default=5.0, ge=0)
+    oneway_weight: float = Field(default=25.0, ge=0)
+    layer_weight: float = Field(default=6.0, ge=0)
+    speed_weight: float = Field(default=1.0, ge=0)
     return_debug_layers: bool = True
 
 

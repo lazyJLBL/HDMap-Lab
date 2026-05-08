@@ -1,25 +1,31 @@
 # HDMap-Lab
 
-Computational Geometry Workbench for Dirty Road Networks, Map Matching, Spatial Index Benchmarking and Explainable Routing.
+Computational geometry based map algorithm workbench for dirty road-network repair, spatial index benchmarking, HMM map matching, trajectory analysis, and explainable routing.
 
-HDMap-Lab is a computational-geometry based map algorithm workbench for dirty road-network repair, spatial index benchmarking, HMM map matching, trajectory analysis, and explainable routing.
+中文定位：HDMap-Lab 是一个面向地图算法工程展示的计算几何实验平台，用于展示脏路网修复、空间索引 benchmark、HMM 地图匹配、轨迹分析和可解释路径规划能力。
 
-中文主线：HDMap-Lab 是一个面向地图算法的计算几何实验平台，用来展示脏路网修复、空间索引加速、HMM 地图匹配、轨迹分析和可解释路径规划能力。
+This is not a production HD map system, commercial GIS service, or full OpenDRIVE/Lanelet2 platform. It is an algorithm workbench built to make geometry and graph algorithms inspectable.
 
 ![HDMap-Lab Demo](docs/assets/demo.gif)
 
 ## Why This Project
 
-I built HDMap-Lab to turn ACM-style computational geometry skills into inspectable map-algorithm engineering: robust predicates, degenerate geometry cases, dirty road topology repair, noisy GPS matching, spatial query acceleration, and route explanations exposed through FastAPI and React + Leaflet.
+I built HDMap-Lab to turn ACM-style computational geometry skills into map-algorithm engineering: robust predicates, degenerate geometry cases, dirty road topology repair, noisy GPS matching, spatial query acceleration, and route explanations exposed through FastAPI and React + Leaflet.
 
-The project is intentionally scoped as an algorithm workbench and case-study platform. It is not a production HD map system, commercial GIS service, or complete OpenDRIVE/Lanelet2 parser.
+## For Recruiters
+
+- 3-minute demo path: open the React workbench, load sample data, run map matching, run a spatial index benchmark, then inspect debug layers and metrics.
+- Key algorithms: orientation/segment intersection, point-in-polygon with holes, topology snapping/splitting, grid/quadtree/KD-tree/R-tree/STR R-tree/Morton indexes, HMM/Viterbi map matching, Dijkstra/A* routing, Frechet/Hausdorff/DTW trajectory metrics.
+- Benchmark reports: [spatial index](docs/assets/spatial_index_benchmark.md), [local OSM/GeoJSON benchmark](docs/real_osm_benchmark_result.md), [map matching](docs/assets/map_matching_benchmark.md), [topology repair](docs/assets/topology_repair_benchmark.md).
+- Case study: [case_study_for_recruiters.md](docs/case_study_for_recruiters.md).
+- Resume bullet: Built HDMap-Lab, a computational-geometry based map algorithm workbench with robust geometry predicates, dirty road-network repair, brute-force-checked spatial index benchmarks, HMM map matching evaluation, explainable routing, FastAPI experiment APIs, and React + Leaflet visualization.
 
 ## Core Highlights
 
 1. **Robust Geometry Kernel**: orientation, segment intersection, point-in-polygon with holes, projection, polyline/polygon utilities, simplification, and degenerate-case tests.
 2. **Dirty Road-Network Repair**: duplicate edge detection, illegal crossing split, close-node snapping, dangling edge handling, overlap detection, before/after reports, and debug GeoJSON layers.
 3. **Spatial Index Benchmark Suite**: brute force, grid, quadtree, KD-tree, R-tree, STR R-tree, and Morton index under one interface with brute-force correctness checks.
-4. **HMM Map Matching Evaluation**: nearest vs HMM matching on synthetic stress cases such as parallel-road drift, sparse sampling, noisy GPS, and one-way penalties.
+4. **HMM Map Matching Evaluation**: nearest vs HMM matching on synthetic stress cases such as parallel-road drift, sparse sampling, noisy GPS, one-way penalties, road class priors, and tunable HMM weights.
 5. **Explainable Routing + React/Leaflet Visualization**: A*/Dijkstra routing, avoid polygons, turn cost, road-class preference, result metrics, warnings, benchmark tables, and map debug layers.
 
 ## Architecture
@@ -56,11 +62,15 @@ app/
 - Output: repaired road GeoJSON, before/after topology summary, operation log, split points, and debug layers.
 - Shows: computational geometry predicates applied to road-network validation and repair.
 
+![Dirty road repair screenshot](docs/assets/screenshot-topology-repair.png)
+
 ### 2. Spatial Index Benchmark
 
 - Input: synthetic or local GeoJSON road items plus bbox/radius/nearest queries.
 - Output: build time, p50/p95/p99 latency, candidate count, recall, false-positive rate, and JSON/Markdown reports.
 - Shows: index engineering and correctness checking against brute force.
+
+![Spatial index benchmark screenshot](docs/assets/screenshot-spatial-benchmark.png)
 
 ### 3. HMM Map Matching Stress Test
 
@@ -68,12 +78,17 @@ app/
 - Output: nearest vs HMM metrics, matched sequence, confidence, candidate layers, and debug GeoJSON.
 - Shows: why global sequence optimization beats purely nearest-road matching in noisy road networks.
 
+![HMM map matching stress screenshot](docs/assets/screenshot-mapmatching-stress.png)
+
+Visual asset tracker: [docs/assets/demo_visuals.md](docs/assets/demo_visuals.md)
+
 ## Quick Start
 
 Backend:
 
 ```bash
 python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
 python -m uvicorn app.main:app --reload
 ```
 
@@ -81,7 +96,7 @@ Frontend:
 
 ```bash
 cd frontend
-npm install
+npm ci
 npm run dev
 ```
 
@@ -120,13 +135,22 @@ python -m benchmarks.map_matching_benchmark
 python -m benchmarks.topology_repair_benchmark
 ```
 
-The city-scale script is a local-data benchmark generator, not a committed city-scale claim:
+The local road-extract benchmark path is city-scale-capable when pointed at a real OSM/GeoJSON extract, but the committed result is a small toy/local sample:
 
 ```bash
-python -m benchmarks.city_scale_benchmark --roads data/roads.geojson --queries 20
+python -m scripts.prepare_osm_extract --input-geojson data/roads.geojson
+python -m benchmarks.spatial_index_benchmark --dataset osm_roads_sample --items 100000 --queries 100
 ```
 
 For real city-scale results, prepare a local OSM/GeoJSON road extract and keep the generated JSON/Markdown report with the dataset description. Do not compare numbers across machines without recording data size, query count, and hardware.
+
+## What Is Implemented vs Prototype
+
+| Status | Scope |
+| --- | --- |
+| Implemented | geometry kernel, topology repair v1, spatial benchmark, HMM matching, routing, trajectory analysis, FastAPI, React/Leaflet |
+| Prototype | OpenDRIVE/Lanelet2 exchange, PostGIS comparison, city-scale benchmark generator |
+| Planned | broader spec coverage, larger real-world extracts, more screenshots/GIF |
 
 ## Project Status
 
@@ -135,7 +159,7 @@ Completed:
 - Geometry kernel and degenerate-case tests.
 - Topology validation and repair v1.
 - Multi-index spatial query benchmark with brute-force correctness checks.
-- Nearest, candidate-cost, and HMM map matching.
+- Nearest, candidate-cost, and HMM map matching with tunable cost weights.
 - Trajectory analysis and explainable routing APIs.
 - React + Leaflet workbench for map layers, metrics, debug layers, and benchmark output.
 
@@ -144,7 +168,7 @@ Prototype:
 - Lane-level HD map data model.
 - OpenDRIVE/Lanelet2 import/export prototypes.
 - PostGIS comparison environment and benchmark script.
-- City-scale benchmark generator for local road extracts.
+- City-scale-capable benchmark generator for local road extracts.
 
 Planned:
 

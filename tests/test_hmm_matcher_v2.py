@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+from app.geometry_kernel.polyline import polyline_length
 from app.map_matching import match_hmm, match_nearest
 from app.map_matching.candidate_search import CandidateSearcher
 from app.map_matching.evaluation import evaluate_match_result
 from app.map_matching.synthetic import generate_synthetic_case
+from app.models import RoadEdge, RoadNode, Trajectory, TrajectoryPoint
 from app.routing.graph_builder import RoadGraph
 
 
@@ -54,3 +56,50 @@ def test_overpass_layer_consistency_candidate_present() -> None:
 
     all_candidate_layers = {candidate["layer"] for layer in result["candidates"] for candidate in layer}
     assert {0, 1} <= all_candidate_layers
+
+
+def test_hmm_weight_overrides_change_reported_match_cost() -> None:
+    nodes = [
+        RoadNode("a", 116.000, 39.000),
+        RoadNode("b", 116.010, 39.000),
+        RoadNode("c", 116.000, 39.010),
+    ]
+    roads = [
+        RoadEdge(
+            id="east_residential",
+            from_node="a",
+            to_node="b",
+            geometry=[nodes[0].coordinate, nodes[1].coordinate],
+            length=polyline_length([nodes[0].coordinate, nodes[1].coordinate]),
+            road_class="residential",
+            road_type="residential",
+        ),
+        RoadEdge(
+            id="north_primary",
+            from_node="a",
+            to_node="c",
+            geometry=[nodes[0].coordinate, nodes[2].coordinate],
+            length=polyline_length([nodes[0].coordinate, nodes[2].coordinate]),
+            road_class="primary",
+            road_type="primary",
+        ),
+    ]
+    trajectory = Trajectory(
+        "north_heading_on_east_road",
+        [
+            TrajectoryPoint(116.005, 39.000),
+            TrajectoryPoint(116.005, 39.0001),
+        ],
+    )
+    searcher = CandidateSearcher(roads)
+    graph = RoadGraph.build(nodes, roads)
+
+    no_heading = match_hmm(trajectory, searcher, graph, k=2, radius_m=1000.0, heading_weight=0.0)
+    strong_heading = match_hmm(trajectory, searcher, graph, k=2, radius_m=1000.0, heading_weight=10.0)
+    no_class = match_hmm(trajectory, searcher, graph, k=2, radius_m=1000.0, road_class_weight=0.0)
+    strong_class = match_hmm(trajectory, searcher, graph, k=2, radius_m=1000.0, road_class_weight=10.0)
+
+    assert strong_heading["matches"][0]["cost_breakdown"]["heading"] > no_heading["matches"][0]["cost_breakdown"]["heading"]
+    assert strong_heading["metrics"]["dp_final_cost"] > no_heading["metrics"]["dp_final_cost"]
+    assert strong_class["matches"][0]["cost_breakdown"]["road_class"] > no_class["matches"][0]["cost_breakdown"]["road_class"]
+    assert strong_class["metrics"]["dp_final_cost"] > no_class["metrics"]["dp_final_cost"]

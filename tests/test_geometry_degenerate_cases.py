@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from app.geometry_kernel.intersection import segment_intersection
 from app.geometry_kernel.polygon import point_in_polygon
-from app.geometry_kernel.predicates import Orientation, on_segment, orientation
+from app.geometry_kernel.predicates import Orientation, exact_orientation_fallback, on_segment, orientation
 
 
 def test_collinear_segments_can_be_disjoint() -> None:
@@ -46,6 +46,23 @@ def test_zero_length_segment_intersects_when_point_lies_on_segment() -> None:
     assert result.kind == "point"
     assert result.relation == "touch"
     assert result.point == (1.0, 1.0)
+
+
+def test_extremely_short_segment_is_treated_as_degenerate_point() -> None:
+    result = segment_intersection((0.0, 0.0), (1e-14, 0.0), (0.0, -1.0), (0.0, 1.0))
+
+    assert result.kind == "point"
+    assert result.relation == "touch"
+    assert result.point == (0.0, 0.0)
+
+
+def test_large_coordinates_with_small_offset_keep_orientation_sign() -> None:
+    a = (1_000_000_000.0, 1_000_000_000.0)
+    b = (1_000_000_001.0, 1_000_000_000.000001)
+    c = (1_000_000_002.0, 1_000_000_000.000003)
+
+    assert orientation(a, b, c) == Orientation.COUNTER_CLOCKWISE
+    assert exact_orientation_fallback(a, b, c) == Orientation.COUNTER_CLOCKWISE
 
 
 def test_point_on_polygon_outer_boundary() -> None:

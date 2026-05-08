@@ -3,6 +3,7 @@ from __future__ import annotations
 from fastapi import APIRouter, HTTPException
 
 from app.map_matching import match_candidate_cost, match_hmm, match_nearest
+from app.map_matching.cost_model import HMMCostWeights
 from app.schemas import MapMatchRequest
 from app.storage.runtime import get_runtime, trajectory_from_payload
 
@@ -32,5 +33,14 @@ def mapmatch(request: MapMatchRequest) -> dict:
         k=request.k,
         sigma=request.sigma,
         beta=request.beta,
+        cost_weights=HMMCostWeights(
+            emission_weight=request.emission_weight,
+            transition_weight=request.transition_weight,
+            heading_weight=request.heading_weight,
+            turn_weight=request.turn_weight,
+            road_class_weight=request.road_class_weight,
+            oneway_weight=request.oneway_weight,
+            layer_weight=request.layer_weight,
+            speed_weight=request.speed_weight,
+        ),
     )
-

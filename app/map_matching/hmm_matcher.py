@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from app.core.geometry import haversine_distance
 from app.map_matching.candidate_search import CandidateSearcher, RoadCandidate
-from app.map_matching.cost_model import breakdown_with_total, cost_breakdown, trajectory_heading
+from app.map_matching.cost_model import HMMCostWeights, breakdown_with_total, cost_breakdown, trajectory_heading
 from app.map_matching.nearest_matcher import _dedupe_sequence
 from app.models import Trajectory
 from app.routing.graph_builder import RoadGraph
@@ -15,13 +15,29 @@ def match_hmm(
     k: int = 5,
     sigma: float = 20.0,
     beta: float = 50.0,
-    heading_weight: float = 4.0,
-    road_class_weight: float = 0.4,
+    cost_weights: HMMCostWeights | None = None,
+    emission_weight: float | None = None,
+    transition_weight: float | None = None,
+    heading_weight: float | None = None,
+    turn_weight: float | None = None,
+    road_class_weight: float | None = None,
+    oneway_weight: float | None = None,
+    layer_weight: float | None = None,
+    speed_weight: float | None = None,
     beam_width: int | None = None,
     radius_m: float = 150.0,
     step_seconds: float | None = None,
 ) -> dict:
-    del heading_weight, road_class_weight
+    weights = (cost_weights or HMMCostWeights()).with_overrides(
+        emission_weight=emission_weight,
+        transition_weight=transition_weight,
+        heading_weight=heading_weight,
+        turn_weight=turn_weight,
+        road_class_weight=road_class_weight,
+        oneway_weight=oneway_weight,
+        layer_weight=layer_weight,
+        speed_weight=speed_weight,
+    )
     candidate_layers = [
         searcher.search(point.coordinate, radius_m=radius_m, k=k, heading=trajectory_heading(trajectory, index))
         for index, point in enumerate(trajectory.points)
@@ -38,7 +54,7 @@ def match_hmm(
     first_scores: dict[int, float] = {}
     first_breakdowns: dict[int, dict[str, float]] = {}
     for idx, candidate in enumerate(candidate_layers[0]):
-        breakdown = cost_breakdown(graph, candidate, first_heading, sigma=sigma, beta=beta)
+        breakdown = cost_breakdown(graph, candidate, first_heading, sigma=sigma, beta=beta, weights=weights)
         first_breakdowns[idx] = breakdown
         first_scores[idx] = breakdown_with_total(breakdown)["total"]
     dp.append(_prune(first_scores, beam_width))
@@ -68,6 +84,7 @@ def match_hmm(
                     step_seconds=step_seconds,
                     sigma=sigma,
                     beta=beta,
+                    weights=weights,
                 )
                 score = dp[layer_index - 1][prev_idx] + breakdown_with_total(breakdown)["total"]
                 if score < best_score:

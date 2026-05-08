@@ -55,7 +55,7 @@ Let `z_t` be the hidden road candidate at GPS observation `o_t`.
 The HMM objective is:
 
 ```text
-argmax_z P(z_1) * Π P(o_t | z_t) * Π P(z_t | z_{t-1})
+argmax_z P(z_1) * product P(o_t | z_t) * product P(z_t | z_{t-1})
 ```
 
 In implementation this is minimized as additive costs:
@@ -70,6 +70,21 @@ total = emission
       + oneway
       + layer
 ```
+
+The implementation exposes these terms through `HMMCostWeights`:
+
+| Weight | Default | Effect |
+| --- | ---: | --- |
+| `emission_weight` | 1.0 | Scales GPS-to-road projection distance. Higher values make the matcher trust per-point geometry more. |
+| `transition_weight` | 1.0 | Scales graph-continuity distance between consecutive candidates. Higher values discourage disconnected or physically implausible jumps. |
+| `heading_weight` | 4.0 | Scales trajectory heading vs road heading. Higher values favor roads aligned with motion direction. |
+| `turn_weight` | 2.0 | Scales turn angle between consecutive candidate roads. Higher values prefer smoother paths. |
+| `road_class_weight` | 5.0 | Scales road-class prior. Higher values favor major roads over service/local roads in ambiguous cases. |
+| `oneway_weight` | 25.0 | Penalty for choosing a candidate incompatible with one-way direction. |
+| `layer_weight` | 6.0 | Penalty for jumping between road layers, such as surface road vs bridge/tunnel metadata. |
+| `speed_weight` | 1.0 | Scales observed-speed feasibility between samples. |
+
+`cost_breakdown` returns weighted components. This makes API and benchmark results explainable: changing a weight should change the reported cost and may change the selected path when candidates are close.
 
 ### Emission
 
@@ -93,12 +108,12 @@ Disconnected transitions receive a large penalty.
 
 ### Additional Penalties
 
-- `heading`: trajectory heading vs road heading.
-- `speed`: observed speed feasibility between samples.
-- `turn`: angular change between candidate roads.
-- `road_class`: prior favoring major roads over service/local roads in ambiguous cases.
-- `oneway`: large penalty for incompatible direction.
-- `layer`: penalty for jumping between surface road and bridge/tunnel layer.
+- `heading`: trajectory heading vs road heading. For two-way roads the matcher accepts either travel direction; for one-way roads it compares against the legal direction only.
+- `turn`: angular change between candidate roads. This helps avoid zig-zagging through candidates that happen to be close to noisy GPS points.
+- `road_class`: prior favoring higher-class roads when GPS evidence is ambiguous. It is deliberately a prior, not a hard rule.
+- `oneway`: large penalty for incompatible direction. It can be set lower for experiments but defaults high enough to make violations visible.
+- `layer`: penalty for jumping between surface/bridge/tunnel layers when metadata is present.
+- `speed`: observed speed feasibility between samples, based on GPS distance and `step_seconds` when available.
 
 ## Viterbi
 
@@ -185,9 +200,21 @@ Request:
   "sampling_interval": 1,
   "k": 5,
   "radius_m": 150.0,
+  "sigma": 20.0,
+  "beta": 50.0,
+  "emission_weight": 1.0,
+  "transition_weight": 1.0,
+  "heading_weight": 4.0,
+  "turn_weight": 2.0,
+  "road_class_weight": 5.0,
+  "oneway_weight": 25.0,
+  "layer_weight": 6.0,
+  "speed_weight": 1.0,
   "return_debug_layers": true
 }
 ```
+
+`POST /mapmatch` accepts the same HMM weight fields when `algorithm` is `"hmm"`. `nearest` and `candidate_cost` ignore these HMM-only weights.
 
 The benchmark JSON is generated from live code. Do not copy numbers into docs unless the JSON file exists and was produced by the benchmark command.
 

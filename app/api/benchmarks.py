@@ -7,6 +7,7 @@ from fastapi import APIRouter, HTTPException
 from app.api.response import ok
 from app.map_matching import match_hmm, match_nearest
 from app.map_matching.candidate_search import CandidateSearcher
+from app.map_matching.cost_model import HMMCostWeights
 from app.map_matching.evaluation import evaluate_match_result
 from app.map_matching.synthetic import generate_synthetic_case
 from app.routing.graph_builder import RoadGraph
@@ -61,7 +62,25 @@ def map_matching_benchmark(request: MapMatchingBenchmarkRequest) -> dict:
             row["nearest"] = evaluate_match_result(nearest, case, latency_ms=(time.perf_counter() - started) * 1000.0)
         if "hmm" in request.algorithms:
             started = time.perf_counter()
-            hmm = match_hmm(case.trajectory, searcher, graph, k=request.k, radius_m=request.radius_m)
+            hmm = match_hmm(
+                case.trajectory,
+                searcher,
+                graph,
+                k=request.k,
+                sigma=request.sigma,
+                beta=request.beta,
+                radius_m=request.radius_m,
+                cost_weights=HMMCostWeights(
+                    emission_weight=request.emission_weight,
+                    transition_weight=request.transition_weight,
+                    heading_weight=request.heading_weight,
+                    turn_weight=request.turn_weight,
+                    road_class_weight=request.road_class_weight,
+                    oneway_weight=request.oneway_weight,
+                    layer_weight=request.layer_weight,
+                    speed_weight=request.speed_weight,
+                ),
+            )
             row["hmm"] = evaluate_match_result(hmm, case, latency_ms=(time.perf_counter() - started) * 1000.0)
         results.append(row)
         if request.return_debug_layers:

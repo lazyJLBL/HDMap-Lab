@@ -1,0 +1,14 @@
+{
+  "source": "GeoJSON file: data/roads.geojson",
+  "road_segments": 13,
+  "bbox": [
+    116.39,
+    39.9,
+    116.41,
+    39.92
+  ],
+  "total_length_m": 13190.693073780367,
+  "road_classes": {
+    "local": 13
+  }
+}

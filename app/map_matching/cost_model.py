@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import dataclass, replace
 from math import inf
 
 from app.core.geometry import angle_difference, bearing, haversine_distance
@@ -7,6 +8,24 @@ from app.map_matching.candidate_search import RoadCandidate
 from app.models import Trajectory
 from app.routing.dijkstra import shortest_path
 from app.routing.graph_builder import RoadGraph
+
+
+@dataclass(frozen=True, slots=True)
+class HMMCostWeights:
+    emission_weight: float = 1.0
+    transition_weight: float = 1.0
+    heading_weight: float = 4.0
+    turn_weight: float = 2.0
+    road_class_weight: float = 5.0
+    oneway_weight: float = 25.0
+    layer_weight: float = 6.0
+    speed_weight: float = 1.0
+
+    def with_overrides(self, **overrides: float | None) -> "HMMCostWeights":
+        active = {key: value for key, value in overrides.items() if value is not None}
+        if not active:
+            return self
+        return replace(self, **active)
 
 
 def trajectory_heading(trajectory: Trajectory, index: int) -> float | None:
@@ -111,23 +130,25 @@ def cost_breakdown(
     step_seconds: float | None = None,
     sigma: float = 20.0,
     beta: float = 50.0,
+    weights: HMMCostWeights | None = None,
 ) -> dict[str, float]:
-    emission = 0.5 * (candidate.distance_m / max(sigma, 1.0)) ** 2
-    heading = direction_cost(candidate, gps_heading) * 4.0
-    speed = speed_feasibility_penalty(previous, candidate, gps_distance, step_seconds)
-    turn = turn_penalty(previous, candidate) * 2.0
-    road_class = road_class_prior(candidate) * 5.0
-    oneway = 0.0 if candidate.is_oneway_compatible else 25.0
+    weights = weights or HMMCostWeights()
+    emission = 0.5 * (candidate.distance_m / max(sigma, 1.0)) ** 2 * weights.emission_weight
+    heading = direction_cost(candidate, gps_heading) * weights.heading_weight
+    speed = speed_feasibility_penalty(previous, candidate, gps_distance, step_seconds) * weights.speed_weight
+    turn = turn_penalty(previous, candidate) * weights.turn_weight
+    road_class = road_class_prior(candidate) * weights.road_class_weight
+    oneway = 0.0 if candidate.is_oneway_compatible else weights.oneway_weight
     layer = 0.0
     transition = 0.0
     if previous is not None and gps_distance is not None:
         if previous.layer != candidate.layer:
-            layer = 6.0
+            layer = weights.layer_weight
         network_distance = edge_connectivity_distance(graph, previous, candidate)
         if network_distance == inf:
-            transition = 1_000_000.0
+            transition = 1_000_000.0 * weights.transition_weight
         else:
-            transition = abs(network_distance - gps_distance) / max(beta, 1.0)
+            transition = abs(network_distance - gps_distance) / max(beta, 1.0) * weights.transition_weight
     return {
         "emission": emission,
         "transition": transition,
